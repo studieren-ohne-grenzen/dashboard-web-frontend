@@ -1,6 +1,10 @@
 <template>
   <div>
+    <br />
+    <br />
     Gruppe!
+    <br />
+    <br />
   </div>
 </template>
 
