@@ -11,31 +11,32 @@
           &nbsp;
         </li>
         <li class="px-1 bg-white rounded-t">
-          <a
+          <nuxt-link
             class="inline-block py-2 px-3 sm:px-8 text-sogblue-darker hover:text-sogblue font-normal"
-            href="/profile"
+            to="/profile"
           >
             Profil
-          </a>
+          </nuxt-link>
         </li>
         <li class="px-1">
-          <a
+          <nuxt-link
             class="inline-block py-2 px-3 sm:px-8 text-sogblue-lightest hover:text-white font-normal"
-            href="/groups"
+            to="/groups"
           >
             Gruppen
-          </a>
+          </nuxt-link>
         </li>
         <li class="px-1 flex-grow">
-          <a
+          <nuxt-link
             class="inline-block float-right py-2 px-2 sm:pr-4 text-sogblue-lightest hover:text-white font-normal"
-            href="#"
+            to="/"
           >
             Abmelden
-          </a>
+          </nuxt-link>
         </li>
       </ul>
     </div>
+    <nuxt-child></nuxt-child>
   </div>
 </template>
 
