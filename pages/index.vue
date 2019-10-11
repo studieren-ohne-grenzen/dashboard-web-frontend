@@ -1,34 +1,41 @@
 <template>
   <div class="bggradient w-screen h-screen">
-    <ul class="flex justify-around border-white pt-4">
-      <li class="inline-block border-b py-2 px-4 font-semibold text-white">
-        Dashboard
-      </li>
-      <li class="px-4 border-l border-t border-r rounded-t border-white">
-        <a
-          class="inline-block py-2 px-4 text-white font-semibold hover:text-sogblue-lighter"
-          href="#"
-        >
-          Profil
-        </a>
-      </li>
-      <li class="border-b border-white px-4">
-        <a
-          class="inline-block py-2 px-4 text-white hover:text-sogblue-lighter font-semibold"
-          href="#"
-        >
-          Gruppen
-        </a>
-      </li>
-      <li class="flex-grow float-right border-b border-white">
-        <a
-          class="inline-block py-2 px-4 text-white hover:text-sogblue-lighter font-semibold"
-          href="#"
-        >
-          Abmelden
-        </a>
-      </li>
-    </ul>
+    <div class="flex flex-wrap border-white sm:pt-4">
+      <div
+        class="inline-block w-screen sm:w-auto sm:border-b py-2 px-4 font-semibold text-white"
+      >
+        SOG Dashboard Logo
+      </div>
+      <ul class="flex flex-grow">
+        <li class="px-1 border-b border-white">
+          &nbsp;
+        </li>
+        <li class="px-1 border-l border-t border-r rounded-t border-white">
+          <a
+            class="inline-block py-2 px-3 sm:px-8 text-white font-semibold hover:text-sogblue-lighter"
+            href="#"
+          >
+            Profil
+          </a>
+        </li>
+        <li class="px-1 border-b border-white">
+          <a
+            class="inline-block py-2 px-3 sm:px-8 text-white hover:text-sogblue-lighter font-semibold"
+            href="#"
+          >
+            Gruppen
+          </a>
+        </li>
+        <li class="px-1 flex-grow border-b border-white">
+          <a
+            class="inline-block float-right py-2 px-2 sm:px-8 text-white hover:text-sogblue-lighter font-semibold"
+            href="#"
+          >
+            Abmelden
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -38,6 +45,6 @@ export default {}
 
 <style>
 .bggradient {
-  background-image: linear-gradient(30deg, #57b4dc 0%, #007ebb 100%);
+  background-image: linear-gradient(30deg, #0098cf 0%, #00679e 100%);
 }
 </style>
