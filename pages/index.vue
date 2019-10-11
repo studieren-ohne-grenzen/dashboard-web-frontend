@@ -1,34 +1,34 @@
 <template>
-  <div class="bggradient w-screen h-screen">
-    <div class="flex flex-wrap border-white sm:pt-4">
+  <div>
+    <div class="flex flex-wrap sm:pt-4 bggradient">
       <div
-        class="inline-block w-screen sm:w-auto sm:border-b py-2 px-4 font-semibold text-white"
+        class="inline-block w-screen text-center sm:w-auto py-4 sm:py-2 px-4 text-sogblue-lightest font-normal"
       >
         SOG Dashboard Logo
       </div>
       <ul class="flex flex-grow">
-        <li class="px-1 border-b border-white">
+        <li class="px-1">
           &nbsp;
         </li>
-        <li class="px-1 border-l border-t border-r rounded-t border-white">
+        <li class="px-1 bg-white rounded-t">
           <a
-            class="inline-block py-2 px-3 sm:px-8 text-white font-semibold hover:text-sogblue-lighter"
-            href="#"
+            class="inline-block py-2 px-3 sm:px-8 text-sogblue-darker hover:text-sogblue font-normal"
+            href="/profile"
           >
             Profil
           </a>
         </li>
-        <li class="px-1 border-b border-white">
+        <li class="px-1">
           <a
-            class="inline-block py-2 px-3 sm:px-8 text-white hover:text-sogblue-lighter font-semibold"
-            href="#"
+            class="inline-block py-2 px-3 sm:px-8 text-sogblue-lightest hover:text-white font-normal"
+            href="/groups"
           >
             Gruppen
           </a>
         </li>
-        <li class="px-1 flex-grow border-b border-white">
+        <li class="px-1 flex-grow">
           <a
-            class="inline-block float-right py-2 px-2 sm:px-8 text-white hover:text-sogblue-lighter font-semibold"
+            class="inline-block float-right py-2 px-2 sm:pr-4 text-sogblue-lightest hover:text-white font-normal"
             href="#"
           >
             Abmelden
@@ -45,6 +45,7 @@ export default {}
 
 <style>
 .bggradient {
-  background-image: linear-gradient(30deg, #0098cf 0%, #00679e 100%);
+  background-color: #00679e;
+  background-image: linear-gradient(10deg, #0098cf 0%, #00679e 100%);
 }
 </style>

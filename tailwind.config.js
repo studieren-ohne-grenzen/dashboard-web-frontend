@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     colors: {
       sogblue: {
+        lightest: '#CCF1FF',
         lighter: '#71C5EA',
         light: '#57B4DC',
         default: '#0098CF',
