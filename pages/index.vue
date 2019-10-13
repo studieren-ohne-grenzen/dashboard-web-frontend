@@ -7,7 +7,14 @@
         SOG Dashboard Logo
       </div>
       <ul class="flex flex-grow">
-        <li class="tabactive ml-2 sm:ml-0">
+        <li
+          class="ml-2 sm:ml-0"
+          :class="
+            this.$router.currentRoute.path.substr(0, 7) == '/groups'
+              ? 'tabactive'
+              : 'tabinactive'
+          "
+        >
           <nuxt-link
             class="inline-block py-2 px-3 sm:px-8 font-normal"
             to="/groups"
@@ -15,7 +22,14 @@
             Gruppen
           </nuxt-link>
         </li>
-        <li class="tabinactive">
+        <li
+          class="ml-2 sm:ml-0"
+          :class="
+            this.$router.currentRoute.path == '/profile'
+              ? 'tabactive'
+              : 'tabinactive'
+          "
+        >
           <nuxt-link
             class="inline-block py-2 px-3 sm:px-8 font-normal"
             to="/profile"
@@ -33,7 +47,7 @@
         </li>
       </ul>
     </div>
-    <div class="max-w-5xl bg-white sm:mx-2 lg:mx-auto sm:rounded">
+    <div class="max-w-5xl bg-white sm:mx-2 lg:mx-auto sm:rounded p-4">
       <nuxt-child></nuxt-child>
     </div>
   </div>
@@ -46,7 +60,7 @@ export default {}
 <style>
 .bggradient {
   background-color: #00679e;
-  background-image: linear-gradient(10deg, #0098cf 0%, #00679e 100%);
+  background-image: linear-gradient(20deg, #57b4dc 0%, #00679e 100%);
 }
 
 .tabactive {
