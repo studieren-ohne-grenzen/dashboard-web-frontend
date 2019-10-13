@@ -1,6 +1,11 @@
 <template>
   <div>
-    Untergruppe!
+    Gruppe {{ this.$route.params.group }}
+    <br />
+    <br />
+    <nuxt-link to="/groups">
+      zurück zur Übersicht
+    </nuxt-link>
   </div>
 </template>
 

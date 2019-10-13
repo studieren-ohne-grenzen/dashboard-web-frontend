@@ -1,6 +1,11 @@
 <template>
   <div>
-    Gruppe!
+    Gruppenübersicht
+    <br />
+    <br />
+    <nuxt-link to="/groups/123">
+      zur Gruppe 123
+    </nuxt-link>
   </div>
 </template>
 
