@@ -1,10 +1,13 @@
 <template>
   <div class="bggradient w-screen h-screen">
     <div class="flex flex-wrap sm:pt-4 max-w-5xl m-auto">
-      <div
-        class="inline-block w-screen text-center sm:w-auto py-4 sm:py-2 pl-2 lg:pl-0 sm:pr-4 text-sogblue-lightest font-normal"
-      >
-        SOG Dashboard Logo
+      <div class="w-screen sm:w-auto py-4 pb-6 sm:py-2 pl-2 lg:pl-0 sm:pr-12">
+        <img
+          alt="Dashboard Logo"
+          src="logo.png"
+          class="m-auto"
+          style="max-width: 10rem"
+        />
       </div>
       <ul class="flex flex-grow">
         <li

@@ -12,9 +12,41 @@ export default {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || ''
-      }
+      },
+      {
+        name: 'msapplication-TileColor',
+        content: '#2d89ef'
+      },
+      { name: 'theme-color', content: '#ffffff' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      {
+        rel: 'apple-touch-icon',
+        sizes: '120x120',
+        href: '/icons/apple-touch-icon.png'
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/icons/favicon-32x32.png'
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/icons/favicon-16x16.png'
+      },
+      {
+        rel: 'manifest',
+        href: '/icons/site.webmanifest'
+      },
+      {
+        rel: 'mask-icon',
+        href: 'safari-pinned-tab.svg',
+        color: '#0098cf'
+      },
+    ]
   },
   /*
    ** Customize the progress-bar color
