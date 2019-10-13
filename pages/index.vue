@@ -1,12 +1,12 @@
 <template>
   <div class="bggradient w-screen h-screen">
-    <div class="flex flex-wrap sm:pt-4 max-w-5xl m-auto">
+    <div class="flex flex-wrap sm:pt-4 max-w-5xl m-auto items-end">
       <div class="w-screen sm:w-auto py-4 pb-6 sm:py-2 pl-2 lg:pl-0 sm:pr-12">
         <img
           alt="Dashboard Logo"
           src="logo.png"
           class="m-auto"
-          style="max-width: 10rem"
+          style="max-width: 8rem"
         />
       </div>
       <ul class="flex flex-grow">
@@ -67,7 +67,7 @@ export default {}
 }
 
 .tabactive {
-  @apply px-1 bg-white rounded-t text-sogblue-darker;
+  @apply px-1 h-10 bg-white rounded-t text-sogblue-darker;
 }
 
 .tabactive:hover {
