@@ -50,7 +50,7 @@
         </li>
       </ul>
     </div>
-    <div class="max-w-5xl bg-white sm:mx-2 lg:mx-auto sm:rounded p-4">
+    <div class="max-w-5xl bg-white sm:mx-2 lg:mx-auto sm:rounded p-4 sm:p-8">
       <nuxt-child></nuxt-child>
     </div>
   </div>
