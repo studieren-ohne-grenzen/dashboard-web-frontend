@@ -32,35 +32,55 @@
         </div>
       </form>
     </div>
-    <h1 class="text-sogblue-light text-3xl mt-8 mb-2">
-      Passwort
+    <h1
+      class="text-sogblue-light text-3xl mt-8 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
+    >
+      Sicherheit
     </h1>
-    <form class="sm:flex w-full items-end">
-      <div class="flex-grow">
+    <button
+      v-if="!changePwd"
+      type="button"
+      class="rounded py-2 px-4 sm:mt-8 bg-sogblue hover:bg-sogblue-darker text-white"
+      @click="togglePwd"
+    >
+      Passwort ändern
+    </button>
+    <form v-if="changePwd" class="sm:flex w-full flex-wrap items-end">
+      <div class="flex-grow sm:max-w-xs sm:mx-2" style="min-width: 14rem">
         <label class="block text-sogblue-dark mb-1">
-          Neues Passwort
+          Aktuelles Passwort
         </label>
         <input
           type="password"
-          placeholder="********"
           class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
         />
       </div>
-      <div class="sm:ml-4 flex-grow">
-        <label class="block text-sogblue-dark mb-1">
-          Neues Passwort wiederholen
-        </label>
-        <input
-          type="password"
-          placeholder="********"
-          class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
-        />
+      <div class="sm:flex flex-grow">
+        <div class="flex-grow sm:mx-2" style="min-width: 14rem">
+          <label class="block text-sogblue-dark mb-1">
+            Neues Passwort
+          </label>
+          <input
+            type="password"
+            class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
+          />
+        </div>
+        <div class="flex-grow sm:mx-2" style="min-width: 14rem">
+          <label class="block text-sogblue-dark mb-1">
+            Neues Passwort wiederholen
+          </label>
+          <input
+            type="password"
+            class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
+          />
+        </div>
       </div>
       <button
         type="button"
-        class="w-40 rounded p-2 flex-grow-0 sm:ml-4 mb-4 bg-sogblue hover:bg-sogblue-darker text-white"
+        class="w-40 rounded p-2 flex-grow-0 sm:ml-2 mb-4 bg-sogblue hover:bg-sogblue-darker text-white"
+        style="min-width: 10rem"
       >
-        Passwort ändern
+        Ändern
       </button>
     </form>
     <h1 class="text-sogblue-light text-3xl mt-8 mb-2">
@@ -98,7 +118,18 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data: () => {
+    return {
+      changePwd: false
+    }
+  },
+  methods: {
+    togglePwd() {
+      this.changePwd = true
+    }
+  }
+}
 </script>
 
 <style></style>
