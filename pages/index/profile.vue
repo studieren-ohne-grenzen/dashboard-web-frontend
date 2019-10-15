@@ -9,7 +9,7 @@
           Name
         </div>
         <div
-          class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-md"
+          class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
         >
           Elisabeth Maria Schulze-Böhmermann
         </div>
@@ -17,7 +17,7 @@
           Benutzername
         </div>
         <div
-          class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-md"
+          class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
         >
           elisabeth.maria.schulze.boehmermann
         </div>
@@ -104,18 +104,17 @@
             SOG-Email
           </div>
           <div
-            class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-md"
+            class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
           >
             elisabeth.maria.schulze.boehmermann<wbr />@<wbr />studieren-ohne-grenzen.org
           </div>
-          <div class="text-gray mb-4">
+          <div class="text-gray mb-4 sm:max-w-lg">
             Deine SOG-Email kann nur von der
             <a href="mailto:it@studieren-ohne-grenzen.org" class="underline"
               >SOG IT</a
             >
-            geändert werden.
-            <br />
-            Weitere Infos zu deinem SOG-Mailaccount findest du im
+            geändert werden. Weitere Infos rund um deinen SOG-Mailaccount
+            findest du im
             <a
               href="https://wiki.studieren-ohne-grenzen.org/bin/view/SOG%20Systeme/E-Mail/"
               class="underline"
@@ -127,7 +126,7 @@
           </div>
           <div
             v-if="!changeMail"
-            class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-md"
+            class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
           >
             eli.maria@gmail.com
           </div>
