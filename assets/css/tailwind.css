@@ -1,3 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@responsive {
+    .min-w-56 {
+        min-width: 14rem;
+    }
+}
