@@ -45,7 +45,7 @@ export default {
         rel: 'mask-icon',
         href: 'safari-pinned-tab.svg',
         color: '#0098cf'
-      },
+      }
     ]
   },
   /*
@@ -61,6 +61,12 @@ export default {
    */
   plugins: [],
   /*
+   ** Router options
+   */
+  router: {
+    middleware: ['auth']
+  },
+  /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
@@ -74,13 +80,19 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    // Doc: https://auth.nuxtjs.org/
+    '@nuxtjs/auth'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+  /*
+   ** Auth module configuration
+   */
+  auth: {},
   /*
    ** Build configuration
    */
