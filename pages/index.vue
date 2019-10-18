@@ -59,7 +59,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  options: {
+    auth: false
+  }
+}
 </script>
 
 <style>
