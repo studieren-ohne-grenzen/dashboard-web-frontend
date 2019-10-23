@@ -67,11 +67,6 @@ export default {
 </script>
 
 <style>
-.bggradient {
-  background-color: #00679e;
-  background-image: linear-gradient(20deg, #57b4dc 0%, #00679e 100%);
-}
-
 .tabactive {
   @apply px-1 h-10 bg-white rounded-t text-sogblue-darker;
 }

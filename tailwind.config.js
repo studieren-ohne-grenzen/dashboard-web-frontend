@@ -20,6 +20,14 @@ module.exports = {
       orange: '#CF6B00',
       gray: '#a0aec0',
       lightgray: '#edf2f7'
+    },
+    screens: {
+      'xs': '420px',
+      // default breakpoints
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
     }
   },
   variants: {},
