@@ -6,8 +6,8 @@
       <form @keydown.enter="login">
         <label class="block text-sogblue-dark mb-1">Alternative Mail</label>
         <input
-          ref="username"
-          v-model="username"
+          ref="mail"
+          v-model="mail"
           placeholder="maria.schmidt@gmail.com"
           class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
         />
@@ -35,6 +35,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      mail: ''
+    }
+  },
   options: {
     auth: false
   }
