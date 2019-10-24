@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sm:flex">
+    <div class="sm:flex mb-8">
       <div
         class="flex-shrink-0 h-40 w-40 sm:h-48 sm:w-48 my-2 sm:m-2 mx-auto sm:mr-10 bg-gray rounded-full text-lightgrey text-center"
       ></div>
@@ -31,15 +31,16 @@
       </div>
     </div>
     <div>
+      <hr class="border-lightgray my-4" />
       <h1
-        class="text-sogblue-light text-3xl mt-8 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
+        class="text-sogblue-light text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
       >
         Sicherheit
       </h1>
       <button
         v-if="!changePwd"
         type="button"
-        class="rounded py-2 px-4 sm:mt-8 bg-sogblue hover:bg-sogblue-darker text-white"
+        class="rounded py-2 px-4 sm:mt-4 bg-sogblue hover:bg-sogblue-darker text-white"
         @click="togglePwd"
       >
         Passwort ändern
@@ -93,12 +94,13 @@
       </form>
     </div>
     <div style="clear: left" class="mt-8">
+      <hr class="border-lightgray my-4" />
       <h1
-        class="text-sogblue-light text-3xl sm:mt-0 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
+        class="text-sogblue-light text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
       >
         Email
       </h1>
-      <div class="flex flex-wrap">
+      <div class="flex flex-wrap sm:mt-8">
         <div class="flex-grow">
           <div class="text-sogblue-dark mb-1">
             SOG-Email
