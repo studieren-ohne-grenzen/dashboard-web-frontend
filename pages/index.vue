@@ -38,12 +38,12 @@
           </nuxt-link>
         </li>
         <li class="px-1 flex-grow">
-          <nuxt-link
+          <button
             class="inline-block float-right py-2 pr-2 sm:pr-0 sm:pl-4 text-sogblue-lightest hover:text-white font-normal"
-            to="/login"
+            @click="$auth.logout()"
           >
             Abmelden
-          </nuxt-link>
+          </button>
         </li>
       </ul>
     </div>
