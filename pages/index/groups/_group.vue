@@ -11,10 +11,10 @@
 
 <script>
 export default {
-  validate({ params }) {
-    // TODO: test for actual group names
+  // TODO: test for actual group names
+  /* validate({ params }) {
     return /^\d+$/.test(params.group)
-  }
+  } */
 }
 </script>
 
