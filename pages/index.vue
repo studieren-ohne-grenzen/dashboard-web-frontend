@@ -1,5 +1,5 @@
 <template>
-  <div class="bggradient w-screen min-h-screen h-full lg:pt-8">
+  <div class="bggradient w-full min-h-screen h-full lg:pt-8">
     <div class="flex flex-wrap sm:pt-4 sm:px-2 max-w-5xl m-auto items-end">
       <div class="w-screen sm:w-auto py-4 pb-6 sm:py-2 lg:pl-0 sm:pr-12">
         <img
@@ -40,7 +40,7 @@
         <li class="px-1 flex-grow">
           <nuxt-link
             class="inline-block float-right py-2 pr-2 sm:pr-0 sm:pl-4 text-sogblue-lightest hover:text-white font-normal"
-            to="/"
+            to="/login"
           >
             Abmelden
           </nuxt-link>
