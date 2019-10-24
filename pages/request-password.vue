@@ -8,6 +8,7 @@
         <input
           ref="mail"
           v-model="mail"
+          v-focus
           placeholder="maria.schmidt@gmail.com"
           class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
         />
@@ -35,6 +36,13 @@
 
 <script>
 export default {
+  directives: {
+    focus: {
+      inserted: (el) => {
+        el.focus()
+      }
+    }
+  },
   data() {
     return {
       mail: ''
