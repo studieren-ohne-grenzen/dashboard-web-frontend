@@ -3,7 +3,7 @@
     Gruppe {{ this.$route.params.group }}
     <br />
     <br />
-    <nuxt-link to="/groups">
+    <nuxt-link to="/">
       zurück zur Übersicht
     </nuxt-link>
   </div>

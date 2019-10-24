@@ -13,15 +13,12 @@
         <li
           class="ml-2 sm:ml-0"
           :class="
-            this.$router.currentRoute.path.substr(0, 7) == '/groups'
+            this.$router.currentRoute.path != '/profile'
               ? 'tabactive'
               : 'tabinactive'
           "
         >
-          <nuxt-link
-            class="inline-block py-2 px-3 sm:px-8 font-normal"
-            to="/groups"
-          >
+          <nuxt-link class="inline-block py-2 px-3 sm:px-8 font-normal" to="/">
             Gruppen
           </nuxt-link>
         </li>
