@@ -4,6 +4,14 @@ const gType = {
   admin: 2
 }
 
+const compareGroups = (a, b) => {
+  const nameA = a.name.toUpperCase()
+  const nameB = b.name.toUpperCase()
+  if (nameA > nameB) return 1
+  if (nameB > nameA) return -1
+  else return 0
+}
+
 export const state = () => ({
   groupList: [
     { name: 'AG Design', type: gType.member },
@@ -18,15 +26,19 @@ export const state = () => ({
 
 export const getters = {
   allGroups(state) {
-    return state.groupList
+    return [...state.groupList].sort(compareGroups)
   },
   myGroups(state) {
-    return state.groupList.filter(
-      (groupList) =>
-        groupList.type === gType.member || groupList.type === gType.admin
-    )
+    return [
+      ...state.groupList.filter(
+        (groupList) =>
+          groupList.type === gType.member || groupList.type === gType.admin
+      )
+    ].sort(compareGroups)
   },
   adminGroups(state) {
-    return state.groupList.filter((groupList) => groupList.type === gType.admin)
+    return [
+      ...state.groupList.filter((groupList) => groupList.type === gType.admin)
+    ].sort(compareGroups)
   }
 }
