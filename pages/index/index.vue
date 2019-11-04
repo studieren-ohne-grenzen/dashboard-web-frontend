@@ -27,6 +27,9 @@
         Administrieren
       </button>
     </div>
+    <div v-for="group in groups" :key="group">
+      <div>{{ group.name }}</div>
+    </div>
   </div>
 </template>
 
@@ -38,6 +41,14 @@ export default {
       allGroups: true,
       myGroups: false,
       adminGroups: false
+    }
+  },
+  computed: {
+    groups() {
+      if (this.allGroups) return this.$store.getters.allGroups
+      if (this.myGroups) return this.$store.getters.myGroups
+      if (this.adminGroups) return this.$store.getters.adminGroups
+      return null
     }
   },
   methods: {
