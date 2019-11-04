@@ -27,7 +27,7 @@
         Administrieren
       </button>
     </div>
-    <div v-for="group in groups" :key="group">
+    <div v-for="group in groups" :key="group.name">
       <div>{{ group.name }}</div>
     </div>
   </div>
