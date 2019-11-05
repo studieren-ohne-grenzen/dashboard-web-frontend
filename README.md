@@ -20,3 +20,7 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+## Pages
+
+Since authentication is not yet avaiable, navigate to ```/login``` to see login and password reset pages.
