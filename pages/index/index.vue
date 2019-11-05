@@ -34,9 +34,6 @@
         Administrieren
       </button>
     </div>
-    <div v-for="group in groups" :key="group.name">
-      <div>{{ group.name }}</div>
-    </div>
     <div v-if="!groups.length && adminGroups" class="text-gray">
       Du hast in keiner Gruppe Administrator-Rechte.
     </div>
@@ -45,6 +42,15 @@
     </div>
     <div v-else-if="!groups.length && allGroups" class="text-gray">
       Keine Gruppen verfügbar.
+    </div>
+    <div class="flex flex-wrap">
+      <div
+        v-for="group in groups"
+        :key="group.name"
+        class="py-2 px-4 mr-4 mb-4 border rounded border-gray"
+      >
+        {{ group.name }}
+      </div>
     </div>
   </div>
 </template>
