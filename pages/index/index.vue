@@ -4,23 +4,30 @@
       Neue Anfragen
     </h1>
     <hr v-if="requests.length" class="border-lightgray my-4" />
-    <div class="w-auto inline-flex border border-sogblue rounded">
+    <div class="mb-4 w-auto inline-flex border border-sogblue rounded">
       <button
-        class="px-4 py-2 border-r border-sogblue"
+        class="px-4 py-2 border-r border-sogblue leading-tight"
         :class="allGroups ? 'groupactive' : 'groupinactive'"
         @click="showAllGroups"
       >
         Alle Gruppen
       </button>
       <button
-        class="px-4 py-2 border-r border-sogblue"
+        class="px-4 py-2 border-r border-sogblue leading-tight"
         :class="myGroups ? 'groupactive' : 'groupinactive'"
         @click="showMyGroups"
       >
         Meine Gruppen
       </button>
       <button
-        class="px-4 py-2"
+        class="px-4 py-2 xs:hidden"
+        :class="adminGroups ? 'groupactive' : 'groupinactive'"
+        @click="showAdminGroups"
+      >
+        Admin
+      </button>
+      <button
+        class="px-4 py-2 hidden xs:inline"
         :class="adminGroups ? 'groupactive' : 'groupinactive'"
         @click="showAdminGroups"
       >
@@ -29,6 +36,15 @@
     </div>
     <div v-for="group in groups" :key="group.name">
       <div>{{ group.name }}</div>
+    </div>
+    <div v-if="!groups.length && adminGroups" class="text-gray">
+      Du hast in keiner Gruppe Administrator-Rechte.
+    </div>
+    <div v-else-if="!groups.length && myGroups" class="text-gray">
+      Du bist noch nicht Mitglied in einer Gruppe.
+    </div>
+    <div v-else-if="!groups.length && allGroups" class="text-gray">
+      Keine Gruppen verfügbar.
     </div>
   </div>
 </template>

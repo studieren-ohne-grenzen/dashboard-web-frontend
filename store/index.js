@@ -15,7 +15,7 @@ const compareGroups = (a, b) => {
 export const state = () => ({
   groupList: [
     { name: 'AG Design', type: gType.member },
-    { name: 'LG Aachen', type: gType.admin },
+    { name: 'LG Aachen', type: gType.member },
     { name: 'AG Kongo - Mweso Stipendienprogramm', type: gType.other },
     { name: 'LG Konstanz', type: gType.other },
     { name: 'Ressort IT', type: gType.member },
