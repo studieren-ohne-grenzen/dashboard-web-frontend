@@ -57,12 +57,13 @@
         Bundesweite Gruppen
       </div>
       <div v-if="groupsBund && groupsBund.length" class="flex flex-wrap">
-        <div
-          v-for="group in groupsBund"
-          :key="group.name"
-          class="py-2 px-4 mr-4 mb-4 border rounded border-gray"
-        >
-          {{ group.name }}
+        <div v-for="group in groupsBund" :key="group.name" class="mr-4 mb-4">
+          <div
+            class="py-2 px-4 float-left h-10 border-l border-t border-b rounded-l border-gray"
+          >
+            {{ group.name }}
+          </div>
+          <img src="wrench.png" class="bg-sogblue rounded-r h-10 p-3" />
         </div>
       </div>
       <div
