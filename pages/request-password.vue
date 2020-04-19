@@ -40,17 +40,17 @@ export default {
     focus: {
       inserted: (el) => {
         el.focus()
-      }
-    }
+      },
+    },
   },
   data() {
     return {
-      mail: ''
+      mail: '',
     }
   },
   options: {
-    auth: false
-  }
+    auth: false,
+  },
 }
 </script>
 

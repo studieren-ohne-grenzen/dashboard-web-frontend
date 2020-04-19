@@ -6,7 +6,7 @@
           alt="Dashboard Logo"
           src="logo.png"
           class="m-auto"
-          style="max-width: 8rem"
+          style="max-width: 8rem;"
         />
       </div>
       <ul class="flex flex-grow">
@@ -58,8 +58,8 @@
 <script>
 export default {
   options: {
-    auth: false
-  }
+    auth: false,
+  },
 }
 </script>
 

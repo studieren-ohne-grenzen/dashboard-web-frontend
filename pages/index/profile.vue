@@ -93,7 +93,7 @@
         </div>
       </form>
     </div>
-    <div style="clear: left" class="mt-8">
+    <div style="clear: left;" class="mt-8">
       <hr class="border-lightgray my-4" />
       <h1
         class="text-sogblue-light text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
@@ -191,13 +191,13 @@ export default {
     focus: {
       inserted: (el) => {
         el.focus()
-      }
-    }
+      },
+    },
   },
   data: () => {
     return {
       changePwd: false,
-      changeMail: false
+      changeMail: false,
     }
   },
   methods: {
@@ -213,8 +213,8 @@ export default {
     },
     untoggleMail() {
       this.changeMail = false
-    }
-  }
+    },
+  },
 }
 </script>
 

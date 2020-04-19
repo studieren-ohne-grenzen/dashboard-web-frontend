@@ -43,7 +43,7 @@ export default {
     return {
       username: '',
       password: '',
-      error: null
+      error: null,
     }
   },
   computed: {
@@ -55,7 +55,7 @@ export default {
     },
     isCallback() {
       return Boolean(this.$route.query.callback)
-    }
+    },
   },
   methods: {
     login() {
@@ -64,14 +64,14 @@ export default {
         .loginWith('local', {
           data: {
             username: this.username,
-            password: this.password
-          }
+            password: this.password,
+          },
         })
         .catch((e) => {
           this.error = e + ''
         })
-    }
-  }
+    },
+  },
 }
 </script>
 

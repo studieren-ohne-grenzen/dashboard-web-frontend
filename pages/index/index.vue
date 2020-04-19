@@ -115,7 +115,7 @@ export default {
     return {
       allGroups: true,
       myGroups: false,
-      adminGroups: false
+      adminGroups: false,
     }
   },
   computed: {
@@ -139,7 +139,7 @@ export default {
     },
     requests() {
       return []
-    }
+    },
   },
   methods: {
     showAllGroups() {
@@ -156,8 +156,8 @@ export default {
       this.allGroups = false
       this.myGroups = false
       this.adminGroups = true
-    }
-  }
+    },
+  },
 }
 </script>
 

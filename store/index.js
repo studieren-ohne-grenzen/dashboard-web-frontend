@@ -1,14 +1,14 @@
 const mType = {
   other: 0,
   member: 1,
-  admin: 2
+  admin: 2,
 }
 
 const gType = {
   other: 0,
   lokalgruppe: 1,
   projektgruppe: 2,
-  bundesweit: 3
+  bundesweit: 3,
 }
 
 const compareGroups = (a, b) => {
@@ -24,39 +24,39 @@ export const state = () => ({
     {
       name: 'AG Design',
       membership: mType.member,
-      groupType: gType.bundesweit
+      groupType: gType.bundesweit,
     },
     {
       name: 'LG Aachen',
       membership: mType.member,
-      groupType: gType.lokalgruppe
+      groupType: gType.lokalgruppe,
     },
     {
       name: 'AG Kongo - Mweso Stipendienprogramm',
       membership: mType.other,
-      groupType: gType.projektgruppe
+      groupType: gType.projektgruppe,
     },
     {
       name: 'LG Konstanz',
       membership: mType.other,
-      groupType: gType.lokalgruppe
+      groupType: gType.lokalgruppe,
     },
     {
       name: 'Ressort IT',
       membership: mType.member,
-      groupType: gType.bundesweit
+      groupType: gType.bundesweit,
     },
     {
       name: 'AG Öffentlichkeitsarbeit',
       membership: mType.other,
-      groupType: gType.bundesweit
+      groupType: gType.bundesweit,
     },
     {
       name: 'AG Ruanda',
       membership: mType.other,
-      groupType: gType.projektgruppe
-    }
-  ]
+      groupType: gType.projektgruppe,
+    },
+  ],
 })
 
 export const getters = {
@@ -64,24 +64,26 @@ export const getters = {
     return [
       ...state.groupList.filter(
         (group) => group.groupType === gType.lokalgruppe
-      )
+      ),
     ].sort(compareGroups)
   },
   allGroupsProjekt(state) {
     return [
       ...state.groupList.filter(
         (group) => group.groupType === gType.projektgruppe
-      )
+      ),
     ].sort(compareGroups)
   },
   allGroupsBund(state) {
     return [
-      ...state.groupList.filter((group) => group.groupType === gType.bundesweit)
+      ...state.groupList.filter(
+        (group) => group.groupType === gType.bundesweit
+      ),
     ].sort(compareGroups)
   },
   allGroupsOther(state) {
     return [
-      ...state.groupList.filter((group) => group.groupType === gType.other)
+      ...state.groupList.filter((group) => group.groupType === gType.other),
     ].sort(compareGroups)
   },
   allGroups(state) {
@@ -92,12 +94,12 @@ export const getters = {
       ...state.groupList.filter(
         (group) =>
           group.membership === mType.member || group.membership === mType.admin
-      )
+      ),
     ].sort(compareGroups)
   },
   adminGroups(state) {
     return [
-      ...state.groupList.filter((group) => group.membership === mType.admin)
+      ...state.groupList.filter((group) => group.membership === mType.admin),
     ].sort(compareGroups)
-  }
+  },
 }
