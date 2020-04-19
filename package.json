@@ -14,11 +14,7 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.9.7",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-vue": "^6.2.2",
-    "import-modules": "^2.0.0",
     "nuxt": "^2.12.2",
-    "standardx": "^5.0.0",
     "vuex": "^3.2.0"
   },
   "devDependencies": {
