@@ -43,78 +43,44 @@
     <div v-else-if="!groupsSelected.length && allGroups" class="text-gray">
       Keine Gruppen verfügbar.
     </div>
-    <div v-if="!allGroups" class="flex flex-wrap">
-      <div
-        v-for="group in groupsSelected"
-        :key="group.name"
-        class="py-2 px-4 mr-4 mb-4 border rounded border-gray"
-      >
-        {{ group.name }}
-      </div>
-    </div>
+
+    <grouplisting v-if="!allGroups" :groups="groupsSelected" name="" />
     <div v-else>
-      <div v-if="groupsBund && groupsBund.length" class="mb-4 text-sogblue">
-        Bundesweite Gruppen
-      </div>
-      <div v-if="groupsBund && groupsBund.length" class="flex flex-wrap">
-        <div v-for="group in groupsBund" :key="group.name" class="mr-4 mb-4">
-          <div
-            class="py-2 px-4 float-left h-10 border-l border-t border-b rounded-l border-gray"
-          >
-            {{ group.name }}
-          </div>
-          <img src="wrench.png" class="bg-sogblue rounded-r h-10 p-3" />
-        </div>
-      </div>
-      <div
+      <grouplisting
+        v-if="groupsBund && groupsBund.length"
+        :groups="groupsBund"
+        name="Bundesweite Gruppen"
+      />
+      <grouplisting
         v-if="groupsProjekt && groupsProjekt.length"
-        class="mb-4 text-sogblue"
-      >
-        Projektgruppen
-      </div>
-      <div v-if="groupsProjekt && groupsProjekt.length" class="flex flex-wrap">
-        <div
-          v-for="group in groupsProjekt"
-          :key="group.name"
-          class="py-2 px-4 mr-4 mb-4 border rounded border-gray"
-        >
-          {{ group.name }}
-        </div>
-      </div>
-      <div v-if="groupsLokal && groupsLokal.length" class="mb-4 text-sogblue">
-        Lokalgruppen
-      </div>
-      <div v-if="groupsLokal && groupsLokal.length" class="flex flex-wrap">
-        <div
-          v-for="group in groupsLokal"
-          :key="group.name"
-          class="py-2 px-4 mr-4 mb-4 border rounded border-gray"
-        >
-          {{ group.name }}
-        </div>
-      </div>
-      <div v-if="groupsOther && groupsOther.length" class="mb-4 text-sogblue">
-        Weitere Gruppen
-      </div>
-      <div v-if="groupsOther && groupsOther.length" class="flex flex-wrap">
-        <div
-          v-for="group in groupsOther"
-          :key="group.name"
-          class="py-2 px-4 mr-4 mb-4 border rounded border-gray"
-        >
-          {{ group.name }}
-        </div>
-      </div>
+        :groups="groupsProjekt"
+        name="Projektgruppen"
+      />
+      <grouplisting
+        v-if="groupsLokal && groupsLokal.length"
+        :groups="groupsLokal"
+        name="Lokalgruppen"
+      />
+      <grouplisting
+        v-if="groupsOther && groupsOther.length"
+        :groups="groupsOther"
+        name="Andere Gruppen"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import grouplisting from '../../components/grouplisting.vue'
+
 export default {
+  components: {
+    grouplisting,
+  },
   data: () => {
     return {
-      allGroups: true,
-      myGroups: false,
+      allGroups: false,
+      myGroups: true,
       adminGroups: false,
     }
   },
@@ -162,8 +128,10 @@ export default {
 </script>
 
 <style>
+/* @apply is tailwind specific, not to be confused with the deprecated css @apply*/
 .groupactive {
-  @apply text-white bg-sogblue;
+  @apply text-white;
+  @apply bg-sogblue;
 }
 .groupactive:hover {
   @apply bg-sogblue-darker;
@@ -172,6 +140,7 @@ export default {
   @apply text-sogblue;
 }
 .groupinactive:hover {
-  @apply text-white bg-sogblue-light;
+  @apply text-white;
+  @apply bg-sogblue-light;
 }
 </style>

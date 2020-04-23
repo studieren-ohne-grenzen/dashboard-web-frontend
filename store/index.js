@@ -1,7 +1,8 @@
 const mType = {
-  other: 0,
-  member: 1,
-  admin: 2,
+  none: 0,
+  waiting: 1,
+  member: 2,
+  admin: 3,
 }
 
 const gType = {
@@ -33,27 +34,27 @@ export const state = () => ({
     },
     {
       name: 'AG Kongo - Mweso Stipendienprogramm',
-      membership: mType.other,
+      membership: mType.none,
       groupType: gType.projektgruppe,
     },
     {
       name: 'LG Konstanz',
-      membership: mType.other,
+      membership: mType.admin,
       groupType: gType.lokalgruppe,
     },
     {
       name: 'Ressort IT',
-      membership: mType.member,
+      membership: mType.waiting,
       groupType: gType.bundesweit,
     },
     {
       name: 'AG Öffentlichkeitsarbeit',
-      membership: mType.other,
+      membership: mType.none,
       groupType: gType.bundesweit,
     },
     {
       name: 'AG Ruanda',
-      membership: mType.other,
+      membership: mType.none,
       groupType: gType.projektgruppe,
     },
   ],
@@ -93,7 +94,9 @@ export const getters = {
     return [
       ...state.groupList.filter(
         (group) =>
-          group.membership === mType.member || group.membership === mType.admin
+          group.membership === mType.member ||
+          group.membership === mType.admin ||
+          group.membership === mType.waiting
       ),
     ].sort(compareGroups)
   },

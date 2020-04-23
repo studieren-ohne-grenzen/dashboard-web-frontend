@@ -13,13 +13,15 @@ module.exports = {
         light: '#57B4DC',
         default: '#0098CF',
         dark: '#007EBB',
-        darker: '#00679E'
+        darker: '#00679E',
       },
       black: '#000000',
       white: '#FFFFFF',
-      orange: '#CF6B00',
       gray: '#a0aec0',
-      lightgray: '#edf2f7'
+      lightgray: '#edf2f7',
+      red: '#CF3F15',
+      green: '#0ACF98',
+      yellow: '#CF9E15',
     },
     screens: {
       xs: '420px',
@@ -31,5 +33,5 @@ module.exports = {
     }
   },
   variants: {},
-  plugins: []
+  plugins: [],
 }
