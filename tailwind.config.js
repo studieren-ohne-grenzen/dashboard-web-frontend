@@ -14,6 +14,7 @@ module.exports = {
         default: '#0098CF',
         dark: '#007EBB',
         darker: '#00679E',
+        transparent: '#0098CFAA',
       },
       black: '#000000',
       white: '#FFFFFF',
@@ -29,8 +30,8 @@ module.exports = {
       sm: '640px',
       md: '768px',
       lg: '1024px',
-      xl: '1280px'
-    }
+      xl: '1280px',
+    },
   },
   variants: {},
   plugins: [],

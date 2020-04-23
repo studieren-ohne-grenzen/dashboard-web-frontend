@@ -44,38 +44,45 @@
       Keine Gruppen verfügbar.
     </div>
 
-    <grouplisting v-if="!allGroups" :groups="groupsSelected" name="" />
+    <GroupListing v-if="!allGroups" :groups="groupsSelected" name="" />
     <div v-else>
-      <grouplisting
+      <GroupListing
         v-if="groupsBund && groupsBund.length"
         :groups="groupsBund"
         name="Bundesweite Gruppen"
       />
-      <grouplisting
+      <GroupListing
         v-if="groupsProjekt && groupsProjekt.length"
         :groups="groupsProjekt"
         name="Projektgruppen"
       />
-      <grouplisting
+      <GroupListing
         v-if="groupsLokal && groupsLokal.length"
         :groups="groupsLokal"
         name="Lokalgruppen"
       />
-      <grouplisting
+      <GroupListing
         v-if="groupsOther && groupsOther.length"
         :groups="groupsOther"
         name="Andere Gruppen"
       />
     </div>
+    <AlertBox
+      alert-title="Test-Info"
+      :active="false"
+      alert-message="Oh, es scheint, als würde etwas getestet werden."
+    />
   </div>
 </template>
 
 <script>
-import grouplisting from '../../components/grouplisting.vue'
+import GroupListing from '../../components/grouplisting'
+import AlertBox from '../../components/alertbox'
 
 export default {
   components: {
-    grouplisting,
+    GroupListing,
+    AlertBox,
   },
   data: () => {
     return {
