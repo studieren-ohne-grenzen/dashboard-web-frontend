@@ -23,4 +23,4 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 ## Pages
 
-Since authentication is not yet avaiable, navigate to ```/login``` to see login and password reset pages.
+Since authentication is not yet available, navigate to ```/login``` to see login and password reset pages.
