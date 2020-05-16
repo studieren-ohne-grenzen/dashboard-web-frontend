@@ -11,22 +11,22 @@
           {{ group.name }}
         </div>
         <img
-          v-if="group.membership == 3"
+          v-if="group.membership == 'admin'"
           src="wrench.png"
           class="bg-sogblue rounded-r h-10 p-3"
         />
         <img
-          v-else-if="group.membership == 2"
+          v-else-if="group.membership == 'member'"
           src="minus.png"
           class="bg-red rounded-r h-10 p-3"
         />
         <img
-          v-else-if="group.membership == 1"
+          v-else-if="group.membership == 'pending'"
           src="minus.png"
           class="bg-yellow rounded-r h-10 p-3"
         />
         <img
-          v-else-if="group.membership == 0"
+          v-else-if="group.membership == ''"
           src="plus.png"
           class="bg-green rounded-r h-10 p-3"
         />
