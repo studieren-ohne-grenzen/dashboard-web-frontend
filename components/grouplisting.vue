@@ -13,22 +13,23 @@
         <img
           v-if="group.membership == 'admin'"
           src="wrench.png"
-          class="bg-sogblue rounded-r h-10 p-3"
+          class="bg-sogblue rounded-r h-10 p-3 cursor-pointer"
         />
         <img
           v-else-if="group.membership == 'member'"
           src="minus.png"
-          class="bg-red rounded-r h-10 p-3"
+          class="bg-red rounded-r h-10 p-3 cursor-pointer"
         />
         <img
           v-else-if="group.membership == 'pending'"
           src="minus.png"
-          class="bg-yellow rounded-r h-10 p-3"
+          class="bg-yellow rounded-r h-10 p-3 cursor-pointer"
         />
         <img
           v-else-if="group.membership == ''"
           src="plus.png"
-          class="bg-green rounded-r h-10 p-3"
+          class="bg-green rounded-r h-10 p-3 cursor-pointer"
+          @click="requestGroupMembership(group.name)"
         />
       </div>
     </div>
@@ -46,6 +47,11 @@ export default {
     groups: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    requestGroupMembership(groupName) {
+      this.$store.dispatch('requestGroupMembership', groupName)
     },
   },
 }

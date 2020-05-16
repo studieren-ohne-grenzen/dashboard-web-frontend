@@ -39,7 +39,7 @@ export default () => ({
   requests: [],
   alert: {
     title: 'Default Title',
-    active: true,
+    active: false,
     message: 'Default Message',
     defaultToAction: false,
     showCancel: true,
