@@ -52,11 +52,17 @@
         <nuxt-child></nuxt-child>
       </div>
     </div>
+    <AlertBox />
   </div>
 </template>
 
 <script>
+import AlertBox from '~/components/alertbox'
+
 export default {
+  components: {
+    AlertBox,
+  },
   options: {
     auth: false,
   },

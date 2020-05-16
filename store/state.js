@@ -37,10 +37,10 @@ export default () => ({
     },
   ],
   requests: [],
-  alertBox: {
-    alertTitle: 'Default Title',
-    active: false,
-    alertMessage: 'Default Message',
+  alert: {
+    title: 'Default Title',
+    active: true,
+    message: 'Default Message',
     defaultToAction: false,
     showCancel: true,
     actionName: 'OK',

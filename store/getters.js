@@ -27,7 +27,7 @@ export default {
       ...state.groupList.filter((group) => group.groupType === 'other'),
     ].sort(compareGroups)
   },
-  allGroupsByCategory(state, getters) {
+  allGroupsByCategory(_, getters) {
     return [
       {
         name: 'Bundesweite Gruppen',
@@ -62,5 +62,8 @@ export default {
   },
   requests(state) {
     return state.requests
+  },
+  alert(state) {
+    return state.alert
   },
 }
