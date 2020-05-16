@@ -36,6 +36,7 @@ export default () => ({
       groupType: 'projektgruppe',
     },
   ],
+  requests: [],
   alertBox: {
     alertTitle: 'Default Title',
     active: false,

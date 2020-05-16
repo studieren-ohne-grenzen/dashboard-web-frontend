@@ -27,6 +27,26 @@ export default {
       ...state.groupList.filter((group) => group.groupType === 'other'),
     ].sort(compareGroups)
   },
+  allGroupsByCategory(state, getters) {
+    return [
+      {
+        name: 'Bundesweite Gruppen',
+        getter: getters.allGroupsBund,
+      },
+      {
+        name: 'Projektgruppen',
+        getter: getters.allGroupsProjekt,
+      },
+      {
+        name: 'Lokalgruppen',
+        getter: getters.allGroupsLokal,
+      },
+      {
+        name: 'Andere Gruppen',
+        getter: getters.allGroupsOther,
+      },
+    ]
+  },
   allGroups(state) {
     return [...state.groupList].sort(compareGroups)
   },
@@ -39,5 +59,8 @@ export default {
     return [
       ...state.groupList.filter((group) => group.membership === 'admin'),
     ].sort(compareGroups)
+  },
+  requests(state) {
+    return state.requests
   },
 }

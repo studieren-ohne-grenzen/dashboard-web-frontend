@@ -1,9 +1,15 @@
 <template>
   <div>
-    <h1 v-if="requests.length" class="text-sogblue-light text-3xl">
+    <h1
+      v-if="this.$store.getters.requests.length"
+      class="text-sogblue-light text-3xl"
+    >
       Neue Anfragen
     </h1>
-    <hr v-if="requests.length" class="border-lightgray my-4" />
+    <hr
+      v-if="this.$store.getters.requests.length"
+      class="border-lightgray my-4"
+    />
     <div class="mb-4 w-auto inline-flex border border-sogblue rounded">
       <button
         class="px-4 py-2 border-r border-sogblue leading-tight"
@@ -20,18 +26,12 @@
         Meine Gruppen
       </button>
       <button
-        class="px-4 py-2 xs:hidden"
+        class="px-4 py-2"
         :class="adminGroups ? 'groupactive' : 'groupinactive'"
         @click="showAdminGroups"
       >
-        Admin
-      </button>
-      <button
-        class="px-4 py-2 hidden xs:inline"
-        :class="adminGroups ? 'groupactive' : 'groupinactive'"
-        @click="showAdminGroups"
-      >
-        Administrieren
+        <span class="xs:hidden">Admin</span>
+        <span class="xs:inline">Administrieren</span>
       </button>
     </div>
     <div v-if="!groupsSelected.length && adminGroups" class="text-gray">
@@ -45,44 +45,26 @@
     </div>
 
     <GroupListing v-if="!allGroups" :groups="groupsSelected" name="" />
-    <div v-else>
+    <div
+      v-for="category in this.$store.getters.allGroupsByCategory"
+      v-else
+      :key="category.name"
+    >
       <GroupListing
-        v-if="groupsBund && groupsBund.length"
-        :groups="groupsBund"
-        name="Bundesweite Gruppen"
-      />
-      <GroupListing
-        v-if="groupsProjekt && groupsProjekt.length"
-        :groups="groupsProjekt"
-        name="Projektgruppen"
-      />
-      <GroupListing
-        v-if="groupsLokal && groupsLokal.length"
-        :groups="groupsLokal"
-        name="Lokalgruppen"
-      />
-      <GroupListing
-        v-if="groupsOther && groupsOther.length"
-        :groups="groupsOther"
-        name="Andere Gruppen"
+        v-if="category.getter.length"
+        :groups="category.getter"
+        :name="category.name"
       />
     </div>
-    <AlertBox
-      alert-title="Test-Info"
-      :active="false"
-      alert-message="Oh, es scheint, als würde etwas getestet werden."
-    />
   </div>
 </template>
 
 <script>
 import GroupListing from '../../components/grouplisting'
-import AlertBox from '../../components/alertbox'
 
 export default {
   components: {
     GroupListing,
-    AlertBox,
   },
   data: () => {
     return {
@@ -97,21 +79,6 @@ export default {
       if (this.adminGroups) return this.$store.getters.adminGroups
       if (this.allGroups) return this.$store.getters.allGroups
       return null
-    },
-    groupsLokal() {
-      return this.$store.getters.allGroupsLokal
-    },
-    groupsProjekt() {
-      return this.$store.getters.allGroupsProjekt
-    },
-    groupsBund() {
-      return this.$store.getters.allGroupsBund
-    },
-    groupsOther() {
-      return this.$store.getters.allGroupsOther
-    },
-    requests() {
-      return []
     },
   },
   methods: {
