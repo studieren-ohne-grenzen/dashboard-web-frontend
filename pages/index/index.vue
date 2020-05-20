@@ -10,52 +10,70 @@
       v-if="this.$store.getters['groups/requests'].length"
       class="border-lightgray my-4"
     />
-    <div class="mb-4 w-auto inline-flex border border-sogblue rounded">
-      <button
-        class="px-4 py-2 border-r border-sogblue leading-tight"
-        :class="allGroups ? 'groupactive' : 'groupinactive'"
-        @click="showAllGroups"
+    <div class="w-full flex flex-wrap justify-between">
+      <div
+        class="mb-4 xs:mr-4 flex-grow xs:flex-grow-0 w-auto inline-flex border border-sogblue rounded"
       >
-        Alle Gruppen
-      </button>
-      <button
-        class="px-4 py-2 border-r border-sogblue leading-tight"
-        :class="myGroups ? 'groupactive' : 'groupinactive'"
-        @click="showMyGroups"
-      >
-        Meine Gruppen
-      </button>
-      <button
-        class="px-4 py-2"
-        :class="adminGroups ? 'groupactive' : 'groupinactive'"
-        @click="showAdminGroups"
-      >
-        <span class="xs:hidden">Admin</span>
-        <span class="hidden xs:inline">Administrieren</span>
-      </button>
+        <button
+          class="px-4 py-2 flex-grow border-r border-sogblue leading-tight"
+          :class="typeSelected === 'all' ? 'groupactive' : 'groupinactive'"
+          @click="changeTypeSelected('all')"
+        >
+          Alle Gruppen
+        </button>
+        <button
+          class="px-4 py-2 flex-grow border-r border-sogblue leading-tight"
+          :class="typeSelected === 'personal' ? 'groupactive' : 'groupinactive'"
+          @click="changeTypeSelected('personal')"
+        >
+          Meine Gruppen
+        </button>
+        <button
+          class="px-4 py-2 flex-grow"
+          :class="typeSelected === 'admin' ? 'groupactive' : 'groupinactive'"
+          @click="changeTypeSelected('admin')"
+        >
+          <span class="s:hidden">Admin</span>
+          <span class="hidden s:inline">Administrieren</span>
+        </button>
+      </div>
+      <input
+        v-model="searchQuery"
+        type="text"
+        placeholder="Gruppe suchen"
+        class="bg-lightgray rounded mb-4 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
+        @focus="changeTypeSelected('search')"
+      />
     </div>
-    <div v-if="!groupsSelected.length && adminGroups" class="text-gray">
+    <div
+      v-if="
+        groupsSelected && !groupsSelected.length && typeSelected === 'admin'
+      "
+      class="text-gray"
+    >
       Du hast in keiner Gruppe Administrator-Rechte.
     </div>
-    <div v-else-if="!groupsSelected.length && myGroups" class="text-gray">
+    <div
+      v-else-if="
+        groupsSelected && !groupsSelected.length && typeSelected === 'personal'
+      "
+      class="text-gray"
+    >
       Du bist noch nicht Mitglied in einer Gruppe.
     </div>
-    <div v-else-if="!groupsSelected.length && allGroups" class="text-gray">
+    <div v-else-if="groupsSelected && !groupsSelected.length" class="text-gray">
       Keine Gruppen verfügbar.
     </div>
 
-    <GroupListing v-if="!allGroups" :groups="groupsSelected" name="" />
-    <div
-      v-for="category in this.$store.getters['groups/allGroupsByCategory']"
-      v-else
-      :key="category.name"
-    >
+    <div v-if="typeSelected === 'all'">
       <GroupListing
-        v-if="category.getter.length"
+        v-for="category in this.$store.getters['groups/allGroupsByCategory']"
+        :key="category.name"
         :groups="category.getter"
         :name="category.name"
       />
     </div>
+    <GroupListing v-else-if="groupsSelected" :groups="groupsSelected" name="" />
   </div>
 </template>
 
@@ -68,34 +86,29 @@ export default {
   },
   data: () => {
     return {
-      allGroups: false,
-      myGroups: true,
-      adminGroups: false,
+      typeSelected: 'personal',
+      searchQuery: '',
     }
   },
   computed: {
     groupsSelected() {
-      if (this.myGroups) return this.$store.getters['groups/myGroups']
-      if (this.adminGroups) return this.$store.getters['groups/adminGroups']
-      if (this.allGroups) return this.$store.getters['groups/allGroups']
+      if (this.typeSelected === 'personal')
+        return this.$store.getters['groups/myGroups']
+      if (this.typeSelected === 'admin')
+        return this.$store.getters['groups/adminGroups']
+      if (this.typeSelected === 'all')
+        return this.$store.getters['groups/allGroups']
+      if (this.typeSelected === 'search')
+        return this.$store.getters['groups/allGroups'].filter((group) =>
+          group.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        )
       return null
     },
   },
   methods: {
-    showAllGroups() {
-      this.allGroups = true
-      this.myGroups = false
-      this.adminGroups = false
-    },
-    showMyGroups() {
-      this.allGroups = false
-      this.myGroups = true
-      this.adminGroups = false
-    },
-    showAdminGroups() {
-      this.allGroups = false
-      this.myGroups = false
-      this.adminGroups = true
+    changeTypeSelected(type) {
+      if (type !== 'search') this.searchQuery = ''
+      this.typeSelected = type
     },
   },
 }

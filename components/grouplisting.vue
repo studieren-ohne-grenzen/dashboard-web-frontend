@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="groups.length">
     <div v-if="name.length" class="mb-4 text-sogblue">
       {{ name }}
     </div>
