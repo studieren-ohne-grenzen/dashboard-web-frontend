@@ -1,6 +1,6 @@
 <template>
   <div>
-    Gruppe {{ this.$route.params.group }}
+    {{ thisGroup.name }}
     <br />
     <br />
     <nuxt-link to="/">
@@ -12,9 +12,19 @@
 <script>
 export default {
   // TODO: test for actual group names
-  /* validate({ params }) {
-    return /^\d+$/.test(params.group)
-  } */
+  validate({ params }) {
+    return true
+  },
+  computed: {
+    thisGroup() {
+      return this.$store.getters['groups/allGroups'].find(
+        (group) =>
+          !decodeURIComponent(this.$route.params.group).localeCompare(
+            group.name
+          )
+      )
+    },
+  },
 }
 </script>
 

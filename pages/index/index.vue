@@ -33,8 +33,8 @@
           :class="typeSelected === 'admin' ? 'groupactive' : 'groupinactive'"
           @click="changeTypeSelected('admin')"
         >
-          <span class="s:hidden">Admin</span>
-          <span class="hidden s:inline">Administrieren</span>
+          <span class="sm:hidden">Admin</span>
+          <span class="hidden sm:inline">Administrieren</span>
         </button>
       </div>
       <input
@@ -60,6 +60,14 @@
       class="text-gray"
     >
       Du bist noch nicht Mitglied in einer Gruppe.
+    </div>
+    <div
+      v-else-if="
+        groupsSelected && !groupsSelected.length && typeSelected === 'search'
+      "
+      class="text-gray"
+    >
+      Keine Gruppen gefunden.
     </div>
     <div v-else-if="groupsSelected && !groupsSelected.length" class="text-gray">
       Keine Gruppen verfügbar.
