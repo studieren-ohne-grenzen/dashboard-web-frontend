@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1
-      v-if="this.$store.getters.requests.length"
+      v-if="this.$store.getters['groups/requests'].length"
       class="text-sogblue-light text-3xl"
     >
       Neue Anfragen
     </h1>
     <hr
-      v-if="this.$store.getters.requests.length"
+      v-if="this.$store.getters['groups/requests'].length"
       class="border-lightgray my-4"
     />
     <div class="mb-4 w-auto inline-flex border border-sogblue rounded">
@@ -46,7 +46,7 @@
 
     <GroupListing v-if="!allGroups" :groups="groupsSelected" name="" />
     <div
-      v-for="category in this.$store.getters.allGroupsByCategory"
+      v-for="category in this.$store.getters['groups/allGroupsByCategory']"
       v-else
       :key="category.name"
     >
@@ -75,9 +75,9 @@ export default {
   },
   computed: {
     groupsSelected() {
-      if (this.myGroups) return this.$store.getters.myGroups
-      if (this.adminGroups) return this.$store.getters.adminGroups
-      if (this.allGroups) return this.$store.getters.allGroups
+      if (this.myGroups) return this.$store.getters['groups/myGroups']
+      if (this.adminGroups) return this.$store.getters['groups/adminGroups']
+      if (this.allGroups) return this.$store.getters['groups/allGroups']
       return null
     },
   },

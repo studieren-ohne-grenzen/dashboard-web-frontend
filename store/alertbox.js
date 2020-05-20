@@ -1,4 +1,22 @@
-export default {
+export const state = () => ({
+  alert: {
+    title: 'Default Title',
+    active: false,
+    message: 'Default Message',
+    defaultToAction: false,
+    showCancel: true,
+    actionName: 'OK',
+    cancelName: 'Abbrechen',
+  },
+})
+
+export const getters = {
+  alert(state) {
+    return state.alert
+  },
+}
+
+export const mutations = {
   hideAlert(state) {
     state.alert.active = false
   },

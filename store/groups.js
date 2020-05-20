@@ -1,3 +1,44 @@
+export const state = () => ({
+  groupList: [
+    {
+      name: 'AG Design',
+      membership: 'member',
+      groupType: 'bundesweit',
+    },
+    {
+      name: 'LG Aachen',
+      membership: 'member',
+      groupType: 'lokalgruppe',
+    },
+    {
+      name: 'AG Kongo - Mweso Stipendienprogramm',
+      membership: '',
+      groupType: 'projektgruppe',
+    },
+    {
+      name: 'LG Konstanz',
+      membership: 'admin',
+      groupType: 'lokalgruppe',
+    },
+    {
+      name: 'Ressort IT',
+      membership: 'pending',
+      groupType: 'bundesweit',
+    },
+    {
+      name: 'AG Öffentlichkeitsarbeit',
+      membership: '',
+      groupType: 'bundesweit',
+    },
+    {
+      name: 'AG Ruanda',
+      membership: '',
+      groupType: 'projektgruppe',
+    },
+  ],
+  requests: [],
+})
+
 const compareGroups = (a, b) => {
   const nameA = a.name.toUpperCase()
   const nameB = b.name.toUpperCase()
@@ -6,7 +47,7 @@ const compareGroups = (a, b) => {
   else return 0
 }
 
-export default {
+export const getters = {
   allGroupsLokal(state) {
     return [
       ...state.groupList.filter((group) => group.groupType === 'lokalgruppe'),
@@ -63,7 +104,22 @@ export default {
   requests(state) {
     return state.requests
   },
-  alert(state) {
-    return state.alert
+}
+
+export const actions = {
+  requestGroupMembership({ commit }, groupName) {
+    groupName = groupName || 'Gruppe'
+    const title = 'Gruppenmitgliedschaft anfragen'
+    const message =
+      'Eine Mitgliedschaft wird bei den Administratoren der ' +
+      groupName +
+      ' angefragt. Sie müssen dich freischalten, bevor du Mitglied wirst.'
+    const defaultToAction = true
+    const actionName = 'Mitgliedschaft anfragen'
+    commit(
+      'alertbox/showAlert',
+      { title, message, defaultToAction, actionName },
+      { root: true }
+    )
   },
 }

@@ -1,45 +1,49 @@
 <template>
   <div
-    v-if="this.$store.getters.alert.active"
+    v-if="this.$store.getters['alertbox/alert'].active"
     class="top-0 left-0 w-full h-full fixed sm:px-2 bg-sogblue-transparent"
   >
     <form
       class="p-4 max-w-2xl my-24 sm:my-64 mx-auto bg-white sm:rounded shadow-2xl"
     >
       <h1 class="text-2xl text-sogblue">
-        {{ this.$store.getters.alert.title }}
+        {{ this.$store.getters['alertbox/alert'].title }}
       </h1>
       <div class="mb-4">
-        {{ this.$store.getters.alert.message }}
+        {{ this.$store.getters['alertbox/alert'].message }}
       </div>
       <div class="w-full text-right">
         <button
-          v-if="this.$store.getters.alert.showCancel"
+          v-if="this.$store.getters['alertbox/alert'].showCancel"
           :type="
-            !this.$store.getters.alert.defaultToAction ? 'reset' : 'button'
+            !this.$store.getters['alertbox/alert'].defaultToAction
+              ? 'reset'
+              : 'button'
           "
           :class="
-            !this.$store.getters.alert.defaultToAction
+            !this.$store.getters['alertbox/alert'].defaultToAction
               ? 'buttonactive'
               : 'buttoninactive'
           "
           class="rounded mr-2 py-2 px-4 border border-sogblue"
           @click="cancelAlert"
         >
-          {{ this.$store.getters.alert.cancelName }}
+          {{ this.$store.getters['alertbox/alert'].cancelName }}
         </button>
         <button
           :type="
-            this.$store.getters.alert.defaultToAction ? 'submit' : 'button'
+            this.$store.getters['alertbox/alert'].defaultToAction
+              ? 'submit'
+              : 'button'
           "
           :class="
-            this.$store.getters.alert.defaultToAction
+            this.$store.getters['alertbox/alert'].defaultToAction
               ? 'buttonactive'
               : 'buttoninactive'
           "
           class="rounded py-2 px-4 border border-sogblue"
         >
-          {{ this.$store.getters.alert.actionName }}
+          {{ this.$store.getters['alertbox/alert'].actionName }}
         </button>
       </div>
     </form>
@@ -51,7 +55,7 @@ export default {
   name: 'AlertBox',
   methods: {
     cancelAlert() {
-      this.$store.commit('hideAlert')
+      this.$store.commit('alertbox/hideAlert')
     },
   },
 }

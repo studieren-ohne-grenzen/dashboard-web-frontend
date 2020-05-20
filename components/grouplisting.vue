@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     requestGroupMembership(groupName) {
-      this.$store.dispatch('requestGroupMembership', groupName)
+      this.$store.dispatch('groups/requestGroupMembership', groupName)
     },
   },
 }
