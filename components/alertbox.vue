@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="this.$store.getters['alertbox/alert'].active"
+    v-if="this.$store.getters['alertbox/active']"
     class="top-0 left-0 w-full h-full fixed sm:px-2 bg-sogblue-transparent"
   >
     <form
@@ -16,11 +16,7 @@
       <div class="w-full text-right">
         <button
           v-if="this.$store.getters['alertbox/showCancel']"
-          :type="
-            !this.$store.getters['alertbox/defaultToAction']
-              ? 'reset'
-              : 'button'
-          "
+          type="reset"
           :class="
             !this.$store.getters['alertbox/defaultToAction']
               ? 'buttonactive'
@@ -32,11 +28,7 @@
           {{ this.$store.getters['alertbox/cancelName'] }}
         </button>
         <button
-          :type="
-            this.$store.getters['alertbox/defaultToAction']
-              ? 'submit'
-              : 'button'
-          "
+          type="submit"
           :class="
             this.$store.getters['alertbox/defaultToAction']
               ? 'buttonactive'

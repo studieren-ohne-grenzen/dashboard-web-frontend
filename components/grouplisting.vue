@@ -25,6 +25,7 @@
           class="text-white fill-current bg-red rounded-r h-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
+          @click="cancelMembership(group.id)"
         >
           <path d="M0 10h24v4h-24z" />
         </svg>
@@ -33,6 +34,7 @@
           class="text-white fill-current bg-yellow rounded-r h-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
+          @click="cancelMembershipRequest(group.id)"
         >
           <path d="M0 10h24v4h-24z" />
         </svg>
@@ -66,6 +68,15 @@ export default {
   methods: {
     requestGroupMembership(groupID) {
       this.$store.dispatch('groups/alertRequestMembership', { groupID })
+    },
+    cancelMembershipRequest(groupID) {
+      this.$store.dispatch('groups/alertCancelMembershipRequest', { groupID })
+    },
+    cancelMembership(groupID) {
+      this.$store.dispatch('groups/alertCancelMembership', { groupID })
+    },
+    administrate(groupID) {
+      // ToDo: change route
     },
   },
 }
