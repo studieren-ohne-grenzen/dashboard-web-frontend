@@ -41,7 +41,7 @@
           class="text-white fill-current bg-green rounded-r h-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          @click="requestGroupMembership(group.name)"
+          @click="requestGroupMembership(group.id)"
         >
           <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
         </svg>
@@ -64,8 +64,8 @@ export default {
     },
   },
   methods: {
-    requestGroupMembership(groupName) {
-      this.$store.dispatch('groups/requestGroupMembership', groupName)
+    requestGroupMembership(groupID) {
+      this.$store.dispatch('groups/alertRequestMembership', { groupID })
     },
   },
 }

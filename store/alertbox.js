@@ -7,6 +7,8 @@ export const state = () => ({
     showCancel: true,
     actionName: 'OK',
     cancelName: 'Abbrechen',
+    action: 'alertbox/hideAlert',
+    params: {},
   },
 })
 
@@ -31,6 +33,8 @@ export const mutations = {
     else state.alert.showCancel = true
     state.alert.actionName = options.actionName || 'OK'
     state.alert.cancelName = options.cancelName || 'Abbrechen'
+    state.alert.action = options.action || 'alertbox/hideAlert'
+    state.alert.params = options.params || {}
     state.alert.active = true
   },
 }

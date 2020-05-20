@@ -5,6 +5,7 @@
   >
     <form
       class="p-4 max-w-2xl my-24 sm:my-64 mx-auto bg-white sm:rounded shadow-2xl"
+      @submit.prevent="confirmAction"
     >
       <h1 class="text-2xl text-sogblue">
         {{ this.$store.getters['alertbox/alert'].title }}
@@ -55,6 +56,12 @@ export default {
   name: 'AlertBox',
   methods: {
     cancelAlert() {
+      this.$store.commit('alertbox/hideAlert')
+    },
+    confirmAction() {
+      const action = this.$store.getters['alertbox/alert'].action
+      const params = this.$store.getters['alertbox/alert'].params
+      this.$store.dispatch(action, params)
       this.$store.commit('alertbox/hideAlert')
     },
   },
