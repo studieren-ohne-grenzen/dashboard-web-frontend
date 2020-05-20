@@ -31,7 +31,7 @@
         @click="showAdminGroups"
       >
         <span class="xs:hidden">Admin</span>
-        <span class="xs:inline">Administrieren</span>
+        <span class="hidden xs:inline">Administrieren</span>
       </button>
     </div>
     <div v-if="!groupsSelected.length && adminGroups" class="text-gray">

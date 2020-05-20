@@ -4,15 +4,19 @@
       {{ name }}
     </div>
     <div class="flex flex-wrap">
-      <div v-for="group in groups" :key="group.name" class="mr-4 mb-4">
+      <div
+        v-for="group in groups"
+        :key="group.name"
+        class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
+      >
         <div
-          class="pt-2 px-4 float-left h-10 border-l border-t border-b rounded-l border-gray"
+          class="py-2 px-4 flex-grow border-l border-t border-b rounded-l border-gray"
         >
           {{ group.name }}
         </div>
         <svg
           v-if="group.membership == 'admin'"
-          class="text-white fill-current bg-sogblue rounded-r h-10 p-3 cursor-pointer"
+          class="text-white flex-none fill-current bg-sogblue rounded-r w-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
@@ -22,7 +26,7 @@
         </svg>
         <svg
           v-else-if="group.membership == 'member'"
-          class="text-white fill-current bg-red rounded-r h-10 p-3 cursor-pointer"
+          class="text-white flex-none fill-current bg-red rounded-r w-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           @click="cancelMembership(group.id)"
@@ -31,7 +35,7 @@
         </svg>
         <svg
           v-else-if="group.membership == 'pending'"
-          class="text-white fill-current bg-yellow rounded-r h-10 p-3 cursor-pointer"
+          class="text-white flex-none fill-current bg-yellow rounded-r w-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           @click="cancelMembershipRequest(group.id)"
@@ -40,7 +44,7 @@
         </svg>
         <svg
           v-else-if="group.membership == ''"
-          class="text-white fill-current bg-green rounded-r h-10 p-3 cursor-pointer"
+          class="text-white flex-none fill-current bg-green rounded-r w-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           @click="requestGroupMembership(group.id)"
