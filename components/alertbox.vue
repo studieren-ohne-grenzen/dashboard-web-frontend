@@ -8,43 +8,43 @@
       @submit.prevent="confirmAction"
     >
       <h1 class="text-2xl text-sogblue">
-        {{ this.$store.getters['alertbox/alert'].title }}
+        {{ this.$store.getters['alertbox/title'] }}
       </h1>
       <div class="mb-4">
-        {{ this.$store.getters['alertbox/alert'].message }}
+        {{ this.$store.getters['alertbox/message'] }}
       </div>
       <div class="w-full text-right">
         <button
-          v-if="this.$store.getters['alertbox/alert'].showCancel"
+          v-if="this.$store.getters['alertbox/showCancel']"
           :type="
-            !this.$store.getters['alertbox/alert'].defaultToAction
+            !this.$store.getters['alertbox/defaultToAction']
               ? 'reset'
               : 'button'
           "
           :class="
-            !this.$store.getters['alertbox/alert'].defaultToAction
+            !this.$store.getters['alertbox/defaultToAction']
               ? 'buttonactive'
               : 'buttoninactive'
           "
           class="rounded mr-2 py-2 px-4 border border-sogblue"
           @click="cancelAlert"
         >
-          {{ this.$store.getters['alertbox/alert'].cancelName }}
+          {{ this.$store.getters['alertbox/cancelName'] }}
         </button>
         <button
           :type="
-            this.$store.getters['alertbox/alert'].defaultToAction
+            this.$store.getters['alertbox/defaultToAction']
               ? 'submit'
               : 'button'
           "
           :class="
-            this.$store.getters['alertbox/alert'].defaultToAction
+            this.$store.getters['alertbox/defaultToAction']
               ? 'buttonactive'
               : 'buttoninactive'
           "
           class="rounded py-2 px-4 border border-sogblue"
         >
-          {{ this.$store.getters['alertbox/alert'].actionName }}
+          {{ this.$store.getters['alertbox/actionName'] }}
         </button>
       </div>
     </form>
@@ -59,8 +59,8 @@ export default {
       this.$store.commit('alertbox/hideAlert')
     },
     confirmAction() {
-      const action = this.$store.getters['alertbox/alert'].action
-      const params = this.$store.getters['alertbox/alert'].params
+      const action = this.$store.getters['alertbox/action']
+      const params = this.$store.getters['alertbox/params']
       this.$store.dispatch(action, params)
       this.$store.commit('alertbox/hideAlert')
     },

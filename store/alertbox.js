@@ -13,9 +13,15 @@ export const state = () => ({
 })
 
 export const getters = {
-  alert(state) {
-    return state.alert
-  },
+  title: (state) => state.alert.title,
+  active: (state) => state.alert.active,
+  message: (state) => state.alert.message,
+  defaultToAction: (state) => state.alert.defaultToAction,
+  showCancel: (state) => state.alert.showCancel,
+  actionName: (state) => state.alert.actionName,
+  cancelName: (state) => state.alert.cancelName,
+  action: (state) => state.alert.action,
+  params: (state) => state.alert.params,
 }
 
 export const mutations = {
