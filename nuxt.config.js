@@ -4,49 +4,52 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: '', // process.env.npm_package_name
+    titleTemplate: (title) => {
+      return title ? title + ' - SOG Dashboard' : 'SOG Dashboard'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content: process.env.npm_package_description || '',
       },
       {
         name: 'msapplication-TileColor',
-        content: '#2d89ef'
+        content: '#2d89ef',
       },
-      { name: 'theme-color', content: '#ffffff' }
+      { name: 'theme-color', content: '#ffffff' },
     ],
     link: [
       {
         rel: 'apple-touch-icon',
         sizes: '120x120',
-        href: '/icons/apple-touch-icon.png'
+        href: '/icons/apple-touch-icon.png',
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '32x32',
-        href: '/icons/favicon-32x32.png'
+        href: '/icons/favicon-32x32.png',
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '16x16',
-        href: '/icons/favicon-16x16.png'
+        href: '/icons/favicon-16x16.png',
       },
       {
         rel: 'manifest',
-        href: '/icons/site.webmanifest'
+        href: '/icons/site.webmanifest',
       },
       {
         rel: 'mask-icon',
         href: 'safari-pinned-tab.svg',
-        color: '#0098cf'
-      }
-    ]
+        color: '#0098cf',
+      },
+    ],
   },
   /*
    ** Customize the progress-bar color
@@ -64,7 +67,7 @@ export default {
    ** Router options
    */
   router: {
-    middleware: ['auth']
+    middleware: ['auth'],
   },
   /*
    ** Nuxt.js dev-modules
@@ -73,7 +76,7 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
   ],
   /*
    ** Nuxt.js modules
@@ -82,7 +85,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://auth.nuxtjs.org/
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
   ],
   /*
    ** Axios module configuration
@@ -100,6 +103,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  }
+    extend(config, ctx) {},
+  },
 }

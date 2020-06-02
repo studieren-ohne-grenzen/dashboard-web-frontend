@@ -51,6 +51,11 @@ export default {
   options: {
     auth: false,
   },
+  head() {
+    return {
+      title: 'Passwort zurücksetzen',
+    }
+  },
 }
 </script>
 

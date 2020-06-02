@@ -126,6 +126,11 @@ export default {
       this.typeSelected = type
     },
   },
+  head: () => {
+    return {
+      title: 'Gruppen',
+    }
+  },
 }
 </script>
 

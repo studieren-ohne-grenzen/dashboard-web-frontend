@@ -226,6 +226,11 @@ export default {
       this.changeMail = false
     },
   },
+  head: () => {
+    return {
+      title: 'Profil',
+    }
+  },
 }
 </script>
 

@@ -61,6 +61,11 @@ export default {
       )
     },
   },
+  head() {
+    return {
+      title: this.thisGroup.name,
+    }
+  },
 }
 </script>
 
