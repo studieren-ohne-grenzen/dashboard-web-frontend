@@ -11,7 +11,7 @@
         <div
           class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
         >
-          Elisabeth Maria Schulze-Böhmermann
+          {{ name }}
         </div>
         <div class="block text-sogblue-dark mb-1">
           Benutzername
@@ -19,7 +19,7 @@
         <div
           class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
         >
-          elisabeth.maria.schulze.boehmermann
+          {{ username }}
         </div>
         <div class="block text-gray">
           Dein Name kann nur von der
@@ -108,7 +108,7 @@
           <div
             class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
           >
-            elisabeth.maria.schulze.boehmermann<wbr />@<wbr />studieren-ohne-grenzen.org
+            {{ sogMail }}
           </div>
           <div class="text-gray mb-4 sm:max-w-lg">
             Deine SOG-Email kann nur von der
@@ -130,7 +130,7 @@
             v-if="!changeMail"
             class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
           >
-            eli.maria@gmail.com
+            {{ alternativeMail }}
           </div>
           <button
             v-if="!changeMail"
@@ -151,7 +151,7 @@
             <input
               v-focus
               type="email"
-              placeholder="eli.maria@gmail.com"
+              :placeholder="alternativeMail"
               class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
           </div>
@@ -186,6 +186,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   directives: {
     focus: {
@@ -199,6 +201,15 @@ export default {
       changePwd: false,
       changeMail: false,
     }
+  },
+  computed: {
+    ...mapGetters({
+      name: 'user/name',
+      username: 'user/username',
+      password: 'user/password',
+      sogMail: 'user/sogMail',
+      alternativeMail: 'user/alternativeMail',
+    }),
   },
   methods: {
     // TODO: reset forms on untoggle
