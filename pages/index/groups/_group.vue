@@ -1,13 +1,8 @@
 <template>
   <div>
-    <div class="flex flex-wrap items-center sm:flex-no-wrap">
-      <nuxt-link class="text-sogblue flex-shrink-0 mr-8 my-3" to="/">
-        <span class="text-2xl leading-none">&lsaquo;</span> Gruppen
-      </nuxt-link>
-      <h1 class="text-sogblue xs:min-w-0 min-w-full text-4xl leading-tight">
-        {{ thisGroup.name }}
-      </h1>
-    </div>
+    <h1 class="text-sogblue xs:min-w-0 min-w-full text-4xl leading-tight">
+      {{ thisGroup.name }}
+    </h1>
     <hr class="border-gray-light my-4" />
     <h2 class="text-sogblue-light text-3xl mb-4">Administrator:innen</h2>
     <div v-if="!thisGroup.admins.length">

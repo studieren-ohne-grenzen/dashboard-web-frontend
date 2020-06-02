@@ -43,7 +43,6 @@
         placeholder="Gruppe suchen"
         class="bg-gray-light rounded mb-4 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
         @focus="changeTypeSelected('search')"
-        @blur="changeTypeSelected('all')"
       />
     </div>
     <div
@@ -64,11 +63,11 @@
     </div>
     <div
       v-else-if="
-        groupsSelected && !groupsSelected.length && typeSelected === 'search'
+        typeSelected === 'search' && (!groupsSelected || !groupsSelected.length)
       "
       class="text-gray"
     >
-      Keine Gruppen gefunden.
+      Keine passenden Gruppen gefunden.
     </div>
     <div v-else-if="groupsSelected && !groupsSelected.length" class="text-gray">
       Keine Gruppen verfügbar.

@@ -4,7 +4,7 @@
       <div class="w-screen sm:w-auto py-4 pb-6 sm:py-2 lg:pl-0 sm:pr-12">
         <img
           alt="Dashboard Logo"
-          src="logo.png"
+          src="@/static/logo.png"
           class="m-auto"
           style="max-width: 8rem;"
         />
@@ -13,9 +13,7 @@
         <li
           class="ml-2 sm:ml-0"
           :class="
-            this.$router.currentRoute.path != '/profile'
-              ? 'tabactive'
-              : 'tabinactive'
+            this.$router.currentRoute.path === '/' ? 'tabactive' : 'tabinactive'
           "
         >
           <nuxt-link class="inline-block py-2 px-3 sm:px-8 font-normal" to="/">
@@ -25,7 +23,7 @@
         <li
           class="ml-2 sm:ml-0"
           :class="
-            this.$router.currentRoute.path == '/profile'
+            this.$router.currentRoute.path === '/profile'
               ? 'tabactive'
               : 'tabinactive'
           "
@@ -39,7 +37,7 @@
         </li>
         <li class="px-1 flex-grow">
           <button
-            class="inline-block float-right py-2 pr-2 sm:pr-0 sm:pl-4 text-sogblue-lightest hover:text-white font-normal"
+            class="inline-block float-right py-2 pr-2 sm:pr-0 sm:pl-4 text-white hover:text-white font-normal"
             @click="$auth.logout()"
           >
             Abmelden
@@ -71,7 +69,11 @@ export default {
 
 <style>
 .tabactive {
-  @apply px-1 h-10 bg-white rounded-t text-sogblue-darker;
+  @apply px-1;
+  @apply h-10;
+  @apply bg-white;
+  @apply rounded-t;
+  @apply text-sogblue-darker;
 }
 
 .tabactive:hover {
@@ -79,7 +81,8 @@ export default {
 }
 
 .tabinactive {
-  @apply px-1 text-sogblue-lightest;
+  @apply px-1;
+  @apply text-white;
 }
 
 .tabinactive:hover {

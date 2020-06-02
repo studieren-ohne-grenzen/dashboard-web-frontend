@@ -18,7 +18,7 @@
         <nuxt-link
           v-if="group.membership == 'admin'"
           :to="'/groups/' + encodeURIComponent(group.name)"
-          class="flex-none bg-gray rounded-r w-10 p-3 cursor-pointer"
+          class="flex-none bg-sogblue-light rounded-r w-10 p-3 cursor-pointer"
         >
           <svg
             class="text-white fill-current"
