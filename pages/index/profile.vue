@@ -9,7 +9,7 @@
           Name
         </div>
         <div
-          class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
+          class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
         >
           Elisabeth Maria Schulze-Böhmermann
         </div>
@@ -17,7 +17,7 @@
           Benutzername
         </div>
         <div
-          class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
+          class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
         >
           elisabeth.maria.schulze.boehmermann
         </div>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div>
-      <hr class="border-lightgray my-4" />
+      <hr class="border-gray-light my-4" />
       <h1
         class="text-sogblue-light text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
       >
@@ -53,7 +53,7 @@
           <input
             v-focus
             type="password"
-            class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
+            class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
           />
         </div>
         <div class="sm:flex flex-grow">
@@ -63,7 +63,7 @@
             </label>
             <input
               type="password"
-              class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
           </div>
           <div class="flex-grow sm:mx-2 sm:min-w-56">
@@ -72,7 +72,7 @@
             </label>
             <input
               type="password"
-              class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
           </div>
         </div>
@@ -94,7 +94,7 @@
       </form>
     </div>
     <div style="clear: left;" class="mt-8">
-      <hr class="border-lightgray my-4" />
+      <hr class="border-gray-light my-4" />
       <h1
         class="text-sogblue-light text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
       >
@@ -106,7 +106,7 @@
             SOG-Email
           </div>
           <div
-            class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
+            class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
           >
             elisabeth.maria.schulze.boehmermann<wbr />@<wbr />studieren-ohne-grenzen.org
           </div>
@@ -128,7 +128,7 @@
           </div>
           <div
             v-if="!changeMail"
-            class="rounded bg-lightgray text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
+            class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
           >
             eli.maria@gmail.com
           </div>
@@ -152,7 +152,7 @@
               v-focus
               type="email"
               placeholder="eli.maria@gmail.com"
-              class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
           </div>
           <div class="sm:ml-4 flex-grow flex-1 sm:min-w-56">
@@ -161,7 +161,7 @@
             </label>
             <input
               type="email"
-              class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
           </div>
         </div>

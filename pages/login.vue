@@ -9,14 +9,14 @@
           ref="username"
           v-model="username"
           placeholder="vorname.nachname"
-          class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
+          class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
         />
         <label class="block text-sogblue-dark mb-1">Passwort</label>
         <input
           v-model="password"
           type="password"
           placeholder="********"
-          class="p-2 mb-8 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
+          class="p-2 mb-8 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
         />
         <button
           class="xs:float-left rounded py-2 px-4 bg-sogblue hover:bg-sogblue-darker text-white"

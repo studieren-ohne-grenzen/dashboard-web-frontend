@@ -10,7 +10,7 @@
           v-model="mail"
           v-focus
           placeholder="maria.schmidt@gmail.com"
-          class="p-2 mb-4 w-full rounded appearance-none bg-lightgray text-sogblue-darker focus:shadow-outline focus:bg-white"
+          class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
         />
         <div class="text-gray mb-4">
           Wir senden dir an deine alternative Mail-Adresse einen Link zum

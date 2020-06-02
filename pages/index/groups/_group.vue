@@ -8,7 +8,7 @@
         {{ thisGroup.name }}
       </h1>
     </div>
-    <hr class="border-lightgray my-4" />
+    <hr class="border-gray-light my-4" />
     <h2 class="text-sogblue-light text-3xl mb-4">Administrator:innen</h2>
     <div v-if="!thisGroup.admins.length">
       Diese Gruppe hat keine Administrator:innen.
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div v-if="thisGroup.membership === 'admin'">
-      <hr class="border-lightgray my-4" />
+      <hr class="border-gray-light my-4" />
       <h2 class="text-sogblue-light text-3xl mb-4">Mitglieder</h2>
       <div v-if="!thisGroup.members.length" class="text-gray">
         Diese Gruppe hat keine Mitglieder.

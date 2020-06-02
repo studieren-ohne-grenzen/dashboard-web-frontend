@@ -8,7 +8,7 @@
     </h1>
     <hr
       v-if="this.$store.getters['groups/requests'].length"
-      class="border-lightgray my-4"
+      class="border-gray-light my-4"
     />
     <div class="w-full flex flex-wrap justify-between mb-4">
       <div
@@ -41,7 +41,7 @@
         v-model="searchQuery"
         type="text"
         placeholder="Gruppe suchen"
-        class="bg-lightgray rounded mb-4 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
+        class="bg-gray-light rounded mb-4 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
         @focus="changeTypeSelected('search')"
         @blur="changeTypeSelected('all')"
       />
@@ -79,7 +79,7 @@
         <GroupListing :groups="category.getter" :name="category.name" />
         <hr
           v-if="index !== nonEmptyCategories.length - 1"
-          class="border-lightgray my-4"
+          class="border-gray-light my-4"
         />
       </div>
     </div>

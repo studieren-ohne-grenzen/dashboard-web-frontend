@@ -18,7 +18,7 @@
         <nuxt-link
           v-if="group.membership == 'admin'"
           :to="'/groups/' + encodeURIComponent(group.name)"
-          class="flex-none bg-sogblue rounded-r w-10 p-3 cursor-pointer"
+          class="flex-none bg-gray rounded-r w-10 p-3 cursor-pointer"
         >
           <svg
             class="text-white fill-current"
@@ -32,7 +32,7 @@
         </nuxt-link>
         <svg
           v-else-if="group.membership == 'member'"
-          class="text-white flex-none fill-current bg-red rounded-r w-10 p-3 cursor-pointer"
+          class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           @click="cancelMembership(group.id)"
@@ -41,7 +41,7 @@
         </svg>
         <svg
           v-else-if="group.membership == 'pending'"
-          class="text-white flex-none fill-current bg-yellow rounded-r w-10 p-3 cursor-pointer"
+          class="text-white flex-none fill-current bg-gray-yellowish rounded-r w-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           @click="cancelMembershipRequest(group.id)"
@@ -50,7 +50,7 @@
         </svg>
         <svg
           v-else-if="group.membership == ''"
-          class="text-white flex-none fill-current bg-green rounded-r w-10 p-3 cursor-pointer"
+          class="text-white flex-none fill-current bg-gray-greenish rounded-r w-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           @click="requestGroupMembership(group.id)"
