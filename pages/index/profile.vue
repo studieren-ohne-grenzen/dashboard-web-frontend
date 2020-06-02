@@ -228,7 +228,7 @@ export default {
   },
   head: () => {
     return {
-      title: 'Profil',
+      title: 'Mein Profil',
     }
   },
 }

@@ -34,7 +34,7 @@
             class="inline-block py-2 px-3 sm:px-8 font-normal"
             to="/profile"
           >
-            Profil
+            Mein Profil
           </nuxt-link>
         </li>
         <li class="px-1 flex-grow">
