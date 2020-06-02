@@ -10,7 +10,7 @@
       v-if="this.$store.getters['groups/requests'].length"
       class="border-lightgray my-4"
     />
-    <div class="w-full flex flex-wrap justify-between">
+    <div class="w-full flex flex-wrap justify-between mb-4">
       <div
         class="mb-4 xs:mr-4 flex-grow xs:flex-grow-0 w-auto inline-flex border border-sogblue rounded"
       >
@@ -43,6 +43,7 @@
         placeholder="Gruppe suchen"
         class="bg-lightgray rounded mb-4 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
         @focus="changeTypeSelected('search')"
+        @blur="changeTypeSelected('all')"
       />
     </div>
     <div
@@ -74,12 +75,13 @@
     </div>
 
     <div v-if="typeSelected === 'all'">
-      <GroupListing
-        v-for="category in this.$store.getters['groups/allGroupsByCategory']"
-        :key="category.name"
-        :groups="category.getter"
-        :name="category.name"
-      />
+      <div v-for="(category, index) in nonEmptyCategories" :key="category.name">
+        <GroupListing :groups="category.getter" :name="category.name" />
+        <hr
+          v-if="index !== nonEmptyCategories.length - 1"
+          class="border-lightgray my-4"
+        />
+      </div>
     </div>
     <GroupListing v-else-if="groupsSelected" :groups="groupsSelected" name="" />
   </div>
@@ -94,7 +96,7 @@ export default {
   },
   data: () => {
     return {
-      typeSelected: 'personal',
+      typeSelected: 'all',
       searchQuery: '',
     }
   },
@@ -111,6 +113,11 @@ export default {
           group.name.toLowerCase().includes(this.searchQuery.toLowerCase())
         )
       return null
+    },
+    nonEmptyCategories() {
+      return this.$store.getters['groups/allGroupsByCategory'].filter(
+        (c) => c.getter.length
+      )
     },
   },
   methods: {

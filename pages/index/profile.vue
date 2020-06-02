@@ -2,7 +2,7 @@
   <div>
     <div class="sm:flex mb-8">
       <div
-        class="flex-shrink-0 h-40 w-40 sm:h-48 sm:w-48 my-2 sm:m-2 mx-auto sm:mr-10 bg-gray rounded-full text-lightgrey text-center"
+        class="hidden sm:block sm:invisible flex-shrink-0 h-40 w-40 sm:h-48 sm:w-48 my-2 sm:m-2 mx-auto sm:mr-10 bg-gray rounded-full text-lightgrey text-center"
       ></div>
       <div class="self-center flex-grow">
         <div class="block text-sogblue-dark mb-1">

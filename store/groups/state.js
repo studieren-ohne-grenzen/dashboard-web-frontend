@@ -79,7 +79,7 @@ export default () => ({
     {
       id: 6,
       name: 'AG Öffentlichkeitsarbeit',
-      membership: '',
+      membership: 'admin',
       groupType: 'bundesweit',
       members: [],
       admins: [

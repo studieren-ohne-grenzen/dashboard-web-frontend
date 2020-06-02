@@ -1,6 +1,6 @@
 <template>
   <div v-if="groups.length">
-    <div v-if="name.length" class="mb-4 text-sogblue">
+    <div v-if="name.length" class="mb-4 text-sogblue-light text-3xl">
       {{ name }}
     </div>
     <div class="flex flex-wrap">

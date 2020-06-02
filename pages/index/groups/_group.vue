@@ -1,25 +1,45 @@
 <template>
   <div>
-    <nuxt-link to="/">
-      Zurück zur Gruppenübersicht
-    </nuxt-link>
-    <h1>
-      {{ thisGroup.name }}
-    </h1>
-    <h2>Administrator:innen</h2>
+    <div class="flex flex-wrap items-center sm:flex-no-wrap">
+      <nuxt-link class="text-sogblue flex-shrink-0 mr-8 my-3" to="/">
+        <span class="text-2xl leading-none">&lsaquo;</span> Gruppen
+      </nuxt-link>
+      <h1 class="text-sogblue xs:min-w-0 min-w-full text-4xl leading-tight">
+        {{ thisGroup.name }}
+      </h1>
+    </div>
+    <hr class="border-lightgray my-4" />
+    <h2 class="text-sogblue-light text-3xl mb-4">Administrator:innen</h2>
     <div v-if="!thisGroup.admins.length">
       Diese Gruppe hat keine Administrator:innen.
     </div>
-    <div v-for="admin in thisGroup.admins" v-else :key="admin.name">
-      {{ admin.name }}
+    <div v-else class="flex flex-wrap">
+      <div
+        v-for="admin in thisGroup.admins"
+        :key="admin.name"
+        class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
+      >
+        <div class="py-2 px-4 flex-grow border rounded border-gray">
+          {{ admin.name }}
+        </div>
+      </div>
     </div>
     <div v-if="thisGroup.membership === 'admin'">
-      <h2>Mitglieder</h2>
-      <div v-if="!thisGroup.members.length">
+      <hr class="border-lightgray my-4" />
+      <h2 class="text-sogblue-light text-3xl mb-4">Mitglieder</h2>
+      <div v-if="!thisGroup.members.length" class="text-gray">
         Diese Gruppe hat keine Mitglieder.
       </div>
-      <div v-for="member in thisGroup.members" v-else :key="member.name">
-        {{ member.name }}
+      <div v-else class="flex flex-wrap">
+        <div
+          v-for="member in thisGroup.members"
+          :key="member.name"
+          class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
+        >
+          <div class="py-2 px-4 flex-grow border rounded border-gray">
+            {{ member.name }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
