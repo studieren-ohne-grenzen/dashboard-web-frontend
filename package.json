@@ -13,19 +13,19 @@
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
-    "@nuxtjs/axios": "^5.9.7",
-    "nuxt": "^2.12.2",
-    "vuex": "^3.2.0"
+    "@nuxtjs/axios": "^5.12.0",
+    "nuxt": "^2.13.3",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^2.0.2",
-    "@nuxtjs/eslint-module": "^1.1.0",
-    "@nuxtjs/tailwindcss": "^1.4.0",
+    "@nuxtjs/eslint-config": "^3.0.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/tailwindcss": "^2.0.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-nuxt": "^0.5.2",
-    "eslint-plugin-prettier": "^3.1.3",
-    "prettier": "^2.0.4"
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-nuxt": "^1.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
   }
 }
