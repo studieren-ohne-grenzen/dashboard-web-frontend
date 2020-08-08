@@ -51,6 +51,7 @@
             Aktuelles Passwort
           </label>
           <input
+            v-model="old_password"
             v-focus
             type="password"
             class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
@@ -62,6 +63,7 @@
               Neues Passwort
             </label>
             <input
+              v-model="new_password_1"
               type="password"
               class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
@@ -71,6 +73,7 @@
               Neues Passwort wiederholen
             </label>
             <input
+              v-model="new_password_2"
               type="password"
               class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
@@ -79,7 +82,13 @@
         <div class="flex-grow-0 flex-shrink-0 sm:mx-2">
           <button
             type="button"
-            class="rounded py-2 px-4 mb-4 bg-sogblue hover:bg-sogblue-darker text-white"
+            class="rounded py-2 px-4 mb-4 text-white"
+            :disabled="!changePwdSubmittable"
+            :class="
+              changePwdSubmittable
+                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker'
+                : 'cursor-default bg-sogblue-lighter hover:bg-sogblue-lighter'
+            "
           >
             Ändern
           </button>
@@ -187,7 +196,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
+import zxcvbn from 'zxcvbn'
 export default {
   directives: {
     focus: {
@@ -200,6 +209,12 @@ export default {
     return {
       changePwd: false,
       changeMail: false,
+      new_password_1: '',
+      new_password_2: '',
+      new_password: '',
+      old_password: '',
+      changePwdSubmittable: false,
+      pwdError: '',
     }
   },
   computed: {
@@ -210,6 +225,17 @@ export default {
       sogMail: 'user/sogMail',
       alternativeMail: 'user/alternativeMail',
     }),
+  },
+  watch: {
+    new_password_1() {
+      this.validatePasswords()
+    },
+    new_password_2() {
+      this.validatePasswords()
+    },
+    old_password() {
+      this.validatePasswords()
+    },
   },
   methods: {
     // TODO: reset forms on untoggle
@@ -224,6 +250,27 @@ export default {
     },
     untoggleMail() {
       this.changeMail = false
+    },
+    validatePasswords() {
+      const zxcvbnResult = zxcvbn(this.new_password_2)
+      if (this.old_password === '') {
+        this.changePwdSubmittable = false
+        this.pwdError = 'Altes Passwort eingeben'
+      } else if (this.new_password_1 === '') {
+        this.changePwdSubmittable = false
+        this.pwdError = 'Neues Passwort eingeben'
+      } else if (this.new_password_1 !== this.new_password_2) {
+        this.changePwdSubmittable = false
+        this.pwdError = 'Neue Passwörter stimmen nicht überein'
+      } else if (zxcvbnResult.score < 3) {
+        this.changePwdSubmittable = false
+        this.pwdError = zxcvbnResult.feedback.suggestions[1]
+      } else {
+        this.changePwdSubmittable = true
+        this.pwdError = ''
+      }
+      // console.log(zxcvbnResult.score)
+      // console.log(this.pwdError)
     },
   },
   head: () => {
