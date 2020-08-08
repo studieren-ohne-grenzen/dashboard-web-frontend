@@ -199,9 +199,7 @@
             />
           </div>
         </div>
-        <div
-          class="flex-grow sm:mx-2 block lg:hidden w-full block text-red-600 mb-4"
-        >
+        <div class="flex-grow sm:mx-2 block lg:hidden w-full text-red-600 mb-4">
           {{ emailError }}
         </div>
         <div class="flex-grow-0 flex-shrink-0 sm:mx-2">

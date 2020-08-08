@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import GroupListing from '../../components/grouplisting'
+import GroupListing from '~/components/grouplisting'
 
 export default {
   components: {
