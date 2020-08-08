@@ -15,11 +15,13 @@
         class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
       >
         <div
-          class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+          :class="thisGroup.membership === 'admin' ? 'border-r-0' : 'rounded-r'"
+          class="py-2 px-4 flex-grow border rounded-l border-gray"
         >
           {{ admin.name }}
         </div>
         <svg
+          v-if="thisGroup.membership === 'admin'"
           class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-2 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -75,7 +77,7 @@
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="thisGroup.membership === 'admin'">
       <hr class="border-gray-light my-4" />
       <button
         class="float-right rounded py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
