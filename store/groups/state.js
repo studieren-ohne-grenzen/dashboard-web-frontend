@@ -11,6 +11,7 @@ export default () => ({
         {
           name: 'Herta Müller',
           email: 'herta.mueller@studieren-ohne-grenzen.org',
+          uid: 'herta.mueller',
         },
       ],
     },
@@ -24,6 +25,7 @@ export default () => ({
         {
           name: 'Imre Kertész',
           email: 'imre.kertesz@studieren-ohne-grenzen.org',
+          uid: 'imre.kertesz',
         },
       ],
     },
@@ -37,6 +39,7 @@ export default () => ({
         {
           name: 'Jean-Paul Sartre',
           email: 'jean.paul.sartre@studieren-ohne-grenzen.org',
+          uid: 'jean.paul.sartre',
         },
       ],
     },
@@ -49,17 +52,24 @@ export default () => ({
         {
           name: 'Imre Kertész',
           email: 'imre.kertesz@studieren-ohne-grenzen.org',
+          uid: 'imre.kertesz',
         },
-        { name: 'Max Frisch', email: 'max.frisch@studieren-ohne-grenzen.org' },
+        {
+          name: 'Max Frisch',
+          email: 'max.frisch@studieren-ohne-grenzen.org',
+          uid: 'max.frisch',
+        },
         {
           name: 'Herta Müller',
           email: 'herta.mueller@studieren-ohne-grenzen.org',
+          uid: 'herta.mueller',
         },
       ],
       admins: [
         {
           name: 'Elfriede Jelinek',
           email: 'elfriede.jelinek@studieren-ohne-grenzen.org',
+          uid: 'elfriede.jelinek',
         },
       ],
     },
@@ -73,6 +83,7 @@ export default () => ({
         {
           name: 'Günter Grass',
           email: 'guenter.grass@studieren-ohne-grenzen.org',
+          uid: 'guenter.grass',
         },
       ],
     },
@@ -86,6 +97,7 @@ export default () => ({
         {
           name: 'Heinrich Böll',
           email: 'heinrich.boell@studieren-ohne-grenzen.org',
+          uid: 'heinrich.boell',
         },
       ],
     },
@@ -99,6 +111,7 @@ export default () => ({
         {
           name: 'Pablo Neruda',
           email: 'pablo.neruda@studieren-ohne-grenzen.org',
+          uid: 'pablo.neruda',
         },
       ],
     },

@@ -11,16 +11,34 @@
     <div v-else class="flex flex-wrap">
       <div
         v-for="admin in thisGroup.admins"
-        :key="admin.name"
+        :key="admin.uid"
         class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
       >
-        <div class="py-2 px-4 flex-grow border rounded border-gray">
+        <div
+          class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+        >
           {{ admin.name }}
         </div>
+        <svg
+          class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-2 cursor-pointer"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          @click="removeAdmin(admin.uid)"
+        >
+          <path
+            d="M11.383 15.941l-3.758 8.059-.967-2.658-2.658.968 3.517-7.541c.678.216 1.137.162 1.849.162.744.513 1.072.844 2.017 1.01zm3.252-1.009c-.738.506-1.049.831-1.994 1.004l3.759 8.064.967-2.658 2.633.968-3.495-7.549c-.686.222-1.146.171-1.87.171zm-2.635-11.932c-2.205 0-4 1.795-4 4s1.795 4 4 4c2.206 0 4-1.794 4-4s-1.794-4-4-4zm6.926 5.278c.051.146.074.296.074.445 0 .449-.222.883-.615 1.156-1.256.87-1.09.651-1.562 2.067-.198.591-.77.99-1.414.99h-.004c-1.549-.005-1.279-.088-2.528.789-.262.183-.569.275-.877.275s-.615-.092-.876-.275c-1.249-.878-.98-.794-2.528-.789h-.004c-.645 0-1.216-.399-1.413-.99-.473-1.417-.311-1.198-1.562-2.067-.395-.274-.617-.708-.617-1.157 0-.148.024-.298.074-.444.483-1.411.484-1.139 0-2.555-.05-.147-.074-.297-.074-.445 0-.45.222-.883.616-1.157 1.251-.868 1.089-.648 1.562-2.067.197-.591.769-.99 1.413-.99h.004c1.545.005 1.271.095 2.528-.79.262-.182.569-.274.877-.274s.615.091.876.274c1.249.878.98.795 2.528.79h.004c.645 0 1.216.399 1.414.99.473 1.416.307 1.197 1.562 2.067.394.274.616.707.616 1.156 0 .148-.023.299-.074.445-.483 1.411-.485 1.139 0 2.556zm-1.926-1.278c0-2.761-2.238-5-5-5-2.761 0-5 2.239-5 5s2.239 5 5 5c2.762 0 5-2.238 5-5z"
+          />
+        </svg>
       </div>
     </div>
-    <div v-if="thisGroup.membership === 'admin'">
+    <div v-if="thisGroup.membership === 'admin' && !addUserActive">
       <hr class="border-gray-light my-4" />
+      <button
+        class="float-right rounded py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
+        @click="addUserActive = true"
+      >
+        Mitglieder hinzufügen
+      </button>
       <h2 class="text-sogblue-light text-3xl mb-4">Mitglieder</h2>
       <div v-if="!thisGroup.members.length" class="text-gray">
         Diese Gruppe hat keine Mitglieder.
@@ -28,12 +46,66 @@
       <div v-else class="flex flex-wrap">
         <div
           v-for="member in thisGroup.members"
-          :key="member.name"
+          :key="member.uid"
           class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
         >
-          <div class="py-2 px-4 flex-grow border rounded border-gray">
+          <div
+            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+          >
             {{ member.name }}
           </div>
+          <svg
+            class="text-white flex-none fill-current bg-gray-greenish w-10 p-2 cursor-pointer"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            @click="makeAdmin(member.uid)"
+          >
+            <path
+              d="M11.383 15.941l-3.758 8.059-.967-2.658-2.658.968 3.517-7.541c.678.216 1.137.162 1.849.162.744.513 1.072.844 2.017 1.01zm3.252-1.009c-.738.506-1.049.831-1.994 1.004l3.759 8.064.967-2.658 2.633.968-3.495-7.549c-.686.222-1.146.171-1.87.171zm-2.635-11.932c-2.205 0-4 1.795-4 4s1.795 4 4 4c2.206 0 4-1.794 4-4s-1.794-4-4-4zm6.926 5.278c.051.146.074.296.074.445 0 .449-.222.883-.615 1.156-1.256.87-1.09.651-1.562 2.067-.198.591-.77.99-1.414.99h-.004c-1.549-.005-1.279-.088-2.528.789-.262.183-.569.275-.877.275s-.615-.092-.876-.275c-1.249-.878-.98-.794-2.528-.789h-.004c-.645 0-1.216-.399-1.413-.99-.473-1.417-.311-1.198-1.562-2.067-.395-.274-.617-.708-.617-1.157 0-.148.024-.298.074-.444.483-1.411.484-1.139 0-2.555-.05-.147-.074-.297-.074-.445 0-.45.222-.883.616-1.157 1.251-.868 1.089-.648 1.562-2.067.197-.591.769-.99 1.413-.99h.004c1.545.005 1.271.095 2.528-.79.262-.182.569-.274.877-.274s.615.091.876.274c1.249.878.98.795 2.528.79h.004c.645 0 1.216.399 1.414.99.473 1.416.307 1.197 1.562 2.067.394.274.616.707.616 1.156 0 .148-.023.299-.074.445-.483 1.411-.485 1.139 0 2.556zm-1.926-1.278c0-2.761-2.238-5-5-5-2.761 0-5 2.239-5 5s2.239 5 5 5c2.762 0 5-2.238 5-5z"
+            />
+          </svg>
+          <svg
+            class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-3 cursor-pointer"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            @click="removeMember(member.uid)"
+          >
+            <path d="M0 10h24v4h-24z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <hr class="border-gray-light my-4" />
+      <button
+        class="float-right rounded py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
+        @click="addUserActive = false"
+      >
+        Fertig
+      </button>
+      <h2 class="text-sogblue-light text-3xl mb-4">Mitglieder hinzufügen</h2>
+      <div v-if="!nonMembers.length" class="text-gray">
+        Es konnten keine weiteren Mitglieder gefunden werden.
+      </div>
+      <div v-else class="flex flex-wrap">
+        <div
+          v-for="user in nonMembers"
+          :key="user.uid"
+          class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
+        >
+          <div
+            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+          >
+            {{ user.name }}
+          </div>
+          <svg
+            class="text-white flex-none fill-current bg-gray-greenish w-10 p-3 rounded-r cursor-pointer"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            @click="addUser(user.uid)"
+          >
+            <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
+          </svg>
         </div>
       </div>
     </div>
@@ -41,10 +113,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   // TODO: test for actual group names
   validate({ params }) {
     return true
+  },
+  data() {
+    return {
+      addUserActive: false,
+    }
   },
   computed: {
     thisGroup() {
@@ -55,6 +134,26 @@ export default {
           )
       )
     },
+    ...mapGetters({
+      allUsers: 'users/all',
+    }),
+    nonMembers() {
+      const members = this.thisGroup.members
+      const admins = this.thisGroup.admins
+      let users = this.$store.getters['users/all']
+      for (const m in members) {
+        users = users.filter((u) => members[m].uid !== u.uid)
+      }
+      for (const a in admins) {
+        users = users.filter((u) => admins[a].uid !== u.uid)
+      }
+      return users
+    },
+  },
+  methods: {
+    removeAdmin(uid) {},
+    makeAdmin(uid) {},
+    removeMember(uid) {},
   },
   head() {
     return {

@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import zxcvbn from 'zxcvbn' // TODO: use German dictionary from https://github.com/qutorial/tryzxcvbn
+import zxcvbn from 'zxcvbn' // TODO: add German dictionary and build zxcvbn with it
 
 export default {
   name: 'ResetPassword',
