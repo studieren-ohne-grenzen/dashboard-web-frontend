@@ -51,9 +51,12 @@
             Aktuelles Passwort
           </label>
           <input
-            v-model="old_password"
+            v-model="oldPassword"
             v-focus
             type="password"
+            :class="
+              errorOldPassword ? 'border-red-500 border-2' : 'border-none'
+            "
             class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
           />
         </div>
@@ -63,8 +66,11 @@
               Neues Passwort
             </label>
             <input
-              v-model="new_password_1"
+              v-model="newPassword1"
               type="password"
+              :class="
+                errorNewPassword ? 'border-red-500 border-2' : 'border-none'
+              "
               class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
           </div>
@@ -73,11 +79,19 @@
               Neues Passwort wiederholen
             </label>
             <input
-              v-model="new_password_2"
+              v-model="newPassword2"
               type="password"
+              :class="
+                errorNewPassword ? 'border-red-500 border-2' : 'border-none'
+              "
               class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
           </div>
+        </div>
+        <div
+          class="flex-grow sm:mx-2 block lg:hidden w-full block text-red-600 mb-4"
+        >
+          {{ pwdError }}
         </div>
         <div class="flex-grow-0 flex-shrink-0 sm:mx-2">
           <button
@@ -87,7 +101,7 @@
             :class="
               changePwdSubmittable
                 ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker'
-                : 'cursor-default bg-sogblue-lighter hover:bg-sogblue-lighter'
+                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
             "
           >
             Ändern
@@ -99,6 +113,9 @@
           >
             Abbrechen
           </button>
+        </div>
+        <div class="flex-grow sm:mx-2 w-full hidden lg:block text-red-600 mb-1">
+          {{ pwdError }}
         </div>
       </form>
     </div>
@@ -158,9 +175,13 @@
               Alternative Email
             </label>
             <input
+              v-model="newEmail1"
               v-focus
-              type="email"
+              type="text"
               :placeholder="alternativeMail"
+              :class="
+                emailError !== '' ? 'border-red-500 border-2' : 'border-none'
+              "
               class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
           </div>
@@ -169,15 +190,30 @@
               Alternative Email wiederholen
             </label>
             <input
-              type="email"
+              v-model="newEmail2"
+              type="text"
+              :class="
+                emailError !== '' ? 'border-red-500 border-2' : 'border-none'
+              "
               class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
           </div>
         </div>
+        <div
+          class="flex-grow sm:mx-2 block lg:hidden w-full block text-red-600 mb-4"
+        >
+          {{ emailError }}
+        </div>
         <div class="flex-grow-0 flex-shrink-0 sm:mx-2">
           <button
             type="button"
-            class="rounded py-2 px-4 mb-4 bg-sogblue hover:bg-sogblue-darker text-white"
+            :disabled="!changeEmailSubmittable"
+            :class="
+              changeEmailSubmittable
+                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker'
+                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
+            "
+            class="rounded py-2 px-4 mb-4 text-white"
           >
             Ändern
           </button>
@@ -189,6 +225,9 @@
             Abbrechen
           </button>
         </div>
+        <div class="flex-grow sm:mx-2 w-full hidden lg:block text-red-600 mb-1">
+          {{ emailError }}
+        </div>
       </form>
     </div>
   </div>
@@ -196,7 +235,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import zxcvbn from 'zxcvbn'
+import zxcvbn from 'zxcvbn' // TODO: use German dictionary from https://github.com/qutorial/tryzxcvbn
+
 export default {
   directives: {
     focus: {
@@ -209,12 +249,17 @@ export default {
     return {
       changePwd: false,
       changeMail: false,
-      new_password_1: '',
-      new_password_2: '',
-      new_password: '',
-      old_password: '',
+      newPassword1: '',
+      newPassword2: '',
+      oldPassword: '',
       changePwdSubmittable: false,
+      errorNewPassword: false,
+      errorOldPassword: false,
       pwdError: '',
+      newEmail1: '',
+      newEmail2: '',
+      changeEmailSubmittable: false,
+      emailError: '',
     }
   },
   computed: {
@@ -227,14 +272,20 @@ export default {
     }),
   },
   watch: {
-    new_password_1() {
+    newPassword1() {
       this.validatePasswords()
     },
-    new_password_2() {
+    newPassword2() {
       this.validatePasswords()
     },
-    old_password() {
+    oldPassword() {
       this.validatePasswords()
+    },
+    newEmail1() {
+      this.validateEmails()
+    },
+    newEmail2() {
+      this.validateEmails()
     },
   },
   methods: {
@@ -244,33 +295,66 @@ export default {
     },
     untogglePwd() {
       this.changePwd = false
+      this.newPassword = ''
+      this.newPassword1 = ''
+      this.newPassword2 = ''
+      this.oldPassword = ''
+      this.errorOldPassword = false
+      this.errorNewPassword = false
+      this.changePwdSubmittable = false
+      this.pwdError = ''
     },
     toggleMail() {
       this.changeMail = true
     },
     untoggleMail() {
       this.changeMail = false
+      this.newEmail1 = ''
+      this.newEmail2 = ''
+      this.newEmail = ''
+      this.changeEmailSubmittable = false
     },
     validatePasswords() {
-      const zxcvbnResult = zxcvbn(this.new_password_2)
-      if (this.old_password === '') {
-        this.changePwdSubmittable = false
-        this.pwdError = 'Altes Passwort eingeben'
-      } else if (this.new_password_1 === '') {
-        this.changePwdSubmittable = false
-        this.pwdError = 'Neues Passwort eingeben'
-      } else if (this.new_password_1 !== this.new_password_2) {
-        this.changePwdSubmittable = false
-        this.pwdError = 'Neue Passwörter stimmen nicht überein'
+      const zxcvbnResult = zxcvbn(this.newPassword2)
+      this.errorOldPassword = false
+      this.errorNewPassword = false
+      this.changePwdSubmittable = false
+      if (
+        this.oldPassword === '' &&
+        (this.newPassword1 !== '' || this.newPassword2 !== '')
+      ) {
+        this.pwdError = 'Altes Passwort eingeben.'
+        this.errorOldPassword = true
+      } else if (this.newPassword2 === '') {
+        this.pwdError = ''
+      } else if (this.newPassword1 !== this.newPassword2) {
+        this.pwdError = 'Neue Passwörter stimmen nicht überein.'
+        this.errorNewPassword = true
       } else if (zxcvbnResult.score < 3) {
-        this.changePwdSubmittable = false
-        this.pwdError = zxcvbnResult.feedback.suggestions[1]
+        this.errorNewPassword = true
+        if (zxcvbnResult.feedback.suggestions[0])
+          this.pwdError =
+            'Passwort zu unsicher: ' + zxcvbnResult.feedback.suggestions[0]
+        else this.pwdError = 'Passwort zu unsicher.'
       } else {
         this.changePwdSubmittable = true
         this.pwdError = ''
       }
-      // console.log(zxcvbnResult.score)
-      // console.log(this.pwdError)
+    },
+    validateEmails() {
+      this.errorNewEmail = false
+      this.changeEmailSubmittable = false
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (this.newEmail2 === '') {
+        this.emailError = ''
+      } else if (this.newEmail1 !== this.newEmail2) {
+        this.emailError = 'Email-Adressen stimmen nicht überein.'
+      } else if (!re.test(String(this.newEmail2).toLowerCase())) {
+        this.emailError = 'Keine gültige Mailadresse eingegeben.'
+      } else {
+        this.changeEmailSubmittable = true
+        this.emailError = ''
+      }
     },
   },
   head: () => {

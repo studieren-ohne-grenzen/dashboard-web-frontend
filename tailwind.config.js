@@ -6,36 +6,28 @@
  */
 module.exports = {
   theme: {
-    colors: {
-      sogblue: {
-        lightest: '#CCF1FF',
-        lighter: '#71C5EA',
-        light: '#57B4DC',
-        default: '#0098CF',
-        dark: '#007EBB',
-        darker: '#00679E',
-        transparent: '#00679EAA',
+    extend: {
+      colors: {
+        sogblue: {
+          lightest: '#CCF1FF',
+          lighter: '#71C5EA',
+          light: '#57B4DC',
+          default: '#0098CF',
+          dark: '#007EBB',
+          darker: '#00679E',
+          transparent: '#00679EAA',
+        },
+        gray: {
+          default: '#a0aec0',
+          greenish: '#B7CE8D',
+          reddish: '#C78086',
+          yellowish: '#D9D279',
+          light: '#edf2f7',
+        },
       },
-      black: '#000000',
-      white: '#FFFFFF',
-      gray: {
-        default: '#a0aec0',
-        greenish: '#B7CE8D',
-        reddish: '#C78086',
-        yellowish: '#D9D279',
-        light: '#edf2f7',
+      screens: {
+        xs: '420px',
       },
-      red: '#CF3F15',
-      green: '#0ACF98',
-      yellow: '#CF9E15',
-    },
-    screens: {
-      xs: '420px',
-      // default breakpoints
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
     },
   },
   variants: {},
