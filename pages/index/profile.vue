@@ -156,7 +156,7 @@
             v-if="!changeMail"
             class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
           >
-            {{ alternativeMail }}
+            {{ altMail }}
           </div>
           <button
             v-if="!changeMail"
@@ -178,7 +178,7 @@
               v-model="newEmail1"
               v-focus
               type="text"
-              :placeholder="alternativeMail"
+              :placeholder="altMail"
               :class="
                 emailError !== '' ? 'border-red-500 border-2' : 'border-none'
               "
@@ -214,6 +214,7 @@
                 : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
             "
             class="rounded py-2 px-4 mb-4 text-white"
+            @click="changeEmail"
           >
             Ändern
           </button>
@@ -268,7 +269,7 @@ export default {
       username: 'user/username',
       password: 'user/password',
       sogMail: 'user/sogMail',
-      alternativeMail: 'user/alternativeMail',
+      altMail: 'user/altMail',
     }),
   },
   watch: {
@@ -289,7 +290,9 @@ export default {
     },
   },
   methods: {
-    // TODO: reset forms on untoggle
+    changeEmail() {
+      this.$store.dispatch('user/alertChangeAltMail', this.newEmail1)
+    },
     togglePwd() {
       this.changePwd = true
     },
