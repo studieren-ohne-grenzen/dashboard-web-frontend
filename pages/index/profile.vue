@@ -185,19 +185,6 @@
               class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
             />
           </div>
-          <div class="sm:ml-4 flex-grow flex-1 sm:min-w-56">
-            <label class="block text-sogblue-dark mb-1">
-              Alternative Email wiederholen
-            </label>
-            <input
-              v-model="newEmail2"
-              type="text"
-              :class="
-                emailError !== '' ? 'border-red-500 border-2' : 'border-none'
-              "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
-            />
-          </div>
         </div>
         <div class="flex-grow sm:mx-2 block lg:hidden w-full text-red-600 mb-4">
           {{ emailError }}
@@ -261,7 +248,6 @@ export default {
       errorOldPassword: false,
       pwdError: '',
       newEmail1: '',
-      newEmail2: '',
       changeEmailSubmittable: false,
       emailError: '',
     }
@@ -270,7 +256,6 @@ export default {
     ...mapGetters({
       name: 'user/name',
       username: 'user/username',
-      password: 'user/password',
       sogMail: 'user/sogMail',
       altMail: 'user/altMail',
     }),
@@ -295,6 +280,7 @@ export default {
   methods: {
     changeEmail() {
       this.$store.dispatch('user/alertChangeAltMail', this.newEmail1)
+      this.changeMail = false
     },
     togglePwd() {
       this.changePwd = true
@@ -316,7 +302,6 @@ export default {
     untoggleMail() {
       this.changeMail = false
       this.newEmail1 = ''
-      this.newEmail2 = ''
       this.newEmail = ''
       this.changeEmailSubmittable = false
     },
@@ -354,11 +339,9 @@ export default {
       this.errorNewEmail = false
       this.changeEmailSubmittable = false
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      if (this.newEmail2 === '') {
+      if (this.newEmail1 === '') {
         this.emailError = ''
-      } else if (this.newEmail1 !== this.newEmail2) {
-        this.emailError = 'Email-Adressen stimmen nicht überein.'
-      } else if (!re.test(String(this.newEmail2).toLowerCase())) {
+      } else if (!re.test(String(this.newEmail1).toLowerCase())) {
         this.emailError = 'Keine gültige Mailadresse eingegeben.'
       } else {
         this.changeEmailSubmittable = true

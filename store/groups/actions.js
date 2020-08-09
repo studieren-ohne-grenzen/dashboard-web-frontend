@@ -206,9 +206,7 @@ export default {
           title: 'Koordinator:innen-Rechte entziehen',
           message,
           defaultToAction: true,
-          actionName: 'OK',
           showCancel: false,
-          action: '',
           params: { uid, groupID },
         },
         { root: true }
