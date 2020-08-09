@@ -2,8 +2,22 @@
   <div class="bggradient w-screen min-h-screen h-full pt-4 lg:pt-32">
     <img alt="Dashboard Logo" src="logo.png" class="mx-auto py-8 px-2 w-64" />
     <div class="bg-white max-w-md bg-white xs:mx-auto xs:rounded p-8">
-      <div v-if="$auth.$state.redirect">Login first!</div>
-      <form @keydown.enter="login">
+      <div v-if="$auth.$state.redirect">Bitte einloggen!</div>
+      <div
+        v-if="wrongLogin"
+        role="alert"
+        class="block p-2 mb-8 rounded border border-red-600 text-red-600"
+      >
+        Falsche Logindaten
+      </div>
+      <div
+        v-if="otherError"
+        role="alert"
+        class="block p-2 mb-8 rounded border border-red-600 text-red-600"
+      >
+        Fehler bei Server-Kommunikation
+      </div>
+      <form @submit.prevent="login">
         <label class="block text-sogblue-dark mb-1">Benutzername</label>
         <input
           ref="username"
@@ -20,7 +34,6 @@
         />
         <button
           class="xs:float-left rounded py-2 px-4 bg-sogblue hover:bg-sogblue-darker text-white"
-          @click="login"
         >
           Login
         </button>
@@ -44,7 +57,12 @@ export default {
       username: '',
       password: '',
       error: null,
+      wrongLogin: false,
+      otherError: false,
     }
+  },
+  options: {
+    auth: 'guest',
   },
   computed: {
     redirect() {
@@ -53,14 +71,11 @@ export default {
         decodeURIComponent(this.$route.query.redirect)
       )
     },
-    isCallback() {
-      return Boolean(this.$route.query.callback)
-    },
   },
   methods: {
-    login() {
+    async login() {
       this.error = null
-      return this.$auth
+      await this.$auth
         .loginWith('local', {
           data: {
             username: this.username,
@@ -68,6 +83,14 @@ export default {
           },
         })
         .catch((e) => {
+          if (e.response && e.response.status === 403) {
+            this.wrongLogin = true
+            this.otherError = false
+          } else {
+            // Anderer Fehler
+            this.wrongLogin = false
+            this.otherError = true
+          }
           this.error = e + ''
         })
     },

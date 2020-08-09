@@ -49,7 +49,7 @@ export default {
     }
   },
   options: {
-    auth: false,
+    auth: 'guest',
   },
   head() {
     return {

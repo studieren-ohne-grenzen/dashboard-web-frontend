@@ -62,7 +62,7 @@ export default {
     AlertBox,
   },
   options: {
-    auth: false,
+    auth: true,
   },
 }
 </script>
