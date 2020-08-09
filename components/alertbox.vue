@@ -53,7 +53,9 @@ export default {
     confirmAction() {
       const action = this.$store.getters['alertbox/action']
       const params = this.$store.getters['alertbox/params']
-      this.$store.dispatch(action, params)
+      if (!(action === '')) {
+        this.$store.dispatch(action, params)
+      }
       this.$store.commit('alertbox/hideAlert')
     },
   },

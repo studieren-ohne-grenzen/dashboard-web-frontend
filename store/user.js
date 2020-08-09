@@ -40,13 +40,27 @@ export const actions = {
     commit('setAltMail', altMail)
   },
   async downloadUserDetails({ commit }) {
-    const data = await this.$axios.$get('api/whoami')
-    commit('setUserDetails', {
-      name: data.cn,
-      username: data.uid,
-      sogMail: data.mail,
-      altMail: data.mail_alternative,
-    })
+    try {
+      const data = await this.$axios.$get('api/whoami')
+      commit('setUserDetails', {
+        name: data.cn,
+        username: data.uid,
+        sogMail: data.mail,
+        altMail: data.mail_alternative,
+      })
+    } catch (err) {
+      const message = 'Kommunikationsfehler bei Download der Nuterdaten'
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message,
+          defaultToAction: false,
+          showCancel: false,
+        },
+        { root: true }
+      )
+    }
   },
 }
 
