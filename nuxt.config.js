@@ -86,16 +86,60 @@ export default {
     '@nuxtjs/axios',
     // Doc: https://auth.nuxtjs.org/
     '@nuxtjs/auth',
+    '@nuxtjs/proxy',
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true,
+  },
+  /*
+   ** Proxy module configuration
+   ** See https://nuxtjs.org/faq/http-proxy/
+   */
+  proxy: {
+    '/api': {
+      target: 'https://vogelnest.de-staging.esf-international.org/', // Login Server goes here
+      pathRewrite: {
+        '^/api': '/',
+      },
+    },
+  },
   /*
    ** Auth module configuration
    */
-  auth: {},
+  auth: {
+    cookie: {
+      prefix: 'auth.',
+      options: {
+        maxAge: 57600,
+      },
+    },
+    strategies: {
+      redirect: {
+        home: '/',
+      },
+      watchLoggedIn: true,
+      rewriteRedirects: false,
+      local: {
+        endpoints: {
+          login: {
+            url: 'api/login',
+            method: 'post',
+            propertyName: false,
+          },
+          logout: false,
+          user: false,
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer',
+        globalToken: true,
+        autoFetchUser: true,
+      },
+    },
+  },
   /*
    ** Build configuration
    */
