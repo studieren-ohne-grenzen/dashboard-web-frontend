@@ -94,7 +94,6 @@ export default {
     GroupListing,
   },
   fetch() {
-    // Jetzt Download der Nutzderdaten
     this.$store.dispatch('groups/loadGroups')
   },
   fetchOnServer: false,

@@ -27,11 +27,77 @@ export default {
         commit('setGroups', groups)
       })
       .catch((errors) => {
-        const message = 'Kommunikationsfehler beim Laden der Gruppen: ' + errors
+        const message = 'Fehler beim Laden der Gruppen: \n' + errors
         commit(
           'alertbox/showAlert',
           {
-            title: 'Kommunikationsfehler',
+            title: 'Fehler',
+            message,
+            defaultToAction: false,
+            showCancel: false,
+          },
+          { root: true }
+        )
+      })
+  },
+
+  loadGroupAsAdmin({ commit }, { groupID }) {
+    Promise.all([
+      this.$axios.get('api/groups/owners?group_id=' + groupID),
+      this.$axios.get('api/groups/members?group_id=' + groupID),
+      this.$axios.get('api/groups/pending_members?group_id=' + groupID),
+      this.$axios.get('api/groups/guests?group_id=' + groupID),
+    ])
+      .then((responses) => {
+        const admins = responses[0].data.map((u) => {
+          return {
+            name: u.cn,
+            email: u.mail,
+            uid: u.uid,
+          }
+        })
+        const members = responses[1].data
+          .map((u) => {
+            return {
+              name: u.cn,
+              email: u.mail,
+              uid: u.uid,
+            }
+          })
+          .filter((u) => {
+            for (const a in admins) {
+              if (admins[a].uid === u.uid) return false
+            }
+            return true
+          })
+        const pendingMembers = responses[2].data.map((u) => {
+          return {
+            name: u.cn,
+            email: u.mail,
+            uid: u.uid,
+          }
+        })
+        const guests = responses[3].data.map((u) => {
+          return {
+            name: u.cn,
+            email: u.mail,
+            uid: u.uid,
+          }
+        })
+        commit('groupSetUsers', {
+          groupID,
+          admins,
+          members,
+          guests,
+          pendingMembers,
+        })
+      })
+      .catch((errors) => {
+        const message = 'Fehler beim Laden der Gruppe: \n' + errors
+        commit(
+          'alertbox/showAlert',
+          {
+            title: 'Fehler',
             message,
             defaultToAction: false,
             showCancel: false,

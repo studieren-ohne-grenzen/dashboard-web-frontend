@@ -2,6 +2,13 @@ export default {
   setGroups(state, groups) {
     state.groupList = groups
   },
+  groupSetUsers(state, { groupID, admins, members, guests, pendingMembers }) {
+    const group = state.groupList.find((group) => group.id === groupID)
+    group.admins = admins
+    group.members = members
+    group.guests = guests
+    group.pendingMembers = pendingMembers
+  },
   setMType(state, { groupID, mType }) {
     state.groupList.find((group) => group.id === groupID).membership = mType
   },

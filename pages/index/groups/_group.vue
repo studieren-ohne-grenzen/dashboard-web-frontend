@@ -275,6 +275,13 @@ export default {
   validate({ params }) {
     return true
   },
+  fetch() {
+    if (this.thisGroup.membership === 'admin')
+      this.$store.dispatch('groups/loadGroupAsAdmin', {
+        groupID: this.thisGroup.id,
+      })
+  },
+  fetchOnServer: false,
   data() {
     return {
       addUsersActive: false,
