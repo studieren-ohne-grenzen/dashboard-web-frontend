@@ -195,7 +195,7 @@ export default {
 
   alertRequestMembership({ commit, getters }, { groupID }) {
     const message =
-      'Eine Mitgliedschaft wird bei den Administrator:innen der ' +
+      'Eine Mitgliedschaft wird bei den Koordinator:innen der ' +
       getters.allGroups.find((group) => group.id === groupID).name +
       ' angefragt. Sie müssen dich freischalten, bevor du Mitglied wirst.'
     commit(
@@ -220,7 +220,7 @@ export default {
     const message =
       'Willst du die Gruppe ' +
       getters.allGroups.find((group) => group.id === groupID).name +
-      ' wirklich verlassen? Für einen erneuten Beitritt musst du dann erst wieder eine Anfrage an die Administrator:innen der Gruppe stellen.'
+      ' wirklich verlassen? Für einen erneuten Beitritt musst du dann erst wieder eine Anfrage an die Koordinator:innen der Gruppe stellen.'
     commit(
       'alertbox/showAlert',
       {

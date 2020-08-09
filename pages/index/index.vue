@@ -33,8 +33,7 @@
           :class="typeSelected === 'admin' ? 'groupactive' : 'groupinactive'"
           @click="changeTypeSelected('admin')"
         >
-          <span class="sm:hidden">Admin</span>
-          <span class="hidden sm:inline">Administrieren</span>
+          <span>Koordination</span>
         </button>
       </div>
       <input
@@ -51,7 +50,7 @@
       "
       class="text-gray"
     >
-      Du hast in keiner Gruppe Administrator-Rechte.
+      Du hast in keiner Gruppe Koordinator:innen-Rechte.
     </div>
     <div
       v-else-if="

@@ -13,7 +13,7 @@
       />
     </div>
     <hr class="border-gray-light my-4" />
-    <h2 class="text-sogblue-light text-3xl mb-4">Administrator:innen</h2>
+    <h2 class="text-sogblue-light text-3xl mb-4">Koordinator:innen</h2>
     <div v-if="loading" class="text-gray">
       Lade Koordinator:innen ...
     </div>
@@ -21,10 +21,10 @@
       v-else-if="!adminsFiltered.length && searchQuery === ''"
       class="text-gray"
     >
-      Diese Gruppe hat keine Administrator:innen.
+      Diese Gruppe hat keine Koordinator:innen.
     </div>
     <div v-else-if="!adminsFiltered.length" class="text-gray">
-      Keine Administrator:innen gefunden.
+      Keine Koordinator:innen gefunden.
     </div>
     <div v-else class="flex flex-wrap">
       <div
@@ -39,7 +39,7 @@
           {{ admin.name }}
         </div>
         <button
-          title="Administrator:innen-Rechte entziehen"
+          title="Koordinator:innen-Rechte entziehen"
           class="border-t border-b border-gray-reddish rounded-r"
           @click="revokeAdmin(admin.uid)"
         >
@@ -91,7 +91,7 @@
             {{ member.name }}
           </div>
           <button
-            title="Zur Administrator:in befördern"
+            title="Zur Koordinator:in befördern"
             class="border-t border-b border-gray-greenish"
             @click="makeAdmin(member.uid)"
           >
