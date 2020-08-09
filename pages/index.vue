@@ -38,7 +38,7 @@
         <li class="px-1 flex-grow">
           <button
             class="inline-block float-right py-2 pr-2 sm:pr-0 sm:pl-4 text-white hover:text-white font-normal"
-            @click="$auth.logout()"
+            @click="logout()"
           >
             Abmelden
           </button>
@@ -60,6 +60,12 @@ import AlertBox from '~/components/alertbox'
 export default {
   components: {
     AlertBox,
+  },
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+      location.reload()
+    },
   },
   options: {
     auth: true,
