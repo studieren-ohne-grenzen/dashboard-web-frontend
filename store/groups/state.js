@@ -14,6 +14,7 @@ export default () => ({
           uid: 'herta.mueller',
         },
       ],
+      guests: [],
     },
     {
       id: 2,
@@ -28,6 +29,7 @@ export default () => ({
           uid: 'imre.kertesz',
         },
       ],
+      guests: [],
     },
     {
       id: 3,
@@ -42,6 +44,7 @@ export default () => ({
           uid: 'jean.paul.sartre',
         },
       ],
+      guests: [],
     },
     {
       id: 4,
@@ -72,6 +75,13 @@ export default () => ({
           uid: 'elfriede.jelinek',
         },
       ],
+      guests: [
+        {
+          name: 'Guest Günter Grass',
+          email: 'guenter.grass@studieren-ohne-grenzen.org',
+          uid: 'guestguenter.grass',
+        },
+      ],
     },
     {
       id: 5,
@@ -86,6 +96,7 @@ export default () => ({
           uid: 'guenter.grass',
         },
       ],
+      guests: [],
     },
     {
       id: 6,
@@ -100,6 +111,7 @@ export default () => ({
           uid: 'heinrich.boell',
         },
       ],
+      guests: [],
     },
     {
       id: 7,
@@ -114,6 +126,7 @@ export default () => ({
           uid: 'pablo.neruda',
         },
       ],
+      guests: [],
     },
   ],
   requests: [],

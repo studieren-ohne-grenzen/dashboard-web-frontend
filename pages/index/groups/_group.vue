@@ -45,7 +45,7 @@
         </svg>
       </div>
     </div>
-    <div v-if="thisGroup.membership === 'admin' && !addUserActive">
+    <div v-if="thisGroup.membership === 'admin' && !addUsersActive">
       <hr class="border-gray-light my-4" />
       <div class="w-full flex flex-wrap justify-between mb-4 items-center">
         <h2 class="text-sogblue-light text-3xl mb-2">Mitglieder</h2>
@@ -133,6 +133,112 @@
         </div>
       </div>
     </div>
+    <div v-if="thisGroup.membership === 'admin' && !addGuestsActive">
+      <hr class="border-gray-light my-4" />
+      <div class="w-full flex flex-wrap justify-between mb-4 items-center">
+        <h2 class="text-sogblue-light text-3xl mb-2">Gäste</h2>
+        <button
+          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
+          @click="openAddGuests"
+        >
+          Gäste hinzufügen
+        </button>
+      </div>
+      <div
+        v-if="!guestsFiltered.length && searchQuery === ''"
+        class="text-gray"
+      >
+        Diese Gruppe hat keine Gäste.
+      </div>
+      <div v-else-if="!guestsFiltered.length" class="text-gray">
+        Keine Gäste gefunden.
+      </div>
+      <div v-else class="flex flex-wrap">
+        <div
+          v-for="guest in guestsFiltered"
+          :key="guest.uid"
+          class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
+        >
+          <div
+            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+          >
+            {{ guest.name }}
+          </div>
+          <svg
+            class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-3 cursor-pointer"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            @click="removeGuest(guest.uid)"
+          >
+            <path d="M0 10h24v4h-24z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div v-else-if="thisGroup.membership === 'admin'">
+      <hr class="border-gray-light my-4" />
+      <div class="w-full flex flex-wrap justify-between mb-4 items-center">
+        <h2 class="text-sogblue-light text-3xl mb-2">Gäste hinzufügen</h2>
+        <button
+          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
+          @click="closeAddGuests"
+        >
+          Fertig
+        </button>
+      </div>
+      <form class="sm:flex flex-wrap w-full items-end">
+        <div class="sm:flex flex-grow sm:mx-2">
+          <div class="flex-grow flex-1 sm:min-w-56">
+            <label class="block text-sogblue-dark mb-1">
+              Name
+            </label>
+            <input
+              v-model="guestName"
+              type="text"
+              placeholder="Vorname Nachname"
+              :class="
+                nameError !== '' ? 'border-red-500 border-2' : 'border-none'
+              "
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
+            />
+          </div>
+          <div class="sm:ml-4 flex-grow flex-1 sm:min-w-56">
+            <label class="block text-sogblue-dark mb-1">
+              Email-Adresse
+            </label>
+            <input
+              v-model="guestEmail"
+              type="text"
+              :class="
+                emailError !== '' ? 'border-red-500 border-2' : 'border-none'
+              "
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
+            />
+          </div>
+        </div>
+        <div class="flex-grow sm:mx-2 block lg:hidden w-full text-red-600 mb-4">
+          {{ nameError }} {{ emailError }}
+        </div>
+        <div class="flex-grow-0 flex-shrink-0 sm:mx-2">
+          <button
+            type="button"
+            :disabled="!addGuestSubmittable"
+            :class="
+              addGuestSubmittable
+                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker'
+                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
+            "
+            class="rounded py-2 px-4 mb-4 text-white"
+            @click="addGuest"
+          >
+            Hinzufügen
+          </button>
+        </div>
+        <div class="flex-grow sm:mx-2 w-full hidden lg:block text-red-600 mb-1">
+          {{ nameError }} {{ emailError }}
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -146,8 +252,14 @@ export default {
   },
   data() {
     return {
-      addUserActive: false,
+      addUsersActive: false,
+      addGuestsActive: false,
       searchQuery: '',
+      guestName: '',
+      guestEmail: '',
+      emailError: '',
+      nameError: '',
+      addGuestSubmittable: false,
     }
   },
   computed: {
@@ -169,6 +281,11 @@ export default {
         a.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       )
     },
+    guestsFiltered() {
+      return this.thisGroup.guests.filter((g) =>
+        g.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+    },
     ...mapGetters({
       allUsers: 'users/all',
     }),
@@ -187,17 +304,54 @@ export default {
       )
     },
   },
+  watch: {
+    guestName() {
+      this.validateGuest()
+    },
+    guestEmail() {
+      this.validateGuest()
+    },
+  },
   methods: {
     removeAdmin(uid) {},
     makeAdmin(uid) {},
     removeMember(uid) {},
+    removeGuest(uid) {},
+    addGuest(uid) {},
     openAddUsers() {
-      this.addUserActive = true
+      this.addUsersActive = true
       this.searchQuery = ''
     },
     closeAddUsers() {
-      this.addUserActive = false
+      this.addUsersActive = false
       this.searchQuery = ''
+    },
+    openAddGuests() {
+      this.addGuestsActive = true
+      this.searchQuery = ''
+    },
+    closeAddGuests() {
+      this.addGuestsActive = false
+      this.searchQuery = ''
+      this.nameError = ''
+      this.emailError = ''
+      this.guestName = ''
+      this.guestEmail = ''
+    },
+    validateGuest() {
+      this.addGuestSubmittable = false
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (this.guestEmail === '') {
+        this.emailError = ''
+      } else if (this.guestName === '') {
+        this.nameError = 'Gast hat keinen Namen.'
+      } else if (!re.test(String(this.guestEmail).toLowerCase())) {
+        this.emailError = 'Keine gültige Mailadresse eingegeben.'
+      } else {
+        this.addGuestSubmittable = true
+        this.emailError = ''
+        this.nameError = ''
+      }
     },
   },
   head() {
