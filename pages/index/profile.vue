@@ -234,7 +234,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import zxcvbn from 'zxcvbn' // TODO: add German dictionary and build zxcvbn with it
+import zxcvbn from '~/components/zxcvbnGerman/zxcvbn' // TODO: add German dictionary and build zxcvbn with it
 
 export default {
   directives: {
@@ -333,10 +333,13 @@ export default {
         this.errorNewPassword = true
       } else if (zxcvbnResult.score < 3) {
         this.errorNewPassword = true
-        if (zxcvbnResult.feedback.suggestions[0])
+        if (zxcvbnResult.feedback.warning)
           this.pwdError =
-            'Passwort zu unsicher: ' + zxcvbnResult.feedback.suggestions[0]
+            'Passwort zu unsicher: ' + zxcvbnResult.feedback.warning + '. '
         else this.pwdError = 'Passwort zu unsicher.'
+        for (const s in zxcvbnResult.feedback.suggestions) {
+          this.pwdError += zxcvbnResult.feedback.suggestions[s] + '. '
+        }
       } else {
         this.changePwdSubmittable = true
         this.pwdError = ''

@@ -43,7 +43,7 @@
       </button>
       <h2 class="text-sogblue-light text-3xl mb-4">Mitglieder</h2>
       <div v-if="!thisGroup.members.length" class="text-gray">
-        Diese Gruppe hat keine Mitglieder.
+        Diese Gruppe hat keine regulären Mitglieder.
       </div>
       <div v-else class="flex flex-wrap">
         <div
