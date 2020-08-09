@@ -14,7 +14,7 @@
     </div>
     <hr class="border-gray-light my-4" />
     <h2 class="text-sogblue-light text-3xl mb-4">Koordinator:innen</h2>
-    <div v-if="loading" class="text-gray">
+    <div v-if="loading && !adminsFiltered.length" class="text-gray">
       Lade Koordinator:innen ...
     </div>
     <div
@@ -67,7 +67,7 @@
           Mitglieder hinzufügen
         </button>
       </div>
-      <div v-if="loading" class="text-gray">
+      <div v-if="loading && !membersFiltered.length" class="text-gray">
         Lade Mitglieder ...
       </div>
       <div
@@ -173,7 +173,7 @@
           Gäste hinzufügen
         </button>
       </div>
-      <div v-if="loading" class="text-gray">
+      <div v-if="loading && !guestsFiltered.length" class="text-gray">
         Lade Gäste ...
       </div>
       <div
@@ -288,7 +288,6 @@ export default {
     return true
   },
   fetch() {
-    this.$store.commit('startLoading')
     this.$store.commit(
       'groups/setCurrentGroupID',
       decodeURIComponent(this.$route.params.group)

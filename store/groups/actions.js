@@ -25,7 +25,7 @@ export default {
             return g
           })
         }
-        commit('setGroups', groups)
+        commit('updateGroups', groups)
         commit('stopLoading')
       })
       .catch((errors) => {
@@ -69,7 +69,7 @@ export default {
             return g
           })
         }
-        commit('setGroups', groups)
+        commit('updateGroups', groups)
         if (getters.currentGroup.membership === 'admin') {
           dispatch('loadGroupAsAdmin')
         } else {

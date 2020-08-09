@@ -1,6 +1,16 @@
 export default {
-  setGroups(state, groups) {
-    state.groupList = groups
+  updateGroups(state, groups) {
+    for (const g in state.groupList) {
+      const pos = groups.map((g) => g.id).indexOf(state.groupList[g].id)
+      if (pos >= 0) {
+        state.groupList[g].name = groups[pos].name
+        state.groupList[g].membership = groups[pos].membership
+        groups.splice(pos, 1)
+      }
+    }
+    for (const g in groups) {
+      state.groupList.push(groups[g])
+    }
   },
   setCurrentGroupID(state, groupID) {
     state.currentGroupID = groupID

@@ -68,6 +68,12 @@
     >
       Keine passenden Gruppen gefunden.
     </div>
+    <div
+      v-else-if="groupsSelected && !groupsSelected.length && loading"
+      class="text-gray"
+    >
+      Lade Gruppen ...
+    </div>
     <div v-else-if="groupsSelected && !groupsSelected.length" class="text-gray">
       Keine Gruppen verfügbar.
     </div>
@@ -86,6 +92,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import GroupListing from '~/components/grouplisting'
 
 export default {
@@ -121,6 +128,9 @@ export default {
         (c) => c.getter.length
       )
     },
+    ...mapGetters({
+      loading: 'groups/loading',
+    }),
   },
   methods: {
     changeTypeSelected(type) {
