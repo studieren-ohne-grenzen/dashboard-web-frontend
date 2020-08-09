@@ -1,16 +1,13 @@
 export const state = () => ({
-  name: 'Bertrand Arthur William Russell',
-  username: 'bertrand.russell',
-  password: '',
-  sogMail: 'bertrand.russell@studieren-ohne-grenzen.org',
-  altMail: 'bertrand@russell.info',
+  name: '',
+  username: '',
+  sogMail: '',
+  altMail: '',
 })
 
 export const getters = {
   name: (state) => state.name,
   username: (state) => state.username,
-  // ToDo better password handling!
-  password: (state) => state.password,
   sogMail: (state) => state.sogMail,
   altMail: (state) => state.altMail,
 }
@@ -42,10 +39,25 @@ export const actions = {
     // API request to be implemented here
     commit('setAltMail', altMail)
   },
+  async downloadUserDetails({ commit }) {
+    const data = await this.$axios.$get('api/whoami')
+    commit('setUserDetails', {
+      name: data.cn,
+      username: data.uid,
+      sogMail: data.mail,
+      altMail: data.mail_alternative,
+    })
+  },
 }
 
 export const mutations = {
   setAltMail(state, altMail) {
     state.altMail = altMail
+  },
+  setUserDetails(state, user) {
+    state.name = user.name
+    state.username = user.username
+    state.sogMail = user.sogMail
+    state.altMail = user.altMail
   },
 }
