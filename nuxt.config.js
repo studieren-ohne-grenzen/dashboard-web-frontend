@@ -134,7 +134,7 @@ export default {
           user: false,
         },
         tokenRequired: true,
-        tokenType: 'bearer',
+        tokenType: 'Bearer',
         globalToken: true,
         autoFetchUser: true,
       },
