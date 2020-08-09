@@ -93,6 +93,11 @@ export default {
   components: {
     GroupListing,
   },
+  fetch() {
+    // Jetzt Download der Nutzderdaten
+    this.$store.dispatch('groups/loadGroups')
+  },
+  fetchOnServer: false,
   data: () => {
     return {
       typeSelected: 'all',

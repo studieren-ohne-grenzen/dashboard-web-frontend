@@ -1,4 +1,7 @@
 export default {
+  setGroups(state, groups) {
+    state.groupList = groups
+  },
   setMType(state, { groupID, mType }) {
     state.groupList.find((group) => group.id === groupID).membership = mType
   },

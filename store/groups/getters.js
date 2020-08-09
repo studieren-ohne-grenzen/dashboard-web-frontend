@@ -23,9 +23,14 @@ export default {
     ].sort(compareGroups),
 
   allGroupsOther: (state) =>
-    [...state.groupList.filter((group) => group.groupType === 'other')].sort(
-      compareGroups
-    ),
+    [
+      ...state.groupList.filter(
+        (group) =>
+          group.groupType !== 'lokalgruppe' &&
+          group.groupType !== 'projektgruppe' &&
+          group.groupType !== 'bundesweit'
+      ),
+    ].sort(compareGroups),
 
   allGroupsByCategory: (_, getters) => [
     {

@@ -39,7 +39,7 @@ export const actions = {
     // API request to be implemented here
     commit('setAltMail', altMail)
   },
-  async downloadUserDetails({ commit }) {
+  async loadUserDetails({ commit }) {
     try {
       const data = await this.$axios.$get('api/whoami')
       commit('setUserDetails', {
@@ -48,8 +48,9 @@ export const actions = {
         sogMail: data.mail,
         altMail: data.mail_alternative,
       })
-    } catch (err) {
-      const message = 'Kommunikationsfehler bei Download der Nuterdaten'
+    } catch (errors) {
+      const message =
+        'Kommunikationsfehler beim Laden der Nuterdaten: ' + errors
       commit(
         'alertbox/showAlert',
         {

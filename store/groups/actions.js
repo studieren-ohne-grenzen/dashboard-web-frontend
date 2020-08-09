@@ -1,4 +1,46 @@
 export default {
+  loadGroups({ commit }) {
+    Promise.all([
+      this.$axios.get('api/groups'),
+      this.$axios.get('api/mygroups'),
+    ])
+      .then((responses) => {
+        let groups = responses[0].data.map((g) => {
+          return {
+            name: g.cn,
+            id: g.ou,
+            groupType: g.businessCategory,
+            admins: [],
+            members: [],
+            guests: [],
+            membership: '',
+          }
+        })
+        for (const myGroup in responses[1].data) {
+          groups = groups.map((g) => {
+            if (responses[1].data[myGroup].ou === g.id) {
+              g.membership = responses[1].data[myGroup].membership
+            }
+            return g
+          })
+        }
+        commit('setGroups', groups)
+      })
+      .catch((errors) => {
+        const message = 'Kommunikationsfehler beim Laden der Gruppen: ' + errors
+        commit(
+          'alertbox/showAlert',
+          {
+            title: 'Kommunikationsfehler',
+            message,
+            defaultToAction: false,
+            showCancel: false,
+          },
+          { root: true }
+        )
+      })
+  },
+
   alertRequestMembership({ commit, getters }, { groupID }) {
     const message =
       'Eine Mitgliedschaft wird bei den Administrator:innen der ' +
