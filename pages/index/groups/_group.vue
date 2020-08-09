@@ -1,16 +1,28 @@
 <template>
   <div>
-    <h1 class="text-sogblue xs:min-w-0 min-w-full text-4xl leading-tight">
-      {{ thisGroup.name }}
-    </h1>
+    <div class="w-full flex flex-wrap justify-between mb-4">
+      <h1 class="text-sogblue xs:min-w-0 min-w-full text-4xl leading-tight">
+        {{ thisGroup.name }}
+      </h1>
+      <input
+        v-if="thisGroup.membership === 'admin'"
+        v-model="searchQuery"
+        type="text"
+        placeholder="Mitglieder suchen"
+        class="bg-gray-light rounded mb-4 mt-4 sm:mt-0 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
+      />
+    </div>
     <hr class="border-gray-light my-4" />
     <h2 class="text-sogblue-light text-3xl mb-4">Administrator:innen</h2>
-    <div v-if="!thisGroup.admins.length">
+    <div v-if="!adminsFiltered.length && searchQuery === ''" class="text-gray">
       Diese Gruppe hat keine Administrator:innen.
+    </div>
+    <div v-else-if="!adminsFiltered.length" class="text-gray">
+      Keine Administrator:innen gefunden.
     </div>
     <div v-else class="flex flex-wrap">
       <div
-        v-for="admin in thisGroup.admins"
+        v-for="admin in adminsFiltered"
         :key="admin.uid"
         class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
       >
@@ -35,19 +47,27 @@
     </div>
     <div v-if="thisGroup.membership === 'admin' && !addUserActive">
       <hr class="border-gray-light my-4" />
-      <button
-        class="float-right rounded py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
-        @click="addUserActive = true"
+      <div class="w-full flex flex-wrap justify-between mb-4 items-center">
+        <h2 class="text-sogblue-light text-3xl mb-2">Mitglieder</h2>
+        <button
+          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
+          @click="openAddUsers"
+        >
+          Mitglieder hinzufügen
+        </button>
+      </div>
+      <div
+        v-if="!membersFiltered.length && searchQuery === ''"
+        class="text-gray"
       >
-        Mitglieder hinzufügen
-      </button>
-      <h2 class="text-sogblue-light text-3xl mb-4">Mitglieder</h2>
-      <div v-if="!thisGroup.members.length" class="text-gray">
         Diese Gruppe hat keine regulären Mitglieder.
+      </div>
+      <div v-else-if="!membersFiltered.length" class="text-gray">
+        Keine Mitglieder gefunden.
       </div>
       <div v-else class="flex flex-wrap">
         <div
-          v-for="member in thisGroup.members"
+          v-for="member in membersFiltered"
           :key="member.uid"
           class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
         >
@@ -79,13 +99,15 @@
     </div>
     <div v-else-if="thisGroup.membership === 'admin'">
       <hr class="border-gray-light my-4" />
-      <button
-        class="float-right rounded py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
-        @click="addUserActive = false"
-      >
-        Fertig
-      </button>
-      <h2 class="text-sogblue-light text-3xl mb-4">Mitglieder hinzufügen</h2>
+      <div class="w-full flex flex-wrap justify-between mb-4 items-center">
+        <h2 class="text-sogblue-light text-3xl mb-2">Mitglieder hinzufügen</h2>
+        <button
+          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
+          @click="closeAddUsers"
+        >
+          Fertig
+        </button>
+      </div>
       <div v-if="!nonMembers.length" class="text-gray">
         Es konnten keine weiteren Mitglieder gefunden werden.
       </div>
@@ -125,6 +147,7 @@ export default {
   data() {
     return {
       addUserActive: false,
+      searchQuery: '',
     }
   },
   computed: {
@@ -134,6 +157,16 @@ export default {
           !decodeURIComponent(this.$route.params.group).localeCompare(
             group.name
           )
+      )
+    },
+    membersFiltered() {
+      return this.thisGroup.members.filter((m) =>
+        m.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+    },
+    adminsFiltered() {
+      return this.thisGroup.admins.filter((a) =>
+        a.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       )
     },
     ...mapGetters({
@@ -149,13 +182,23 @@ export default {
       for (const a in admins) {
         users = users.filter((u) => admins[a].uid !== u.uid)
       }
-      return users
+      return users.filter((u) =>
+        u.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
     },
   },
   methods: {
     removeAdmin(uid) {},
     makeAdmin(uid) {},
     removeMember(uid) {},
+    openAddUsers() {
+      this.addUserActive = true
+      this.searchQuery = ''
+    },
+    closeAddUsers() {
+      this.addUserActive = false
+      this.searchQuery = ''
+    },
   },
   head() {
     return {

@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import zxcvbn from '~/components/zxcvbnGerman/zxcvbn' // TODO: add German dictionary and build zxcvbn with it
+import zxcvbn from '~/components/zxcvbnGerman/zxcvbn'
 
 export default {
   name: 'ResetPassword',
