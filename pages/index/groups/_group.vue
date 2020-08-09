@@ -2,7 +2,7 @@
   <div>
     <div class="w-full flex flex-wrap justify-between mb-4">
       <h1 class="text-sogblue xs:min-w-0 min-w-full text-4xl leading-tight">
-        {{ thisGroup.name }}
+        {{ thisGroup.name === '' ? 'Lade Gruppe ...' : thisGroup.name }}
       </h1>
       <input
         v-if="thisGroup.membership === 'admin'"
@@ -14,7 +14,13 @@
     </div>
     <hr class="border-gray-light my-4" />
     <h2 class="text-sogblue-light text-3xl mb-4">Administrator:innen</h2>
-    <div v-if="!adminsFiltered.length && searchQuery === ''" class="text-gray">
+    <div v-if="loading" class="text-gray">
+      Lade Koordinator:innen ...
+    </div>
+    <div
+      v-else-if="!adminsFiltered.length && searchQuery === ''"
+      class="text-gray"
+    >
       Diese Gruppe hat keine Administrator:innen.
     </div>
     <div v-else-if="!adminsFiltered.length" class="text-gray">
@@ -61,8 +67,11 @@
           Mitglieder hinzufügen
         </button>
       </div>
+      <div v-if="loading" class="text-gray">
+        Lade Mitglieder ...
+      </div>
       <div
-        v-if="!membersFiltered.length && searchQuery === ''"
+        v-else-if="!membersFiltered.length && searchQuery === ''"
         class="text-gray"
       >
         Diese Gruppe hat keine regulären Mitglieder.
@@ -164,8 +173,11 @@
           Gäste hinzufügen
         </button>
       </div>
+      <div v-if="loading" class="text-gray">
+        Lade Gäste ...
+      </div>
       <div
-        v-if="!guestsFiltered.length && searchQuery === ''"
+        v-else-if="!guestsFiltered.length && searchQuery === ''"
         class="text-gray"
       >
         Diese Gruppe hat keine Gäste.
@@ -276,10 +288,18 @@ export default {
     return true
   },
   fetch() {
+    this.$store.commit('startLoading')
+    this.$store.commit(
+      'groups/setCurrentGroupID',
+      decodeURIComponent(this.$route.params.group)
+    )
     if (this.thisGroup.membership === 'admin')
-      this.$store.dispatch('groups/loadGroupAsAdmin', {
-        groupID: this.thisGroup.id,
-      })
+      this.$store.dispatch('groups/loadGroupAsAdmin')
+    else if (this.thisGroup.id === '') {
+      this.$store.dispatch('groups/loadGroupAsUnknown')
+    } else {
+      this.$store.dispatch('groups/loadGroupDetails')
+    }
   },
   fetchOnServer: false,
   data() {
@@ -296,12 +316,19 @@ export default {
   },
   computed: {
     thisGroup() {
-      return this.$store.getters['groups/allGroups'].find(
-        (group) =>
-          !decodeURIComponent(this.$route.params.group).localeCompare(
-            group.name
-          )
-      )
+      if (this.$store.getters['groups/currentGroup']) {
+        return this.$store.getters['groups/currentGroup']
+      } else
+        return {
+          name: '',
+          id: '',
+          membership: '',
+          groupType: null,
+          admins: [],
+          members: [],
+          pendingMembers: [],
+          guests: [],
+        }
     },
     membersFiltered() {
       return this.thisGroup.members.filter((m) =>
@@ -320,6 +347,7 @@ export default {
     },
     ...mapGetters({
       allUsers: 'users/all',
+      loading: 'groups/loading',
     }),
     nonMembers() {
       const members = this.thisGroup.members

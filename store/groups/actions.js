@@ -1,5 +1,6 @@
 export default {
   loadGroups({ commit }) {
+    commit('startLoading')
     Promise.all([
       this.$axios.get('api/groups'),
       this.$axios.get('api/mygroups'),
@@ -25,6 +26,7 @@ export default {
           })
         }
         commit('setGroups', groups)
+        commit('stopLoading')
       })
       .catch((errors) => {
         const message = 'Fehler beim Laden der Gruppen: \n' + errors
@@ -41,7 +43,90 @@ export default {
       })
   },
 
-  loadGroupAsAdmin({ commit }, { groupID }) {
+  loadGroupAsUnknown({ dispatch, getters, commit }) {
+    commit('startLoading')
+    Promise.all([
+      this.$axios.get('api/groups'),
+      this.$axios.get('api/mygroups'),
+    ])
+      .then((responses) => {
+        let groups = responses[0].data.map((g) => {
+          return {
+            name: g.cn,
+            id: g.ou,
+            groupType: g.businessCategory,
+            admins: [],
+            members: [],
+            guests: [],
+            membership: '',
+          }
+        })
+        for (const myGroup in responses[1].data) {
+          groups = groups.map((g) => {
+            if (responses[1].data[myGroup].ou === g.id) {
+              g.membership = responses[1].data[myGroup].membership
+            }
+            return g
+          })
+        }
+        commit('setGroups', groups)
+        if (getters.currentGroup.membership === 'admin') {
+          dispatch('loadGroupAsAdmin')
+        } else {
+          dispatch('loadGroupDetails')
+        }
+      })
+      .catch((errors) => {
+        const message = 'Fehler beim Laden der Gruppen: \n' + errors
+        commit(
+          'alertbox/showAlert',
+          {
+            title: 'Fehler',
+            message,
+            defaultToAction: false,
+            showCancel: false,
+          },
+          { root: true }
+        )
+      })
+  },
+
+  loadGroupDetails({ commit, getters }) {
+    commit('startLoading')
+    const groupID = getters.currentGroupID
+    Promise.all([this.$axios.get('api/groups/owners?group_id=' + groupID)])
+      .then((responses) => {
+        const admins = responses[0].data.map((u) => {
+          return {
+            name: u.cn,
+            email: u.mail,
+            uid: u.uid,
+          }
+        })
+        commit('groupSetUsers', {
+          groupID,
+          admins,
+        })
+        commit('stopLoading')
+      })
+      .catch((errors) => {
+        const message = 'Fehler beim Laden der Gruppe: \n' + errors
+        commit(
+          'alertbox/showAlert',
+          {
+            title: 'Fehler',
+            message,
+            defaultToAction: false,
+            showCancel: false,
+          },
+          { root: true }
+        )
+      })
+  },
+
+  loadGroupAsAdmin({ commit, getters }) {
+    commit('startLoading')
+    const groupID = getters.currentGroupID
     Promise.all([
       this.$axios.get('api/groups/owners?group_id=' + groupID),
       this.$axios.get('api/groups/members?group_id=' + groupID),
@@ -91,6 +176,7 @@ export default {
           guests,
           pendingMembers,
         })
+        commit('stopLoading')
       })
       .catch((errors) => {
         const message = 'Fehler beim Laden der Gruppe: \n' + errors

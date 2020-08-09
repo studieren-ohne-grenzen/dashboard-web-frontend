@@ -2,6 +2,15 @@ export default {
   setGroups(state, groups) {
     state.groupList = groups
   },
+  setCurrentGroupID(state, groupID) {
+    state.currentGroupID = groupID
+  },
+  startLoading(state) {
+    state.groupsAreLoading = true
+  },
+  stopLoading(state) {
+    state.groupsAreLoading = false
+  },
   groupSetUsers(state, { groupID, admins, members, guests, pendingMembers }) {
     const group = state.groupList.find((group) => group.id === groupID)
     group.admins = admins

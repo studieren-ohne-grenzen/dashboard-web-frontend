@@ -10,14 +10,14 @@
         class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
       >
         <nuxt-link
-          :to="'/groups/' + encodeURIComponent(group.name)"
+          :to="'/groups/' + encodeURIComponent(group.id)"
           class="py-2 px-4 flex-grow border-l border-t border-b rounded-l border-gray"
         >
           {{ group.name }}
         </nuxt-link>
         <nuxt-link
           v-if="group.membership == 'admin'"
-          :to="'/groups/' + encodeURIComponent(group.name)"
+          :to="'/groups/' + encodeURIComponent(group.id)"
           class="flex-none bg-sogblue-light rounded-r w-10 p-3 cursor-pointer"
         >
           <svg

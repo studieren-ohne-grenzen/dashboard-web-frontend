@@ -7,6 +7,13 @@ const compareGroups = (a, b) => {
 }
 
 export default {
+  currentGroupID: (state) => state.currentGroupID,
+
+  currentGroup: (state, getters) =>
+    [
+      ...state.groupList.filter((group) => group.id === getters.currentGroupID),
+    ][0],
+
   allGroupsLokal: (state) =>
     [
       ...state.groupList.filter((group) => group.groupType === 'lokalgruppe'),
@@ -64,4 +71,6 @@ export default {
     ),
 
   requests: (state) => state.requests,
+
+  loading: (state) => state.groupsAreLoading,
 }
