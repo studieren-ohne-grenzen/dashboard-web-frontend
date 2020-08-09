@@ -244,6 +244,11 @@ export default {
       },
     },
   },
+  fetch() {
+    // Jetzt Download der Nutzderdaten
+    this.$store.dispatch('user/downloadUserDetails')
+  },
+  fetchOnServer: false,
   data: () => {
     return {
       changePwd: false,

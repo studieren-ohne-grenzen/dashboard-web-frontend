@@ -93,8 +93,6 @@ export default {
           }
           this.error = e + ''
         })
-      // Jetzt Download der Nutzderdaten
-      this.$store.dispatch('user/downloadUserDetails')
     },
   },
 }
