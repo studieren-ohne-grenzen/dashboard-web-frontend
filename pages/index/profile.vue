@@ -222,6 +222,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import zxcvbn from '~/components/zxcvbnGerman/zxcvbn'
+import validate from '~/components/validateEmails'
 
 export default {
   directives: {
@@ -338,10 +339,9 @@ export default {
     validateEmails() {
       this.errorNewEmail = false
       this.changeEmailSubmittable = false
-      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (this.newEmail1 === '') {
         this.emailError = ''
-      } else if (!re.test(String(this.newEmail1).toLowerCase())) {
+      } else if (!validate(this.newEmail1)) {
         this.emailError = 'Keine gültige Mailadresse eingegeben.'
       } else {
         this.changeEmailSubmittable = true

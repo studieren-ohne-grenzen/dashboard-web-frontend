@@ -281,6 +281,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import validate from '~/components/validateEmails'
 
 export default {
   // TODO: test for actual group names
@@ -435,12 +436,11 @@ export default {
     },
     validateGuest() {
       this.addGuestSubmittable = false
-      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (this.guestEmail === '') {
         this.emailError = ''
       } else if (this.guestName === '') {
         this.nameError = 'Gast hat keinen Namen.'
-      } else if (!re.test(String(this.guestEmail).toLowerCase())) {
+      } else if (!validate(this.guestEmail)) {
         this.emailError = 'Keine gültige Mailadresse eingegeben.'
       } else {
         this.addGuestSubmittable = true
