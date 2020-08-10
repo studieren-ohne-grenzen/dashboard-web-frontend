@@ -21,7 +21,7 @@ export default {
 
   allGroupsProjekt: (state) =>
     [
-      ...state.groupList.filter((group) => group.groupType === 'projektgruppe'),
+      ...state.groupList.filter((group) => group.groupType === 'projektarbeit'),
     ].sort(compareGroups),
 
   allGroupsBund: (state) =>
@@ -34,7 +34,7 @@ export default {
       ...state.groupList.filter(
         (group) =>
           group.groupType !== 'lokalgruppe' &&
-          group.groupType !== 'projektgruppe' &&
+          group.groupType !== 'projektarbeit' &&
           group.groupType !== 'bundesweit'
       ),
     ].sort(compareGroups),

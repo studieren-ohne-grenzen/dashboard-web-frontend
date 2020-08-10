@@ -5,6 +5,7 @@ export default {
       if (pos >= 0) {
         state.groupList[g].name = groups[pos].name
         state.groupList[g].membership = groups[pos].membership
+        state.groupList[g].groupType = groups[pos].groupType
         groups.splice(pos, 1)
       }
     }
