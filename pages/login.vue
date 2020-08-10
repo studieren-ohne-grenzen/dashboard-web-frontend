@@ -2,20 +2,23 @@
   <div class="bggradient w-screen min-h-screen h-full pt-4 lg:pt-32">
     <img alt="Dashboard Logo" src="logo.png" class="mx-auto py-8 px-2 w-64" />
     <div class="bg-white max-w-md bg-white xs:mx-auto xs:rounded p-8">
-      <div v-if="$auth.$state.redirect">Bitte einloggen!</div>
       <div
-        v-if="wrongLogin"
-        role="alert"
+        v-if="$auth.$state.redirect"
+        class="block p-2 mb-8 rounded border border-red-600 text-red-600"
+      >
+        Bitte einloggen!
+      </div>
+      <div
+        v-else-if="wrongLogin"
         class="block p-2 mb-8 rounded border border-red-600 text-red-600"
       >
         Falsche Logindaten
       </div>
       <div
-        v-if="otherError"
-        role="alert"
+        v-else-if="otherError"
         class="block p-2 mb-8 rounded border border-red-600 text-red-600"
       >
-        Fehler bei Server-Kommunikation
+        Fehler bei der Kommunikation mit dem Server
       </div>
       <form @submit.prevent="login">
         <label class="block text-sogblue-dark mb-1">Benutzername</label>
@@ -93,6 +96,7 @@ export default {
           }
           this.error = e + ''
         })
+      this.password = ''
     },
   },
 }
