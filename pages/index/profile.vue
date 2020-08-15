@@ -103,6 +103,7 @@
                 ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker'
                 : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
             "
+            @click="changePassword"
           >
             Ändern
           </button>
@@ -281,7 +282,14 @@ export default {
   methods: {
     changeEmail() {
       this.$store.dispatch('user/alertChangeAltMail', this.newEmail1)
-      this.changeMail = false
+      this.untoggleMail()
+    },
+    changePassword() {
+      this.$store.dispatch('user/changePasswordWithOld', {
+        oldPassword: this.oldPassword,
+        newPassword: this.newPassword1,
+      })
+      this.untogglePwd()
     },
     togglePwd() {
       this.changePwd = true
@@ -327,7 +335,7 @@ export default {
         if (zxcvbnResult.feedback.warning)
           this.pwdError =
             'Passwort zu unsicher: ' + zxcvbnResult.feedback.warning + '. '
-        else this.pwdError = 'Passwort zu unsicher.'
+        else this.pwdError = 'Passwort zu unsicher. '
         for (const s in zxcvbnResult.feedback.suggestions) {
           this.pwdError += zxcvbnResult.feedback.suggestions[s] + '. '
         }
