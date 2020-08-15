@@ -130,7 +130,7 @@
       <div class="flex flex-wrap sm:mt-8">
         <div class="flex-grow">
           <div class="text-sogblue-dark mb-1">
-            SOG-Email
+            SOG-Mailadresse
           </div>
           <div
             class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
@@ -138,7 +138,7 @@
             {{ sogMail }}
           </div>
           <div class="text-gray mb-4 sm:max-w-lg">
-            Deine SOG-Email kann nur von der
+            Deine SOG-Mailadresse kann nur von der
             <a href="mailto:it@studieren-ohne-grenzen.org" class="underline"
               >SOG IT</a
             >
@@ -151,7 +151,7 @@
             >.
           </div>
           <div v-if="!changeMail" class="text-sogblue-dark mb-1">
-            Alternative Email
+            Alternative Mailadresse
           </div>
           <div
             v-if="!changeMail"
@@ -167,7 +167,7 @@
             class="rounded py-2 px-4 bg-sogblue hover:bg-sogblue-darker text-white"
             @click="toggleMail"
           >
-            Alternative Email-Adresse ändern
+            Alternative Mail-Adresse ändern
           </button>
         </div>
       </div>
@@ -175,7 +175,7 @@
         <div class="sm:flex flex-grow sm:mx-2">
           <div class="flex-grow flex-1 sm:min-w-56">
             <label class="block text-sogblue-dark mb-1">
-              Alternative Email
+              Neue alternative Mailadresse
             </label>
             <input
               v-model="newEmail1"
@@ -354,6 +354,9 @@ export default {
         this.emailError = ''
       } else if (!validate(this.newEmail1)) {
         this.emailError = 'Keine gültige Mailadresse eingegeben.'
+      } else if (this.newEmail1 === this.sogMail) {
+        this.emailError =
+          'Alternative Mailadresse darf nicht mit SOG-Mailadresse übereinstimmen.'
       } else {
         this.changeEmailSubmittable = true
         this.emailError = ''
