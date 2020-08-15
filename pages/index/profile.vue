@@ -155,9 +155,11 @@
           </div>
           <div
             v-if="!changeMail"
-            class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
+            :class="altMailConfirmed ? 'text-sogblue-dark' : 'text-gray'"
+            class="rounded bg-gray-light p-2 mb-4 w-full sm:max-w-lg"
           >
             {{ altMail }}
+            <span v-if="!altMailConfirmed"> (nicht bestätigt)</span>
           </div>
           <button
             v-if="!changeMail"
@@ -260,6 +262,7 @@ export default {
       username: 'user/username',
       sogMail: 'user/sogMail',
       altMail: 'user/altMail',
+      altMailConfirmed: 'user/altMailConfirmed',
     }),
   },
   watch: {

@@ -3,6 +3,7 @@ export const state = () => ({
   username: '',
   sogMail: '',
   altMail: '',
+  altMailConfirmed: true,
 })
 
 export const getters = {
@@ -10,6 +11,7 @@ export const getters = {
   username: (state) => state.username,
   sogMail: (state) => state.sogMail,
   altMail: (state) => state.altMail,
+  altMailConfirmed: (state) => state.altMailConfirmed,
 }
 
 export const actions = {
@@ -40,9 +42,26 @@ export const actions = {
       { root: true }
     )
   },
-  changeAltMail({ commit }, altMail) {
-    // API request to be implemented here
-    commit('setAltMail', altMail)
+  async changeAltMail({ commit }, altMail) {
+    try {
+      await this.$axios.post('api/users/confirm_email', {
+        alternative_mail: altMail,
+      })
+      commit('setUserDetails', { altMail, altMailConfirmed: false })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message:
+            'Kommunikationsfehler beim Ändern der alternativen Mailadresse: ' +
+            error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
   },
 
   changePasswordWithOld({ commit }, { oldPassword, newPassword }) {
@@ -97,15 +116,23 @@ export const actions = {
       })
   },
 
-  async loadUserDetails({ commit }) {
+  async loadUserDetails({ commit, getters }) {
     try {
       const data = await this.$axios.$get('api/whoami')
-      commit('setUserDetails', {
-        name: data.cn,
-        username: data.uid,
-        sogMail: data.mail,
-        altMail: data.mail_alternative,
-      })
+      if (getters.altMail !== '' && !getters.altMailConfirmed) {
+        commit('setUserDetails', {
+          name: data.cn,
+          username: data.uid,
+          sogMail: data.mail,
+        })
+      } else {
+        commit('setUserDetails', {
+          name: data.cn,
+          username: data.uid,
+          sogMail: data.mail,
+          altMail: data.mail_alternative,
+        })
+      }
     } catch (errors) {
       commit(
         'alertbox/showAlert',
@@ -122,13 +149,12 @@ export const actions = {
 }
 
 export const mutations = {
-  setAltMail(state, altMail) {
-    state.altMail = altMail
-  },
   setUserDetails(state, user) {
-    state.name = user.name
-    state.username = user.username
-    state.sogMail = user.sogMail
-    state.altMail = user.altMail
+    if (user.name) state.name = user.name
+    if (user.username) state.username = user.username
+    if (user.sogMail) state.sogMail = user.sogMail
+    if (user.altMail) state.altMail = user.altMail
+    if (user.altMailConfirmed !== undefined)
+      state.altMailConfirmed = user.altMailConfirmed
   },
 }
