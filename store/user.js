@@ -66,8 +66,7 @@ export const actions = {
 
   changePasswordWithOld({ commit }, { oldPassword, newPassword }) {
     this.$axios
-      .post('api/users/set_password', {
-        // TODO: redeploy vogelnest - should be api/users/set_password_with_old
+      .post('api/users/set_password_with_old', {
         old_password: oldPassword,
         new_password: newPassword,
       })
