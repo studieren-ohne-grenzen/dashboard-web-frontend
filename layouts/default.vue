@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <nuxt />
-  </div>
+  <nuxt />
 </template>
 
-<style></style>
+<style>
+html {
+  background-color: #00679e;
+  background-image: linear-gradient(20deg, #57b4dc 0%, #00679e 100%);
+}
+</style>

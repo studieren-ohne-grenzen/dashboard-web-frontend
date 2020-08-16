@@ -42,8 +42,5 @@ module.exports = {
       'plugins/**/*.js',
       'nuxt.config.js',
     ],
-    options: {
-      whitelist: ['bggradient'],
-    },
   },
 }

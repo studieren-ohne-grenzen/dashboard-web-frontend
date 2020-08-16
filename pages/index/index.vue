@@ -33,7 +33,7 @@
           :class="typeSelected === 'admin' ? 'groupactive' : 'groupinactive'"
           @click="changeTypeSelected('admin')"
         >
-          <span>Koordination</span>
+          <span>Koor&shy;dination</span>
         </button>
       </div>
       <input

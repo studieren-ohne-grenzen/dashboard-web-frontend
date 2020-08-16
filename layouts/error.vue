@@ -1,5 +1,5 @@
 <template>
-  <div class="bggradient w-screen h-screen">
+  <div class="w-screen h-screen">
     <div class="max-w-lg mx-auto p-4">
       <div class="text-white clearfix text-6xl">
         {{ error.statusCode }}
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style>
-.bggradient {
+html {
   background-color: #00679e;
   background-image: linear-gradient(20deg, #57b4dc 0%, #00679e 100%);
 }

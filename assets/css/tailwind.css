@@ -6,4 +6,8 @@
     .min-w-56 {
         min-width: 14rem;
     }
+    .width-container {
+        margin-left: calc(100vw - 100%);
+        width: calc(200% - 100vw);
+    }
 }

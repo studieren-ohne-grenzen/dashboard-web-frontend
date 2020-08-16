@@ -1,5 +1,5 @@
 <template>
-  <div class="bggradient w-screen min-h-screen h-full pt-4 lg:pt-32">
+  <div class="w-screen min-h-screen h-full pt-4 lg:pt-32">
     <img
       alt="Dashboard Logo"
       src="~/static/logo.png"
