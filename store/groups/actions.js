@@ -293,9 +293,26 @@ export default {
       { root: true }
     )
   },
-  addGuest({ commit }, { name, email, groupID }) {
-    // API request to be implemented here
-    commit('addGuest', { name, email, groupID })
+  async addGuest({ commit }, { name, email, groupID }) {
+    try {
+      await this.$axios.post('/groups/add_guest', {
+        group_id: groupID,
+        name,
+        mail: email,
+      })
+      commit('addGuest', { name, email, groupID })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message: 'Kommunikationsfehler beim Hinzufügen des Gasts: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
   },
 
   alertRemoveGuest({ commit, getters }, { uid, groupID }) {
@@ -348,15 +365,46 @@ export default {
       { root: true }
     )
   },
-  removeMember({ commit }, { uid, groupID }) {
-    // API request to be implemented here
-    commit('removeMember', { uid, groupID })
+  async removeMember({ commit }, { uid, groupID }) {
+    try {
+      await this.$axios.post('/groups/remove_member', {
+        group_id: groupID,
+        uid,
+      })
+      commit('removeMember', { uid, groupID })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message:
+            'Kommunikationsfehler beim Entfernen des Mitglieds: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
   },
 
-  addMember({ commit, rootGetters }, { uid, groupID }) {
-    // API request to be implemented here
+  async addMember({ commit, rootGetters }, { uid, groupID }) {
     const user = rootGetters['users/all'].find((u) => u.uid === uid)
-    commit('addMember', { user, groupID })
+    try {
+      await this.$axios.post('/groups/add_member', { group_id: groupID, uid })
+      commit('addMember', { user, groupID })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message:
+            'Kommunikationsfehler beim Hinzufügen des Mitglieds: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
   },
 
   alertMakeAdmin({ commit, getters }, { uid, groupID }) {
@@ -382,14 +430,28 @@ export default {
       { root: true }
     )
   },
-  makeAdmin({ commit, rootGetters }, { uid, groupID }) {
-    // API request to be implemented here
-    commit('removeMember', { uid, groupID })
-    const user = rootGetters['users/all'].find((u) => u.uid === uid)
-    commit('addAdmin', { user, groupID })
+  async makeAdmin({ commit, rootGetters }, { uid, groupID }) {
+    try {
+      await this.$axios.post('/groups/add_owner', { group_id: groupID, uid })
+      commit('removeMember', { uid, groupID })
+      const user = rootGetters['users/all'].find((u) => u.uid === uid)
+      commit('addAdmin', { user, groupID })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message:
+            'Kommunikationsfehler beim Befördern des Mitglieds: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
   },
 
-  alertRevokeAdmin({ commit, getters }, { uid, groupID }) {
+  alertRevokeAdmin({ commit, getters, rootGetters }, { uid, groupID }) {
     if (
       getters.allGroups.find((group) => group.id === groupID).admins.length ===
       1
@@ -407,10 +469,28 @@ export default {
       commit(
         'alertbox/showAlert',
         {
-          title: 'Koordinator:innen-Rechte entziehen',
+          title: 'Koordinators-Rechte entziehen',
           message,
           defaultToAction: true,
           showCancel: false,
+          params: { uid, groupID },
+        },
+        { root: true }
+      )
+    } else if (uid === rootGetters['user/username']) {
+      const message =
+        'Willst du wirklich deine Koordinations-Rechte für ' +
+        getters.allGroups.find((group) => group.id === groupID).name +
+        ' abgeben? Du kannst dann die Mitglieder der Gruppe nicht mehr bearbeiten' +
+        ' und keine weiteren Mitglieder zu Koordinator:innen befördern.'
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Koordinators-Rechte abgeben',
+          message,
+          defaultToAction: false,
+          actionName: 'Rechte abgeben',
+          action: 'groups/revokeAdmin',
           params: { uid, groupID },
         },
         { root: true }
@@ -421,17 +501,17 @@ export default {
         getters.allGroups
           .find((group) => group.id === groupID)
           .admins.find((g) => g.uid === uid).name +
-        ' die Koordinator:innen-Rechte für ' +
+        ' die Koordinators-Rechte für ' +
         getters.allGroups.find((group) => group.id === groupID).name +
         ' entziehen? Sie/er kann dann die Mitglieder der Gruppe nicht mehr bearbeiten' +
-        ' und keine weiteren Mitglieder zu Koordinator:innen ernennen.'
+        ' und keine weiteren Mitglieder zu Koordinator:innen befördern.'
       commit(
         'alertbox/showAlert',
         {
-          title: 'Koordinator:innen-Rechte entziehen',
+          title: 'Koordinators-Rechte entziehen',
           message,
           defaultToAction: false,
-          actionName: 'Entziehen',
+          actionName: 'Rechte entziehen',
           action: 'groups/revokeAdmin',
           params: { uid, groupID },
         },
@@ -439,10 +519,25 @@ export default {
       )
     }
   },
-  revokeAdmin({ commit, rootGetters }, { uid, groupID }) {
-    // API request to be implemented here
-    commit('removeAdmin', { uid, groupID })
-    const user = rootGetters['users/all'].find((u) => u.uid === uid)
-    commit('addMember', { user, groupID })
+  async revokeAdmin({ commit, rootGetters }, { uid, groupID }) {
+    try {
+      await this.$axios.post('/groups/remove_owner', { group_id: groupID, uid })
+      commit('removeAdmin', { uid, groupID })
+      const user = rootGetters['users/all'].find((u) => u.uid === uid)
+      commit('addMember', { user, groupID })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message:
+            'Kommunikationsfehler beim Entziehen der Koordinations-Rechte: ' +
+            error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
   },
 }

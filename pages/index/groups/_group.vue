@@ -408,7 +408,7 @@ export default {
         uid,
         groupID: this.thisGroup.id,
       })
-      this.addUsersActive = false
+      this.closeAddUsers()
     },
     removeGuest(uid) {
       this.$store.dispatch('groups/alertRemoveGuest', {
