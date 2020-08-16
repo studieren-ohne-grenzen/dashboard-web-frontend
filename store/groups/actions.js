@@ -133,6 +133,7 @@ export default {
       this.$axios.get('api/groups/members?group_id=' + groupID),
       this.$axios.get('api/groups/pending_members?group_id=' + groupID),
       this.$axios.get('api/groups/guests?group_id=' + groupID),
+      this.$axios.get('api/users'),
     ])
       .then((responses) => {
         const admins = responses[0].data.map((u) => {
@@ -170,6 +171,14 @@ export default {
             uid: u.uid,
           }
         })
+        const allUsers = responses[4].data.map((u) => {
+          return {
+            name: u.cn,
+            email: u.mail,
+            uid: u.uid,
+          }
+        })
+        commit('users/setAllUsers', allUsers, { root: true })
         commit('groupSetUsers', {
           groupID,
           admins,
