@@ -66,7 +66,7 @@ export const actions = {
 
   changePasswordWithOld({ commit }, { oldPassword, newPassword }) {
     this.$axios
-      .post('api/users/set_password_with_old', {
+      .post('api/users/set_new_password_with_old_password', {
         old_password: oldPassword,
         new_password: newPassword,
       })

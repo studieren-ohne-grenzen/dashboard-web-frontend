@@ -1,10 +1,4 @@
-const compareGroups = (a, b) => {
-  const nameA = a.name.toUpperCase()
-  const nameB = b.name.toUpperCase()
-  if (nameA > nameB) return 1
-  if (nameB > nameA) return -1
-  else return 0
-}
+import compareByName from '~/components/compare'
 
 export default {
   currentGroupID: (state) => state.currentGroupID,
@@ -17,17 +11,17 @@ export default {
   allGroupsLokal: (state) =>
     [
       ...state.groupList.filter((group) => group.groupType === 'lokalgruppe'),
-    ].sort(compareGroups),
+    ].sort(compareByName),
 
   allGroupsProjekt: (state) =>
     [
       ...state.groupList.filter((group) => group.groupType === 'projektarbeit'),
-    ].sort(compareGroups),
+    ].sort(compareByName),
 
   allGroupsBund: (state) =>
     [
       ...state.groupList.filter((group) => group.groupType === 'bundesweit'),
-    ].sort(compareGroups),
+    ].sort(compareByName),
 
   allGroupsOther: (state) =>
     [
@@ -37,7 +31,7 @@ export default {
           group.groupType !== 'projektarbeit' &&
           group.groupType !== 'bundesweit'
       ),
-    ].sort(compareGroups),
+    ].sort(compareByName),
 
   allGroupsByCategory: (_, getters) => [
     {
@@ -58,16 +52,16 @@ export default {
     },
   ],
 
-  allGroups: (state) => [...state.groupList].sort(compareGroups),
+  allGroups: (state) => [...state.groupList].sort(compareByName),
 
   myGroups: (state) =>
     [...state.groupList.filter((group) => group.membership !== '')].sort(
-      compareGroups
+      compareByName
     ),
 
   adminGroups: (state) =>
     [...state.groupList.filter((group) => group.membership === 'admin')].sort(
-      compareGroups
+      compareByName
     ),
 
   requests: (state) => state.requests,

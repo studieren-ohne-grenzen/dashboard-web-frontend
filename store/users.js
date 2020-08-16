@@ -1,17 +1,11 @@
-const compareUsers = (a, b) => {
-  const nameA = a.name.toUpperCase()
-  const nameB = b.name.toUpperCase()
-  if (nameA > nameB) return 1
-  if (nameB > nameA) return -1
-  else return 0
-}
+import compareByName from '~/components/compare'
 
 export const state = () => ({
   allUsers: [],
 })
 
 export const getters = {
-  all: (state) => [...state.allUsers].sort(compareUsers),
+  all: (state) => [...state.allUsers].sort(compareByName),
 }
 
 export const mutations = {

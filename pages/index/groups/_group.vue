@@ -33,12 +33,17 @@
         class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
       >
         <div
-          :class="thisGroup.membership === 'admin' ? 'border-r-0' : 'rounded-r'"
+          :class="
+            thisGroup.membership === 'admin' && admin.uid !== 'dashboardadmin'
+              ? 'border-r-0'
+              : 'rounded-r'
+          "
           class="py-2 px-4 flex-grow border rounded-l border-gray"
         >
           {{ admin.name }}
         </div>
         <button
+          v-if="admin.uid !== 'dashboardadmin'"
           title="Koordinator:innen-Rechte entziehen"
           class="border-t border-b border-gray-reddish rounded-r"
           @click="revokeAdmin(admin.uid)"
@@ -282,6 +287,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import validate from '~/components/validateEmails'
+import compareByName from '~/components/compare'
 
 export default {
   // TODO: test for actual group names
@@ -331,19 +337,25 @@ export default {
         }
     },
     membersFiltered() {
-      return this.thisGroup.members.filter((m) =>
-        m.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      )
+      return [
+        ...this.thisGroup.members.filter((m) =>
+          m.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        ),
+      ].sort(compareByName)
     },
     adminsFiltered() {
-      return this.thisGroup.admins.filter((a) =>
-        a.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      )
+      return [
+        ...this.thisGroup.admins.filter((a) =>
+          a.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        ),
+      ].sort(compareByName)
     },
     guestsFiltered() {
-      return this.thisGroup.guests.filter((g) =>
-        g.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      )
+      return [
+        ...this.thisGroup.guests.filter((g) =>
+          g.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        ),
+      ].sort(compareByName)
     },
     ...mapGetters({
       allUsers: 'users/all',
