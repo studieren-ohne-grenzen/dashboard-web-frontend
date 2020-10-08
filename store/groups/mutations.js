@@ -22,12 +22,23 @@ export default {
   stopLoading(state) {
     state.groupsAreLoading = false
   },
-  groupSetUsers(state, { groupID, admins, members, guests, pendingMembers }) {
+  groupSetUsers(
+    state,
+    {
+      groupID,
+      admins,
+      members,
+      guests,
+      activePendingMembers,
+      inactivePendingMembers,
+    }
+  ) {
     const group = state.groupList.find((group) => group.id === groupID)
     group.admins = admins
     group.members = members
     group.guests = guests
-    group.pendingMembers = pendingMembers
+    group.activePendingMembers = activePendingMembers
+    group.inactivePendingMembers = inactivePendingMembers
   },
   setMType(state, { groupID, mType }) {
     state.groupList.find((group) => group.id === groupID).membership = mType
@@ -66,5 +77,19 @@ export default {
   },
   addAdmin(state, { user, groupID }) {
     state.groupList.find((group) => group.id === groupID).admins.push(user)
+  },
+  removeActivePendingMember(state, { uid, groupID }) {
+    state.groupList.find(
+      (group) => group.id === groupID
+    ).activePendingMembers = state.groupList
+      .find((group) => group.id === groupID)
+      .activePendingMembers.filter((g) => g.uid !== uid)
+  },
+  removeInactivePendingMember(state, { uid, groupID }) {
+    state.groupList.find(
+      (group) => group.id === groupID
+    ).inactivePendingMembers = state.groupList
+      .find((group) => group.id === groupID)
+      .inactivePendingMembers.filter((g) => g.uid !== uid)
   },
 }

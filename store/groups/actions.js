@@ -129,9 +129,10 @@ export default {
     Promise.all([
       this.$axios.get('api/groups/' + groupID + '/owners'),
       this.$axios.get('api/groups/' + groupID + '/members'),
-      this.$axios.get('api/groups/' + groupID + '/active_pending_members'),
       this.$axios.get('api/groups/' + groupID + '/guests'),
       this.$axios.get('api/users'),
+      this.$axios.get('api/groups/' + groupID + '/active_pending_members'),
+      this.$axios.get('api/groups/' + groupID + '/inactive_pending_members'),
     ])
       .then((responses) => {
         const admins = responses[0].data.map((u) => {
@@ -155,21 +156,28 @@ export default {
             }
             return true
           })
-        const pendingMembers = responses[2].data.map((u) => {
+        const guests = responses[2].data.map((u) => {
           return {
             name: u.cn,
             email: u.mail,
             uid: u.uid,
           }
         })
-        const guests = responses[3].data.map((u) => {
+        const allUsers = responses[3].data.map((u) => {
           return {
             name: u.cn,
             email: u.mail,
             uid: u.uid,
           }
         })
-        const allUsers = responses[4].data.map((u) => {
+        const activePendingMembers = responses[4].data.map((u) => {
+          return {
+            name: u.cn,
+            email: u.mail,
+            uid: u.uid,
+          }
+        })
+        const inactivePendingMembers = responses[5].data.map((u) => {
           return {
             name: u.cn,
             email: u.mail,
@@ -182,7 +190,8 @@ export default {
           admins,
           members,
           guests,
-          pendingMembers,
+          activePendingMembers,
+          inactivePendingMembers,
         })
         commit('stopLoading')
       })
@@ -219,9 +228,25 @@ export default {
       { root: true }
     )
   },
-  requestMembership({ commit }, { groupID }) {
-    // API request to be implemented here
-    commit('setMType', { groupID, mType: 'pending' })
+  async requestMembership({ commit, rootGetters }, { groupID }) {
+    try {
+      const uid = rootGetters['user/username']
+      await this.$axios.post('api/groups/' + groupID + '/request_access', {
+        uid,
+      })
+      commit('setMType', { groupID, mType: 'pending' })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message: 'Kommunikationsfehler Anfragen der Mitgliedschaft: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
   },
 
   alertCancelMembership({ commit, getters }, { groupID }) {
@@ -242,9 +267,25 @@ export default {
       { root: true }
     )
   },
-  cancelMembership({ commit }, { groupID }) {
-    // API request to be implemented here
-    commit('setMType', { groupID, mType: '' })
+  async cancelMembership({ commit, rootGetters }, { groupID }) {
+    try {
+      const uid = rootGetters['user/username']
+      await this.$axios.post('api/groups/' + groupID + '/remove_member', {
+        uid,
+      })
+      commit('setMType', { groupID, mType: '' })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message: 'Kommunikationsfehler beim Verlassen der Gruppe: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
   },
 
   alertCancelMembershipRequest({ commit, getters }, { groupID }) {
@@ -265,9 +306,176 @@ export default {
       { root: true }
     )
   },
-  cancelMembershipRequest({ commit }, { groupID }) {
-    // API request to be implemented here
-    commit('setMType', { groupID, mType: '' })
+  async cancelMembershipRequest({ commit, rootGetters }, { groupID }) {
+    try {
+      const uid = rootGetters['user/username']
+      await this.$axios.post(
+        'api/groups/' + groupID + '/remove_pending_member',
+        { uid }
+      )
+      commit('setMType', { groupID, mType: '' })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message: 'Kommunikationsfehler beim Abbrechen der Anfrage: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
+  },
+
+  alertDeclineMembershipRequest({ commit, getters }, { uid, groupID }) {
+    const name = getters.allGroups
+      .find((group) => group.id === groupID)
+      .activePendingMembers.find((member) => member.uid === uid).name
+    const message =
+      name +
+      ' ist noch nicht Mitglied der Gruppe ' +
+      getters.allGroups.find((group) => group.id === groupID).name +
+      '. Willst du die Anfrage auf Mitgliedschaft wirklich ablehnen?'
+    commit(
+      'alertbox/showAlert',
+      {
+        title: 'Anfrage ablehnen',
+        message,
+        defaultToAction: false,
+        actionName: 'Anfrage ablehnen',
+        action: 'groups/declineMembershipRequest',
+        params: { uid, groupID },
+      },
+      { root: true }
+    )
+  },
+  async declineMembershipRequest({ commit }, { uid, groupID }) {
+    try {
+      await this.$axios.post(
+        'api/groups/' + groupID + '/remove_pending_member',
+        { uid }
+      )
+      commit('removeActivePendingMember', { uid, groupID })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message: 'Kommunikationsfehler beim Ablehnen der Anfrage: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
+  },
+
+  alertAddActivePending({ commit, getters }, { uid, groupID }) {
+    const name = getters.allGroups
+      .find((group) => group.id === groupID)
+      .activePendingMembers.find((member) => member.uid === uid).name
+    const message =
+      'Möchtest du ' +
+      name +
+      ' wirklich zu ' +
+      getters.allGroups.find((group) => group.id === groupID).name +
+      ' hinzufügen? Sie/er ist dann auf die Mailingliste der Gruppe eingetragen und hat Zugriff auf den Mattermost-Channel und den Nextcloud-Ordner der Gruppe. '
+    commit(
+      'alertbox/showAlert',
+      {
+        title: 'Mitglied hinzufügen',
+        message,
+        defaultToAction: true,
+        actionName: 'Hinzufügen',
+        action: 'groups/addActivePending',
+        params: { uid, groupID },
+      },
+      { root: true }
+    )
+  },
+  async addActivePending({ commit, getters }, { uid, groupID }) {
+    try {
+      const name = getters.allGroups
+        .find((group) => group.id === groupID)
+        .activePendingMembers.find((member) => member.uid === uid).name
+      const email = getters.allGroups
+        .find((group) => group.id === groupID)
+        .activePendingMembers.find((member) => member.uid === uid).email
+      const user = { name, email, uid }
+      await this.$axios.post(
+        'api/groups/' + groupID + '/accept_pending_member',
+        { uid }
+      )
+      commit('addMember', { user, groupID })
+      commit('removeActivePendingMember', { uid, groupID })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message:
+            'Kommunikationsfehler beim Hinzufügen des Mitglieds: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
+  },
+
+  alertAddInactivePending({ commit, getters }, { uid, groupID }) {
+    const name = getters.allGroups
+      .find((group) => group.id === groupID)
+      .inactivePendingMembers.find((member) => member.uid === uid).name
+    const message =
+      'Ist ' +
+      name +
+      ' wirklich ein neues Mitglied von ' +
+      getters.allGroups.find((group) => group.id === groupID).name +
+      '? Sie/er wird freigeschaltet und erhält dadurch Zugriff auf die SOG-Online-Tools.' +
+      ' Sie/er wird außerdem auf die Mailingliste der Gruppe eingetragen und erhält Zugriff auf den Mattermost-Channel und den Nextcloud-Ordner der Gruppe. '
+    commit(
+      'alertbox/showAlert',
+      {
+        title: 'Mitglied freischalten',
+        message,
+        defaultToAction: true,
+        actionName: 'Freischalten',
+        action: 'groups/addInactivePending',
+        params: { uid, groupID },
+      },
+      { root: true }
+    )
+  },
+  async addInactivePending({ commit, getters }, { uid, groupID }) {
+    try {
+      const name = getters.allGroups
+        .find((group) => group.id === groupID)
+        .inactivePendingMembers.find((member) => member.uid === uid).name
+      const email = getters.allGroups
+        .find((group) => group.id === groupID)
+        .inactivePendingMembers.find((member) => member.uid === uid).email
+      const user = { name, email, uid }
+      await this.$axios.post(
+        'api/groups/' + groupID + '/accept_pending_member',
+        { uid }
+      )
+      commit('addMember', { user, groupID })
+      commit('removeInactivePendingMember', { uid, groupID })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message:
+            'Kommunikationsfehler beim Freischalten des Mitglieds: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
   },
 
   alertAddGuest({ commit, getters }, { name, email, groupID }) {

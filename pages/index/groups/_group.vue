@@ -12,6 +12,103 @@
         class="bg-gray-light rounded mb-4 mt-4 sm:mt-0 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
       />
     </div>
+    <div v-if="thisGroup.membership === 'admin'">
+      <hr class="border-gray-light my-4" />
+      <h2 class="text-sogblue-light text-3xl mb-4">Anfragen</h2>
+      <div
+        v-if="
+          loading &&
+          !activePendingFiltered.length &&
+          !inactivePendingFiltered.length
+        "
+        class="text-gray"
+      >
+        Lade Anfragen ...
+      </div>
+      <div
+        v-else-if="
+          !activePendingFiltered.length &&
+          !inactivePendingFiltered.length &&
+          searchQuery === ''
+        "
+        class="text-gray"
+      >
+        Keine ausstehenden Anfragen.
+      </div>
+      <div
+        v-else-if="
+          !activePendingFiltered.length && !inactivePendingFiltered.length
+        "
+        class="text-gray"
+      >
+        Keine Anfragen gefunden.
+      </div>
+      <div v-else class="flex flex-wrap">
+        <div
+          v-for="pendingMember in activePendingFiltered"
+          :key="pendingMember.uid"
+          class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
+        >
+          <div
+            class="py-2 px-4 flex-grow border rounded-l border-r-0 border-gray"
+            :title="pendingMember.uid"
+          >
+            {{ pendingMember.name }}
+          </div>
+          <button
+            title="Mitglied hinzufügen"
+            class="border-t border-b border-gray-greenish"
+            @click="addActivePending(pendingMember.uid)"
+          >
+            <svg
+              class="text-white flex-none fill-current bg-gray-greenish w-10 p-3 cursor-pointer"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
+            </svg>
+          </button>
+          <button
+            title="Anfrage ablehnen"
+            class="border-t border-b border-gray-reddish rounded-r"
+            @click="declineActivePending(pendingMember.uid)"
+          >
+            <svg
+              class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-3 cursor-pointer"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M0 10h24v4h-24z" />
+            </svg>
+          </button>
+        </div>
+        <div
+          v-for="pendingMember in inactivePendingFiltered"
+          :key="pendingMember.uid"
+          class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
+        >
+          <div
+            class="py-2 px-4 flex-grow border rounded-l border-r-0 border-gray"
+            :title="pendingMember.uid"
+          >
+            {{ pendingMember.name }}
+          </div>
+          <button
+            title="Mitglied freischalten"
+            class="border-t border-b border-gray-greenish rounded-r"
+            @click="addInactivePending(pendingMember.uid)"
+          >
+            <svg
+              class="text-white flex-none fill-current bg-gray-greenish w-10 p-3 rounded-r cursor-pointer"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
     <hr class="border-gray-light my-4" />
     <h2 class="text-sogblue-light text-3xl mb-4">Koordinator:innen</h2>
     <div v-if="loading && !adminsFiltered.length" class="text-gray">
@@ -361,6 +458,20 @@ export default {
         ),
       ].sort(compareByName)
     },
+    activePendingFiltered() {
+      return [
+        ...this.thisGroup.activePendingMembers.filter((g) =>
+          g.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        ),
+      ].sort(compareByName)
+    },
+    inactivePendingFiltered() {
+      return [
+        ...this.thisGroup.inactivePendingMembers.filter((g) =>
+          g.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        ),
+      ].sort(compareByName)
+    },
     ...mapGetters({
       allUsers: 'users/all',
       loading: 'groups/loading',
@@ -413,6 +524,24 @@ export default {
         groupID: this.thisGroup.id,
       })
       this.closeAddUsers()
+    },
+    addActivePending(uid) {
+      this.$store.dispatch('groups/alertAddActivePending', {
+        uid,
+        groupID: this.thisGroup.id,
+      })
+    },
+    addInactivePending(uid) {
+      this.$store.dispatch('groups/alertAddInactivePending', {
+        uid,
+        groupID: this.thisGroup.id,
+      })
+    },
+    declineActivePending(uid) {
+      this.$store.dispatch('groups/alertDeclineMembershipRequest', {
+        uid,
+        groupID: this.thisGroup.id,
+      })
     },
     removeGuest(uid) {
       this.$store.dispatch('groups/alertRemoveGuest', {
