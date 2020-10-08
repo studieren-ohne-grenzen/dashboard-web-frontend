@@ -119,7 +119,7 @@ export default {
     },
     strategies: {
       redirect: {
-        home: '/',
+        home: '/profile',
       },
       watchLoggedIn: true,
       rewriteRedirects: false,
