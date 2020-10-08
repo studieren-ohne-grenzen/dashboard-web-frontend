@@ -3,7 +3,7 @@ export default {
     commit('startLoading')
     Promise.all([
       this.$axios.get('api/groups'),
-      this.$axios.get('api/mygroups'),
+      this.$axios.get('api/my_groups'),
     ])
       .then((responses) => {
         let groups = responses[0].data.map((g) => {
@@ -47,7 +47,7 @@ export default {
     commit('startLoading')
     Promise.all([
       this.$axios.get('api/groups'),
-      this.$axios.get('api/mygroups'),
+      this.$axios.get('api/my_groups'),
     ])
       .then((responses) => {
         let groups = responses[0].data.map((g) => {
@@ -129,7 +129,7 @@ export default {
     Promise.all([
       this.$axios.get('api/groups/' + groupID + '/owners'),
       this.$axios.get('api/groups/' + groupID + '/members'),
-      this.$axios.get('api/groups/' + groupID + '/pending_members'),
+      this.$axios.get('api/groups/' + groupID + '/active_pending_members'),
       this.$axios.get('api/groups/' + groupID + '/guests'),
       this.$axios.get('api/users'),
     ])
@@ -537,6 +537,9 @@ export default {
       commit('removeAdmin', { uid, groupID })
       const user = rootGetters['users/all'].find((u) => u.uid === uid)
       commit('addMember', { user, groupID })
+      if (uid === rootGetters['user/username']) {
+        commit('setMType', { groupID, mType: 'member' })
+      }
     } catch (error) {
       commit(
         'alertbox/showAlert',
