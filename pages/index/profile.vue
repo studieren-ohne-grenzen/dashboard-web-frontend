@@ -1,5 +1,54 @@
 <template>
   <div>
+    <div v-if="$store.getters['user/inactive']" class="sm:flex mb-8">
+      <h1
+        class="flex-none text-red-600 text-3xl mt-4 mb-2 sm:ml-2 w-40 sm:w-48 sm:mr-10"
+      >
+        Aktivierung
+      </h1>
+      <div class="text-red-600 sm:mt-4">
+        <div class="mb-4">
+          Dein SOG-Benutzerkonto wurde noch nicht aktiviert. Eine:r der
+          folgenden Koordinator:innen muss deine Mitgliedschaft im Verein und in
+          der Gruppe
+          {{ pendingGroupName }} erst noch bestätigen.
+        </div>
+        <div class="flex flex-wrap">
+          <div
+            v-for="admin in pendingGroupOwners"
+            :key="admin.uid"
+            class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
+          >
+            <div
+              class="flex-grow py-2 px-4 text-sogblue-dark border border-r-0 rounded-l border-gray"
+              :title="admin.mail"
+            >
+              {{ admin.cn }}
+            </div>
+            <a
+              :title="admin.mail"
+              class="border-t border-b border-sogblue-light rounded-r"
+              :href="'mailto:' + admin.mail"
+            >
+              <svg
+                class="text-white flex-none fill-current bg-sogblue-light w-10 p-2 rounded-r cursor-pointer"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr
+      v-if="$store.getters['user/inactive']"
+      style="clear: left;"
+      class="border-gray-light my-4"
+    />
     <div class="sm:flex mb-8">
       <div
         class="hidden sm:block sm:invisible flex-shrink-0 h-40 w-40 sm:h-48 sm:w-48 my-2 sm:m-2 mx-auto sm:mr-10 bg-gray rounded-full text-lightgrey text-center"
@@ -263,6 +312,8 @@ export default {
       sogMail: 'user/sogMail',
       altMail: 'user/altMail',
       altMailConfirmed: 'user/altMailConfirmed',
+      pendingGroupName: 'user/pendingGroupName',
+      pendingGroupOwners: 'user/pendingGroupOwners',
     }),
   },
   watch: {

@@ -13,6 +13,7 @@
       </div>
       <ul class="flex flex-grow">
         <li
+          v-if="!$store.getters['user/inactive']"
           class="ml-2 sm:ml-0"
           :class="
             this.$router.currentRoute.path === '/groups'
@@ -28,6 +29,7 @@
           </nuxt-link>
         </li>
         <li
+          v-if="!$store.getters['user/inactive']"
           class="ml-2 sm:ml-0"
           :class="
             this.$router.currentRoute.path === '/profile'

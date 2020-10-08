@@ -4,6 +4,9 @@ export const state = () => ({
   sogMail: '',
   altMail: '',
   altMailConfirmed: true,
+  inactive: false,
+  pendingGroupName: '',
+  pendingGroupOwners: [],
 })
 
 export const getters = {
@@ -12,6 +15,9 @@ export const getters = {
   sogMail: (state) => state.sogMail,
   altMail: (state) => state.altMail,
   altMailConfirmed: (state) => state.altMailConfirmed,
+  inactive: (state) => state.inactive,
+  pendingGroupName: (state) => state.pendingGroupName,
+  pendingGroupOwners: (state) => state.pendingGroupOwners,
 }
 
 export const actions = {
@@ -115,35 +121,46 @@ export const actions = {
       })
   },
 
-  async loadUserDetails({ commit, getters }) {
-    try {
-      const data = await this.$axios.$get('api/whoami')
-      if (getters.altMail !== '' && !getters.altMailConfirmed) {
-        commit('setUserDetails', {
-          name: data.cn,
-          username: data.uid,
-          sogMail: data.mail,
-        })
-      } else {
-        commit('setUserDetails', {
-          name: data.cn,
-          username: data.uid,
-          sogMail: data.mail,
-          altMail: data.mail_alternative,
-        })
-      }
-    } catch (errors) {
-      commit(
-        'alertbox/showAlert',
-        {
-          title: 'Kommunikationsfehler',
-          message: 'Kommunikationsfehler beim Laden der Nuterdaten: ' + errors,
-          showCancel: false,
-          defaultToAction: true,
-        },
-        { root: true }
-      )
-    }
+  loadUserDetails({ commit, getters }) {
+    Promise.all([
+      this.$axios.$get('api/inactive_info'),
+      this.$axios.$get('api/whoami'),
+    ])
+      .then((responses) => {
+        if (getters.altMail !== '' && !getters.altMailConfirmed) {
+          commit('setUserDetails', {
+            name: responses[1].cn,
+            username: responses[1].uid,
+            sogMail: responses[1].mail,
+            inactive: responses[0].inactive,
+            pendingGroupName: responses[0].pending_group_name,
+            pendingGroupOwners: responses[0].pending_group_owners,
+          })
+        } else {
+          commit('setUserDetails', {
+            name: responses[1].cn,
+            username: responses[1].uid,
+            sogMail: responses[1].mail,
+            altMail: responses[1].mail_alternative,
+            inactive: responses[0].inactive,
+            pendingGroupName: responses[0].pending_group_name,
+            pendingGroupOwners: responses[0].pending_group_owners,
+          })
+        }
+      })
+      .catch((errors) => {
+        commit(
+          'alertbox/showAlert',
+          {
+            title: 'Kommunikationsfehler',
+            message:
+              'Kommunikationsfehler beim Laden der Nutzerdaten: ' + errors,
+            showCancel: false,
+            defaultToAction: true,
+          },
+          { root: true }
+        )
+      })
   },
 }
 
@@ -155,5 +172,9 @@ export const mutations = {
     if (user.altMail) state.altMail = user.altMail
     if (user.altMailConfirmed !== undefined)
       state.altMailConfirmed = user.altMailConfirmed
+    if (user.inactive !== undefined) state.inactive = user.inactive
+    if (user.pendingGroupName) state.pendingGroupName = user.pendingGroupName
+    if (user.pendingGroupOwners)
+      state.pendingGroupOwners = user.pendingGroupOwners
   },
 }
