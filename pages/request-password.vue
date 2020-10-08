@@ -19,6 +19,7 @@
           Zurücksetzen des Passworts.
         </div>
         <button
+          @click="sendRequest"
           :disabled="!changeEmailSubmittable"
           :class="
             changeEmailSubmittable
@@ -79,6 +80,9 @@ export default {
         this.changeEmailSubmittable = true
         this.emailError = false
       }
+    },
+    sendRequest() {
+      console.log("hello world");
     },
   },
   head() {
