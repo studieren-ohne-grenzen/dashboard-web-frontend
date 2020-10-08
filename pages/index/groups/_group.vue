@@ -39,6 +39,7 @@
               : 'rounded-r'
           "
           class="py-2 px-4 flex-grow border rounded-l border-gray"
+          :title="admin.uid"
         >
           {{ admin.name }}
         </div>
@@ -69,7 +70,7 @@
           class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
           @click="openAddUsers"
         >
-          Mitglieder hinzufügen
+          Mitglied hinzufügen
         </button>
       </div>
       <div v-if="loading && !membersFiltered.length" class="text-gray">
@@ -92,6 +93,7 @@
         >
           <div
             class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+            :title="member.uid"
           >
             {{ member.name }}
           </div>
@@ -148,6 +150,7 @@
         >
           <div
             class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+            :title="user.uid"
           >
             {{ user.name }}
           </div>
@@ -175,7 +178,7 @@
           class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
           @click="openAddGuests"
         >
-          Gäste hinzufügen
+          Gast hinzufügen
         </button>
       </div>
       <div v-if="loading && !guestsFiltered.length" class="text-gray">
@@ -198,6 +201,7 @@
         >
           <div
             class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+            :title="guest.uid"
           >
             {{ guest.name }}
           </div>
