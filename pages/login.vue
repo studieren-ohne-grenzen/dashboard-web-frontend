@@ -3,7 +3,7 @@
     <img alt="Dashboard Logo" src="logo.png" class="mx-auto py-8 px-2 w-64" />
     <div class="bg-white max-w-md bg-white xs:mx-auto xs:rounded p-8">
       <div
-        v-else-if="wrongLogin"
+        v-if="wrongLogin"
         class="block p-2 mb-8 rounded border border-red-600 text-red-600"
       >
         Falsche Logindaten
