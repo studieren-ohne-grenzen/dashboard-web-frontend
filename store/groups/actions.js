@@ -95,9 +95,7 @@ export default {
     commit('startLoading')
     const groupID = getters.currentGroupID
     try {
-      const data = await this.$axios.$get(
-        'api/groups/owners?group_id=' + groupID
-      )
+      const data = await this.$axios.$get('api/groups/' + groupID + '/owners')
       const admins = data.map((u) => {
         return {
           name: u.cn,
@@ -129,10 +127,10 @@ export default {
     commit('startLoading')
     const groupID = getters.currentGroupID
     Promise.all([
-      this.$axios.get('api/groups/owners?group_id=' + groupID),
-      this.$axios.get('api/groups/members?group_id=' + groupID),
-      this.$axios.get('api/groups/pending_members?group_id=' + groupID),
-      this.$axios.get('api/groups/guests?group_id=' + groupID),
+      this.$axios.get('api/groups/' + groupID + '/owners'),
+      this.$axios.get('api/groups/' + groupID + '/members'),
+      this.$axios.get('api/groups/' + groupID + '/pending_members'),
+      this.$axios.get('api/groups/' + groupID + '/guests'),
       this.$axios.get('api/users'),
     ])
       .then((responses) => {
@@ -295,8 +293,7 @@ export default {
   },
   async addGuest({ commit }, { name, email, groupID }) {
     try {
-      await this.$axios.post('/groups/add_guest', {
-        group_id: groupID,
+      await this.$axios.post('api/groups/' + groupID + '/add_guest', {
         name,
         mail: email,
       })
@@ -337,9 +334,25 @@ export default {
       { root: true }
     )
   },
-  removeGuest({ commit }, { uid, groupID }) {
-    // API request to be implemented here
-    commit('removeGuest', { uid, groupID })
+  async removeGuest({ commit }, { uid, groupID }) {
+    try {
+      await this.$axios.post('api/groups/' + groupID + '/remove_member', {
+        uid,
+      })
+      commit('removeGuest', { uid, groupID })
+    } catch (error) {
+      commit(
+        'alertbox/showAlert',
+        {
+          title: 'Kommunikationsfehler',
+          message:
+            'Kommunikationsfehler beim Entfernen des Mitglieds: ' + error,
+          showCancel: false,
+          defaultToAction: true,
+        },
+        { root: true }
+      )
+    }
   },
 
   alertRemoveMember({ commit, getters }, { uid, groupID }) {
@@ -367,8 +380,7 @@ export default {
   },
   async removeMember({ commit }, { uid, groupID }) {
     try {
-      await this.$axios.post('/groups/remove_member', {
-        group_id: groupID,
+      await this.$axios.post('api/groups/' + groupID + '/remove_member', {
         uid,
       })
       commit('removeMember', { uid, groupID })
@@ -390,7 +402,7 @@ export default {
   async addMember({ commit, rootGetters }, { uid, groupID }) {
     const user = rootGetters['users/all'].find((u) => u.uid === uid)
     try {
-      await this.$axios.post('/groups/add_member', { group_id: groupID, uid })
+      await this.$axios.post('api/groups/' + groupID + '/add_member', { uid })
       commit('addMember', { user, groupID })
     } catch (error) {
       commit(
@@ -432,7 +444,7 @@ export default {
   },
   async makeAdmin({ commit, rootGetters }, { uid, groupID }) {
     try {
-      await this.$axios.post('/groups/add_owner', { group_id: groupID, uid })
+      await this.$axios.post('api/groups/' + groupID + '/add_owner', { uid })
       commit('removeMember', { uid, groupID })
       const user = rootGetters['users/all'].find((u) => u.uid === uid)
       commit('addAdmin', { user, groupID })
@@ -521,7 +533,7 @@ export default {
   },
   async revokeAdmin({ commit, rootGetters }, { uid, groupID }) {
     try {
-      await this.$axios.post('/groups/remove_owner', { group_id: groupID, uid })
+      await this.$axios.post('api/groups/' + groupID + '/remove_owner', { uid })
       commit('removeAdmin', { uid, groupID })
       const user = rootGetters['users/all'].find((u) => u.uid === uid)
       commit('addMember', { user, groupID })
