@@ -114,7 +114,7 @@ export default {
     cookie: {
       prefix: 'auth.',
       options: {
-        maxAge: 57600,
+        maxAge: 43200,
       },
     },
     strategies: {
