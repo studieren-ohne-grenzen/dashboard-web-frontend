@@ -50,7 +50,7 @@ export const actions = {
   },
   async changeAltMail({ commit }, altMail) {
     try {
-      await this.$axios.post('api/users/confirm_email', {
+      await this.$axios.post('api/users/set_alternative_mail', {
         alternative_mail: altMail,
       })
       commit('setUserDetails', { altMail, altMailConfirmed: false })
