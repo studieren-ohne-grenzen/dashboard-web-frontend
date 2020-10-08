@@ -1,5 +1,5 @@
 export default {
-  loadGroups({ commit }) {
+  loadGroups({ commit, getters }) {
     commit('startLoading')
     Promise.all([
       this.$axios.get('api/groups'),
@@ -27,6 +27,77 @@ export default {
         }
         commit('updateGroups', groups)
         commit('stopLoading')
+        const adminGroups = getters.adminGroups
+        const requests = []
+        if (adminGroups.length > 0) {
+          for (const i in adminGroups) {
+            requests.push(
+              this.$axios.get(
+                'api/groups/' + adminGroups[i].id + '/active_pending_members'
+              )
+            )
+            requests.push(
+              this.$axios.get(
+                'api/groups/' + adminGroups[i].id + '/inactive_pending_members'
+              )
+            )
+          }
+          Promise.all(requests)
+            .then((responses) => {
+              const membershipRequests = {}
+              for (const i in responses) {
+                if (responses[i].data.length) {
+                  const id = adminGroups[Math.floor(i / 2)].id
+                  const pendingMembers = responses[i].data.map((p) => {
+                    return {
+                      name: p.cn,
+                      email: p.mail,
+                      uid: p.uid,
+                    }
+                  })
+                  if (id in membershipRequests) {
+                    membershipRequests[id] += pendingMembers.length
+                  } else {
+                    membershipRequests[id] = pendingMembers.length
+                  }
+                  if (i % 2 === 0)
+                    commit('groupSetUsers', {
+                      groupID: id,
+                      activePendingMembers: pendingMembers,
+                    })
+                  else {
+                    commit('groupSetUsers', {
+                      groupID: id,
+                      inactivePendingMembers: pendingMembers,
+                    })
+                  }
+                }
+              }
+              const groupsWithRequests = []
+              for (const id in membershipRequests) {
+                groupsWithRequests.push({
+                  id,
+                  count: membershipRequests[id],
+                  name: adminGroups.find((group) => group.id === id).name,
+                })
+              }
+              commit('setRequests', groupsWithRequests)
+            })
+            .catch((errors) => {
+              const message =
+                'Fehler beim Laden der offenen Anfragen: \n' + errors
+              commit(
+                'alertbox/showAlert',
+                {
+                  title: 'Fehler',
+                  message,
+                  defaultToAction: false,
+                  showCancel: false,
+                },
+                { root: true }
+              )
+            })
+        }
       })
       .catch((errors) => {
         const message = 'Fehler beim Laden der Gruppen: \n' + errors

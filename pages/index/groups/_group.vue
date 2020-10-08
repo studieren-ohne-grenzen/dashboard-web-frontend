@@ -460,15 +460,15 @@ export default {
     },
     activePendingFiltered() {
       return [
-        ...this.thisGroup.activePendingMembers.filter((g) =>
-          g.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        ...this.thisGroup.activePendingMembers.filter((p) =>
+          p.name.toLowerCase().includes(this.searchQuery.toLowerCase())
         ),
       ].sort(compareByName)
     },
     inactivePendingFiltered() {
       return [
-        ...this.thisGroup.inactivePendingMembers.filter((g) =>
-          g.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        ...this.thisGroup.inactivePendingMembers.filter((p) =>
+          p.name.toLowerCase().includes(this.searchQuery.toLowerCase())
         ),
       ].sort(compareByName)
     },

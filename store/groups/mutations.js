@@ -34,11 +34,12 @@ export default {
     }
   ) {
     const group = state.groupList.find((group) => group.id === groupID)
-    group.admins = admins
-    group.members = members
-    group.guests = guests
-    group.activePendingMembers = activePendingMembers
-    group.inactivePendingMembers = inactivePendingMembers
+    if (admins) group.admins = admins
+    if (members) group.members = members
+    if (guests) group.guests = guests
+    if (activePendingMembers) group.activePendingMembers = activePendingMembers
+    if (inactivePendingMembers)
+      group.inactivePendingMembers = inactivePendingMembers
   },
   setMType(state, { groupID, mType }) {
     state.groupList.find((group) => group.id === groupID).membership = mType
@@ -91,5 +92,8 @@ export default {
     ).inactivePendingMembers = state.groupList
       .find((group) => group.id === groupID)
       .inactivePendingMembers.filter((g) => g.uid !== uid)
+  },
+  setRequests(state, requests) {
+    state.requests = requests
   },
 }
