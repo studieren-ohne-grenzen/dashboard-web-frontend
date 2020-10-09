@@ -85,9 +85,6 @@ export default {
     cancelMembership(groupID) {
       this.$store.dispatch('groups/alertCancelMembership', { groupID })
     },
-    administrate(groupID) {
-      // ToDo: change route
-    },
   },
 }
 </script>

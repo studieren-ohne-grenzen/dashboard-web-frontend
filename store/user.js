@@ -23,7 +23,6 @@ export const getters = {
 export const actions = {
   async signOut(_) {
     await this.$auth.logout()
-    location.reload()
   },
 
   alertChangeAltMail({ commit, getters }, altMail) {

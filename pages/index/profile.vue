@@ -277,7 +277,6 @@ export default {
     },
   },
   fetch() {
-    // Jetzt Download der Nutzderdaten
     this.$store.dispatch('user/loadUserDetails')
   },
   fetchOnServer: false,
