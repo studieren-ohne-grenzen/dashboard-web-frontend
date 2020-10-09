@@ -53,7 +53,9 @@ export default {
     confirmAction() {
       const action = this.$store.getters['alertbox/action']
       const params = this.$store.getters['alertbox/params']
-      if (!(action === '')) {
+      if (this.$store.getters['alertbox/actionIsRedirect'])
+        this.$router.push(this.$store.getters['alertbox/action'])
+      else if (action !== '') {
         this.$store.dispatch(action, params)
       }
       this.$store.commit('alertbox/hideAlert')

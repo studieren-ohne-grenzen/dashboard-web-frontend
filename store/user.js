@@ -70,44 +70,43 @@ export const actions = {
     }
   },
 
-  alertRequestPassword({ commit }, altMail) {
-    console.log('hi')
-    const message =
-      'Wir senden dir einen Link an ' +
-      altMail +
-      '. Folge dem Link, um ein neues Passwort zu vergeben.'
-    commit(
-      'alertbox/showAlert',
-      {
-        title: 'Passwort zurücksetzen',
-        message,
-        defaultToAction: true,
-        actionName: 'Zurücksetzen',
-        action: 'user/requestPassword',
-        params: altMail,
-      },
-      { root: true }
-    )
-  },
-  async requestPassword({ commit }, altMail) {
-    try {
-      await this.$axios.post('api/users/reset_password', {
+  requestPassword({ commit }, altMail) {
+    this.$axios
+      .post('api/users/reset_password', {
         alternative_mail: altMail,
       })
-      commit('setUserDetails', { altMail, altMailConfirmed: false })
-    } catch (error) {
-      commit(
-        'alertbox/showAlert',
-        {
-          title: 'Kommunikationsfehler',
-          message:
-            'Kommunikationsfehler beim Zurücksetzen des Passworts: ' + error,
-          showCancel: false,
-          defaultToAction: true,
-        },
-        { root: true }
+      .then(
+        commit(
+          'alertbox/showAlert',
+          {
+            title: 'Passwort zurückgesetzt',
+            message:
+              'Wir haben dir einen Link an ' +
+              altMail +
+              ' gesendet. Folge dem Link, um ein neues Passwort zu vergeben.',
+            defaultToAction: true,
+            actionName: 'Zurück zum Login',
+            action: '/login',
+            params: altMail,
+            actionIsRedirect: true,
+            showCancel: false,
+          },
+          { root: true }
+        )
       )
-    }
+      .catch((error) => {
+        commit(
+          'alertbox/showAlert',
+          {
+            title: 'Kommunikationsfehler',
+            message:
+              'Kommunikationsfehler beim Zurücksetzen des Passworts: ' + error,
+            showCancel: false,
+            defaultToAction: true,
+          },
+          { root: true }
+        )
+      })
   },
 
   changePasswordWithOld({ commit }, { oldPassword, newPassword }) {

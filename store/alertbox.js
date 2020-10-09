@@ -9,6 +9,7 @@ export const state = () => ({
     cancelName: 'Abbrechen',
     action: '',
     params: {},
+    actionIsRedirect: false,
   },
 })
 
@@ -22,6 +23,7 @@ export const getters = {
   cancelName: (state) => state.alert.cancelName,
   action: (state) => state.alert.action,
   params: (state) => state.alert.params,
+  actionIsRedirect: (state) => state.alert.actionIsRedirect,
 }
 
 export const mutations = {
@@ -41,6 +43,9 @@ export const mutations = {
     state.alert.cancelName = options.cancelName || 'Abbrechen'
     state.alert.action = options.action || ''
     state.alert.params = options.params || {}
+    if (options.actionIsRedirect !== undefined)
+      state.alert.actionIsRedirect = options.actionIsRedirect
+    else state.alert.actionIsRedirect = false
     state.alert.active = true
   },
 }

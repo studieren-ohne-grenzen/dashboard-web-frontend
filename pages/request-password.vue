@@ -82,7 +82,7 @@ export default {
       }
     },
     sendRequest() {
-      this.$store.dispatch('user/alertRequestPassword', this.mail)
+      this.$store.dispatch('user/requestPassword', this.mail)
     },
   },
   head() {
