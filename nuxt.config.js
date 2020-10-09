@@ -101,7 +101,7 @@ export default {
    */
   proxy: {
     '/api': {
-      target: 'https://vogelnest.de-staging.esf-international.org/', // Login Server goes here
+      target: 'https://vogelnest-api.de-staging.esf-international.org/', // Login Server goes here
       pathRewrite: {
         '^/api': '/',
       },
