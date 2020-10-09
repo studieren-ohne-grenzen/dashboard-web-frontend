@@ -1,5 +1,5 @@
 <template>
-  <form @keydown.enter="resetPassword">
+  <form @submit.prevent="resetPassword">
     <label class="block text-sogblue-dark mb-1">Neues Passwort</label>
     <input
       v-model="newPassword1"
@@ -29,7 +29,6 @@
           : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
       "
       class="rounded py-2 px-4 text-white"
-      @click="resetPassword"
     >
       {{ confirmText }}
     </button>
@@ -46,6 +45,10 @@ export default {
       type: String,
       default: 'Passwort ändern',
     },
+    action: {
+      type: String,
+      default: 'user/changePasswordWithKey',
+    },
   },
   data() {
     return {
@@ -53,6 +56,7 @@ export default {
       newPassword2: '',
       changePwdSubmittable: false,
       pwdError: '',
+      key: this.$route.query.key,
     }
   },
   watch: {
@@ -64,7 +68,12 @@ export default {
     },
   },
   methods: {
-    resetPassword() {},
+    resetPassword() {
+      this.$store.dispatch(this.action, {
+        newPassword: this.newPassword2,
+        key: this.key,
+      })
+    },
     validatePasswords() {
       const zxcvbnResult = zxcvbn(this.newPassword2)
       this.changePwdSubmittable = false

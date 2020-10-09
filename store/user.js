@@ -87,7 +87,6 @@ export const actions = {
             defaultToAction: true,
             actionName: 'Zurück zum Login',
             action: '/login',
-            params: altMail,
             actionIsRedirect: true,
             showCancel: false,
           },
@@ -101,6 +100,41 @@ export const actions = {
             title: 'Kommunikationsfehler',
             message:
               'Kommunikationsfehler beim Zurücksetzen des Passworts: ' + error,
+            showCancel: false,
+            defaultToAction: true,
+          },
+          { root: true }
+        )
+      })
+  },
+
+  changePasswordWithKey({ commit }, { key, newPassword }) {
+    this.$axios
+      .post('api/users/set_password_with_key', {
+        key,
+        new_password: newPassword,
+      })
+      .then(
+        commit(
+          'alertbox/showAlert',
+          {
+            title: 'Passwort geändert',
+            message: 'Dein Passwort wurde erfolgreich geändert.',
+            defaultToAction: true,
+            actionName: 'Zum Login',
+            action: '/login',
+            actionIsRedirect: true,
+            showCancel: false,
+          },
+          { root: true }
+        )
+      )
+      .catch((error) => {
+        commit(
+          'alertbox/showAlert',
+          {
+            title: 'Kommunikationsfehler',
+            message: 'Kommunikationsfehler beim Ändern des Passworts: ' + error,
             showCancel: false,
             defaultToAction: true,
           },
