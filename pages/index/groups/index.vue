@@ -34,7 +34,7 @@
         </nuxt-link>
         <div
           class="bg-red-600 rounded-full w-6 h-6 text-center text-white absolute leading-6"
-          style="top: -6px; right: -6px;"
+          style="top: -6px; right: -6px"
         >
           {{ request.count }}
         </div>

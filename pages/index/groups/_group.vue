@@ -332,9 +332,7 @@
       <form class="sm:flex flex-wrap w-full items-end">
         <div class="sm:flex flex-grow sm:mx-2">
           <div class="flex-grow flex-1 sm:min-w-56">
-            <label class="block text-sogblue-dark mb-1">
-              Name
-            </label>
+            <label class="block text-sogblue-dark mb-1">Name</label>
             <input
               v-model="guestName"
               type="text"
@@ -346,9 +344,7 @@
             />
           </div>
           <div class="sm:ml-4 flex-grow flex-1 sm:min-w-56">
-            <label class="block text-sogblue-dark mb-1">
-              Email-Adresse
-            </label>
+            <label class="block text-sogblue-dark mb-1">Email-Adresse</label>
             <input
               v-model="guestEmail"
               type="text"
@@ -395,20 +391,6 @@ export default {
   validate({ params }) {
     return true
   },
-  fetch() {
-    this.$store.commit(
-      'groups/setCurrentGroupID',
-      decodeURIComponent(this.$route.params.group)
-    )
-    if (this.thisGroup.membership === 'admin')
-      this.$store.dispatch('groups/loadGroupAsAdmin')
-    else if (this.thisGroup.id === '') {
-      this.$store.dispatch('groups/loadGroupAsUnknown')
-    } else {
-      this.$store.dispatch('groups/loadGroupDetails')
-    }
-  },
-  fetchOnServer: false,
   data() {
     return {
       addUsersActive: false,
@@ -498,6 +480,19 @@ export default {
     guestEmail() {
       this.validateGuest()
     },
+  },
+  mounted() {
+    this.$store.commit(
+      'groups/setCurrentGroupID',
+      decodeURIComponent(this.$route.params.group)
+    )
+    if (this.thisGroup.membership === 'admin')
+      this.$store.dispatch('groups/loadGroupAsAdmin')
+    else if (this.thisGroup.id === '') {
+      this.$store.dispatch('groups/loadGroupAsUnknown')
+    } else {
+      this.$store.dispatch('groups/loadGroupDetails')
+    }
   },
   methods: {
     revokeAdmin(uid) {
