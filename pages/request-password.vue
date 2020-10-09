@@ -2,7 +2,7 @@
   <div class="w-screen min-h-screen h-full pt-4 lg:pt-32">
     <img alt="Dashboard Logo" src="logo.png" class="mx-auto py-8 px-2 w-64" />
     <div class="bg-white max-w-md bg-white xs:mx-auto xs:rounded p-8">
-      <form @keydown.enter="login">
+      <form @submit.prevent="sendRequest">
         <label class="block text-sogblue-dark mb-1">Alternative Mail</label>
         <input
           ref="mail"
@@ -14,12 +14,7 @@
         <div v-if="emailError" class="flex-grow w-full text-red-600 mb-4">
           Keine gültige Mailadresse eingegeben.
         </div>
-        <div class="text-gray mb-4">
-          Wir senden dir an deine alternative Mail-Adresse einen Link zum
-          Zurücksetzen des Passworts.
-        </div>
         <button
-          @click="sendRequest"
           :disabled="!changeEmailSubmittable"
           :class="
             changeEmailSubmittable
@@ -40,13 +35,18 @@
         </div>
       </form>
     </div>
+    <AlertBox />
   </div>
 </template>
 
 <script>
 import validate from '~/components/validateEmails'
+import AlertBox from '~/components/alertbox'
 
 export default {
+  components: {
+    AlertBox,
+  },
   directives: {
     focus: {
       inserted: (el) => {
@@ -82,7 +82,7 @@ export default {
       }
     },
     sendRequest() {
-      console.log("hello world");
+      this.$store.dispatch('user/alertRequestPassword', this.mail)
     },
   },
   head() {

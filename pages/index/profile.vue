@@ -46,7 +46,7 @@
     </div>
     <hr
       v-if="$store.getters['user/inactive']"
-      style="clear: left;"
+      style="clear: left"
       class="border-gray-light my-4"
     />
     <div class="sm:flex mb-8">
@@ -54,17 +54,13 @@
         class="hidden sm:block sm:invisible flex-shrink-0 h-40 w-40 sm:h-48 sm:w-48 my-2 sm:m-2 mx-auto sm:mr-10 bg-gray rounded-full text-lightgrey text-center"
       ></div>
       <div class="self-center flex-grow">
-        <div class="block text-sogblue-dark mb-1">
-          Name
-        </div>
+        <div class="block text-sogblue-dark mb-1">Name</div>
         <div
           class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
         >
           {{ name }}
         </div>
-        <div class="block text-sogblue-dark mb-1">
-          Benutzername
-        </div>
+        <div class="block text-sogblue-dark mb-1">Benutzername</div>
         <div
           class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
         >
@@ -111,9 +107,7 @@
         </div>
         <div class="sm:flex flex-grow">
           <div class="flex-grow sm:mx-2 sm:min-w-56">
-            <label class="block text-sogblue-dark mb-1">
-              Neues Passwort
-            </label>
+            <label class="block text-sogblue-dark mb-1"> Neues Passwort </label>
             <input
               v-model="newPassword1"
               type="password"
@@ -169,7 +163,7 @@
         </div>
       </form>
     </div>
-    <div style="clear: left;" class="mt-8">
+    <div style="clear: left" class="mt-8">
       <hr class="border-gray-light my-4" />
       <h1
         class="text-sogblue-light text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
@@ -178,9 +172,7 @@
       </h1>
       <div class="flex flex-wrap sm:mt-8">
         <div class="flex-grow">
-          <div class="text-sogblue-dark mb-1">
-            SOG-Mailadresse
-          </div>
+          <div class="text-sogblue-dark mb-1">SOG-Mailadresse</div>
           <div
             class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
           >
