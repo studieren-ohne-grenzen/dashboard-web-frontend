@@ -90,7 +90,11 @@
       >
         Passwort ändern
       </button>
-      <form v-if="changePwd" class="sm:flex w-full flex-wrap items-end">
+      <form
+        v-if="changePwd"
+        class="sm:flex w-full flex-wrap items-end"
+        @submit.prevent="changePassword"
+      >
         <div class="flex-grow sm:max-w-md sm:mx-2 sm:min-w-56">
           <label class="block text-sogblue-dark mb-1">
             Aktuelles Passwort
@@ -138,7 +142,7 @@
         </div>
         <div class="flex-grow-0 flex-shrink-0 sm:mx-2">
           <button
-            type="button"
+            type="submit"
             class="rounded py-2 px-4 mb-4 text-white"
             :disabled="!changePwdSubmittable"
             :class="
@@ -146,12 +150,11 @@
                 ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker'
                 : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
             "
-            @click="changePassword"
           >
             Ändern
           </button>
           <button
-            type="button"
+            type="reset"
             class="rounded py-2 px-4 ml-2 bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white"
             @click="untogglePwd"
           >
@@ -212,7 +215,11 @@
           </button>
         </div>
       </div>
-      <form v-if="changeMail" class="sm:flex flex-wrap w-full items-end">
+      <form
+        v-if="changeMail"
+        class="sm:flex flex-wrap w-full items-end"
+        @submit.prevent="changeEmail"
+      >
         <div class="sm:flex flex-grow sm:mx-2">
           <div class="flex-grow flex-1 sm:min-w-56">
             <label class="block text-sogblue-dark mb-1">
@@ -235,7 +242,7 @@
         </div>
         <div class="flex-grow-0 flex-shrink-0 sm:mx-2">
           <button
-            type="button"
+            type="submit"
             :disabled="!changeEmailSubmittable"
             :class="
               changeEmailSubmittable
@@ -243,12 +250,11 @@
                 : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
             "
             class="rounded py-2 px-4 mb-4 text-white"
-            @click="changeEmail"
           >
             Ändern
           </button>
           <button
-            type="button"
+            type="reset"
             class="rounded py-2 px-4 ml-2 bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white"
             @click="untoggleMail"
           >

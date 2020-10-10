@@ -27,13 +27,10 @@ export const actions = {
 
   alertChangeAltMail({ commit, getters }, altMail) {
     const message =
-      'Deine alternative Emailadresse wird von ' +
-      getters.altMail +
-      ' geändert zu ' +
+      'Um deine alternative Mailadresse zu ändern, öffne den Link,' +
+      ' den wir dir an deine neue alternative Mailadresse (' +
       altMail +
-      '. Du bekommst zur Bestätigung eine Mail an ' +
-      altMail +
-      ' zugeschickt.'
+      ') geschickt haben.'
     commit(
       'alertbox/showAlert',
       {
