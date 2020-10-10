@@ -6,7 +6,7 @@ export default {
   head: {
     title: '', // process.env.npm_package_name
     titleTemplate: (title) => {
-      return title ? title + ' - SOG Dashboard' : 'SOG Dashboard'
+      return title ? title + ' - SOG Vogelnest' : 'SOG Vogelnest'
     },
     meta: [
       { charset: 'utf-8' },

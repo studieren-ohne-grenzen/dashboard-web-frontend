@@ -1,7 +1,7 @@
 {
-  "name": "dashboard",
+  "name": "vogelnest",
   "version": "1.0.0",
-  "description": "V2.0 of Studieren Ohne Grenzen Dashboard Web Frontend",
+  "description": "Studieren Ohne Grenzen Benutzer- & Gruppenverwaltung",
   "author": "SOG IT",
   "private": true,
   "scripts": {
