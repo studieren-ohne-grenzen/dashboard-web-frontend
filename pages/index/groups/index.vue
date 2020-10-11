@@ -2,10 +2,14 @@
   <div>
     <h1
       v-if="this.$store.getters['groups/requests'].length"
-      class="mb-4 text-sogblue-light text-3xl"
+      class="text-sogblue-light text-3xl"
     >
       Anfragen an mich
     </h1>
+    <div class="text-gray mb-4">
+      In den folgenden von dir koordinierten Gruppen möchten Mitglieder
+      beitreten:
+    </div>
     <div class="flex flex-wrap">
       <div
         v-for="request in this.$store.getters['groups/requests']"

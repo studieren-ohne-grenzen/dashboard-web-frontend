@@ -14,7 +14,10 @@
     </div>
     <div v-if="thisGroup.membership === 'admin'">
       <hr class="border-gray-light my-4" />
-      <h2 class="text-sogblue-light text-3xl mb-4">Anfragen</h2>
+      <h2 class="text-sogblue-light text-3xl">Anfragen</h2>
+      <div class="text-gray mb-4">
+        Die folgenden Mitglieder möchten der Gruppe beitreten.
+      </div>
       <div
         v-if="
           loading &&
@@ -110,7 +113,16 @@
       </div>
     </div>
     <hr class="border-gray-light my-4" />
-    <h2 class="text-sogblue-light text-3xl mb-4">Koordinator:innen</h2>
+    <h2 class="text-sogblue-light text-3xl">Koordinator:innen</h2>
+    <div v-if="thisGroup.membership === 'admin'" class="text-gray mb-4">
+      Koordinator:innen können Mitglieder hinzufügen, entfernen und andere
+      Koordinator:innen ernennen.
+    </div>
+    <div v-else class="text-gray mb-4">
+      Diese Koordinator:innen verwalten {{ thisGroup.name }}. Sie müssen dich
+      als Mitglied freischalten, nachdem du eine Mitgliedschafts-Anfrage
+      gestellt hast.
+    </div>
     <div v-if="loading && !adminsFiltered.length" class="text-gray">
       Lade Koordinator:innen ...
     </div>
@@ -161,14 +173,18 @@
     </div>
     <div v-if="thisGroup.membership === 'admin' && !addUsersActive">
       <hr class="border-gray-light my-4" />
-      <div class="w-full flex flex-wrap justify-between mb-4 items-center">
-        <h2 class="text-sogblue-light text-3xl mb-2">Mitglieder</h2>
+      <div class="w-full flex flex-wrap justify-between items-center">
+        <h2 class="text-sogblue-light text-3xl mb-1">Mitglieder</h2>
         <button
-          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
+          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker mb-1"
           @click="openAddUsers"
         >
           Mitglied hinzufügen
         </button>
+      </div>
+      <div class="text-gray mb-4">
+        Mitglieder haben Zugriff auf den Mattermost-Channel und den
+        Nextcloud-Ordner und stehen auf der Mailing-Liste der Gruppe.
       </div>
       <div v-if="loading && !membersFiltered.length" class="text-gray">
         Lade Mitglieder ...
@@ -269,14 +285,19 @@
     </div>
     <div v-if="thisGroup.membership === 'admin' && !addGuestsActive">
       <hr class="border-gray-light my-4" />
-      <div class="w-full flex flex-wrap justify-between mb-4 items-center">
-        <h2 class="text-sogblue-light text-3xl mb-2">Gäste</h2>
+      <div class="w-full flex flex-wrap justify-between items-center">
+        <h2 class="text-sogblue-light text-3xl mb-1">Gäste</h2>
         <button
-          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
+          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker mb-1"
           @click="openAddGuests"
         >
           Gast hinzufügen
         </button>
+      </div>
+      <div class="text-gray mb-4">
+        Gäste sind Nicht-Vereinsmitglieder und haben keinen Zugriff auf die
+        SOG-Tools. Sie sind aber auf der Mailing-Liste dieser Gruppe
+        eingetragen.
       </div>
       <div v-if="loading && !guestsFiltered.length" class="text-gray">
         Lade Gäste ...
