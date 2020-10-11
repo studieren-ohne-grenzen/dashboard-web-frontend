@@ -4,7 +4,7 @@
       v-if="this.$store.getters['groups/requests'].length"
       class="mb-4 text-sogblue-light text-3xl"
     >
-      Neue Anfragen
+      Anfragen an mich
     </h1>
     <div class="flex flex-wrap">
       <div
@@ -49,21 +49,28 @@
         class="mb-4 xs:mr-4 flex-grow xs:flex-grow-0 w-auto inline-flex border border-sogblue rounded"
       >
         <button
-          class="px-4 py-2 flex-grow border-r border-sogblue leading-tight"
+          class="px-1 xs:px-4 py-2 flex-grow border-r border-sogblue leading-tight text-sm xs:text-base"
           :class="typeSelected === 'all' ? 'groupactive' : 'groupinactive'"
           @click="changeTypeSelected('all')"
         >
           Alle Gruppen
         </button>
         <button
-          class="px-4 py-2 flex-grow border-r border-sogblue leading-tight"
+          class="px-1 xs:px-4 py-2 flex-grow border-r border-sogblue leading-tight text-sm xs:text-base"
           :class="typeSelected === 'personal' ? 'groupactive' : 'groupinactive'"
           @click="changeTypeSelected('personal')"
         >
           Meine Gruppen
         </button>
         <button
-          class="px-4 py-2 flex-grow"
+          class="px-1 xs:px-4 py-2 flex-grow border-r border-sogblue leading-tight text-sm xs:text-base"
+          :class="typeSelected === 'requests' ? 'groupactive' : 'groupinactive'"
+          @click="changeTypeSelected('requests')"
+        >
+          Meine Anfragen
+        </button>
+        <button
+          class="px-1 xs:px-4 py-2 flex-grow text-sm xs:text-base"
           :class="typeSelected === 'admin' ? 'groupactive' : 'groupinactive'"
           @click="changeTypeSelected('admin')"
         >
@@ -93,6 +100,15 @@
       class="text-gray"
     >
       Du bist noch nicht Mitglied in einer Gruppe.
+    </div>
+    <div
+      v-else-if="
+        groupsSelected && !groupsSelected.length && typeSelected === 'requests'
+      "
+      class="text-gray"
+    >
+      Es gibt keine offenen Gruppenmitgliedschafts-Anfragen, die du gestellt
+      hast.
     </div>
     <div
       v-else-if="
@@ -151,6 +167,8 @@ export default {
         return this.$store.getters['groups/adminGroups']
       if (this.typeSelected === 'all')
         return this.$store.getters['groups/allGroups']
+      if (this.typeSelected === 'requests')
+        return this.$store.getters['groups/myRequestedGroups']
       if (this.typeSelected === 'search')
         return this.$store.getters['groups/allGroups'].filter((group) =>
           group.name.toLowerCase().includes(this.searchQuery.toLowerCase())

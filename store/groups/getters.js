@@ -59,6 +59,11 @@ export default {
       compareByName
     ),
 
+  myRequestedGroups: (state) =>
+    [...state.groupList.filter((group) => group.membership === 'pending')].sort(
+      compareByName
+    ),
+
   adminGroups: (state) =>
     [...state.groupList.filter((group) => group.membership === 'admin')].sort(
       compareByName
