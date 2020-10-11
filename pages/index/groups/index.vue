@@ -6,11 +6,17 @@
     >
       Anfragen an mich
     </h1>
-    <div class="text-gray mb-4">
+    <div
+      v-if="this.$store.getters['groups/requests'].length"
+      class="text-gray mb-4"
+    >
       In den folgenden von dir koordinierten Gruppen möchten Mitglieder
       beitreten:
     </div>
-    <div class="flex flex-wrap">
+    <div
+      v-if="this.$store.getters['groups/requests'].length"
+      class="flex flex-wrap"
+    >
       <div
         v-for="request in this.$store.getters['groups/requests']"
         :key="request.id"
