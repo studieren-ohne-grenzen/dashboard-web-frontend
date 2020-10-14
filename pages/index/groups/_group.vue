@@ -11,6 +11,27 @@
         placeholder="Mitglieder suchen"
         class="bg-gray-light rounded mb-4 mt-4 sm:mt-0 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
       />
+      <button
+        v-if="thisGroup.membership === 'member'"
+        class="text-white bg-gray-reddish rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0"
+        @click="cancelMembership(thisGroup.id)"
+      >
+        Gruppe verlassen
+      </button>
+      <button
+        v-else-if="thisGroup.membership === 'pending'"
+        class="text-white bg-gray-yellowish rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0"
+        @click="cancelMembershipRequest(thisGroup.id)"
+      >
+        Mitgliedschafts-Anfrage abbrechen
+      </button>
+      <button
+        v-else-if="thisGroup.membership === ''"
+        class="text-white bg-gray-greenish rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0"
+        @click="requestGroupMembership(thisGroup.id)"
+      >
+        Mitgliedschaft anfragen
+      </button>
     </div>
     <div v-if="thisGroup.membership === 'admin'">
       <hr class="border-gray-light my-4" />
@@ -124,10 +145,19 @@
       Koordinator:innen können Mitglieder hinzufügen, entfernen und andere
       Koordinator:innen ernennen.
     </div>
-    <div v-else class="text-gray mb-4">
+    <div v-else-if="thisGroup.membership === 'member'" class="text-gray mb-4">
+      Diese Koordinator:innen verwalten {{ thisGroup.name }}. Sie können dich
+      zur Koordinator:in ernennen.
+    </div>
+    <div v-else-if="thisGroup.membership === 'pending'" class="text-gray mb-4">
+      Diese Koordinator:innen verwalten {{ thisGroup.name }}. Sie müssen dich
+      als Mitglied freischalten, bevor du Zugriff auf den Mattermost-Kanal und
+      den Nextcloud-Ordner der Gruppe hast.
+    </div>
+    <div v-else-if="thisGroup.membership === ''" class="text-gray mb-4">
       Diese Koordinator:innen verwalten {{ thisGroup.name }}. Sie müssen dich
       als Mitglied freischalten, nachdem du eine Mitgliedschafts-Anfrage
-      gestellt hast.
+      gestellt erhältst.
     </div>
     <div v-if="loading && !adminsFiltered.length" class="text-gray">
       Lade Koordinator:innen ...
@@ -586,6 +616,15 @@ export default {
       this.guestName = ''
       this.guestEmail = ''
       this.addGuestsActive = false
+    },
+    requestGroupMembership(groupID) {
+      this.$store.dispatch('groups/alertRequestMembership', { groupID })
+    },
+    cancelMembershipRequest(groupID) {
+      this.$store.dispatch('groups/alertCancelMembershipRequest', { groupID })
+    },
+    cancelMembership(groupID) {
+      this.$store.dispatch('groups/alertCancelMembership', { groupID })
     },
     openAddUsers() {
       this.addUsersActive = true
