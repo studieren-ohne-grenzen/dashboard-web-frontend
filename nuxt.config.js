@@ -83,8 +83,8 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // Doc: https://auth.nuxtjs.org/
-    '@nuxtjs/auth',
+    // Doc: https://dev.auth.nuxtjs.org/
+    '@nuxtjs/auth-next',
     '@nuxtjs/proxy',
   ],
   /*
@@ -110,32 +110,19 @@ export default {
    ** Auth module configuration
    */
   auth: {
-    cookie: {
-      prefix: 'auth.',
-      options: {
-        maxAge: 43200,
-      },
-    },
     strategies: {
-      redirect: {
-        home: '/profile',
-      },
-      watchLoggedIn: true,
-      rewriteRedirects: false,
       local: {
         endpoints: {
-          login: {
+          login: { // Endpoint for retrievieng the JWT token
             url: 'api/login',
             method: 'post',
-            propertyName: false,
           },
-          logout: false,
-          user: false,
+          logout: false, // No explicit token invalidation
+          user: false, // no auto user data fetching
         },
-        tokenRequired: true,
-        tokenType: 'Bearer',
-        globalToken: true,
-        autoFetchUser: true,
+        token: {
+          property: false, // token is the plain text rcvd from login endpoint
+        },
       },
     },
   },
