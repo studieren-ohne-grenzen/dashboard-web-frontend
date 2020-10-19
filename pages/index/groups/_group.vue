@@ -12,7 +12,7 @@
         class="bg-gray-light rounded mb-4 mt-4 sm:mt-0 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
       />
       <button
-        v-if="thisGroup.membership === 'member'"
+        v-if="thisGroup.membership === 'member' && thisGroup.id !== 'allgemein'"
         class="text-white bg-gray-reddish rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0"
         @click="cancelMembership(thisGroup.id)"
       >

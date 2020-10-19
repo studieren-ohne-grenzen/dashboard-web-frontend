@@ -319,7 +319,23 @@ export default {
       )
     }
   },
-
+  alertInfoAllgemein({ commit }) {
+    const message =
+      'Alle Mitglieder von Studieren Ohne Grenzen sind Mitglied der Gruppe Allgemein. Daher kannst du die Gruppe nicht verlassen. ' +
+      'Wenn du den Verein verlassen möchtest, wende dich bitte über mitglieder@studieren-ohne-grenzen.org an den Vorstand. ' +
+      'Falls du allerdings nur keine E-Mail-Benachrichtungen über Mattermost-Nachrichten mehr erhalten möchtest, ' +
+      'kannst du unter chat.studieren-ohne-grenzen.org die Benachrichtungseinstellungen für Chatnachrichten ändern.'
+    commit(
+      'alertbox/showAlert',
+      {
+        title: 'Gruppe verlassen nicht möglich',
+        message,
+        defaultToAction: false,
+        showCancel: false,
+      },
+      { root: true }
+    )
+  },
   alertCancelMembership({ commit, getters }, { groupID }) {
     const message =
       'Willst du die Gruppe ' +
