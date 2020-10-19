@@ -130,6 +130,8 @@ export default {
             members: [],
             guests: [],
             membership: '',
+            activePendingMembers: [],
+            inactivePendingMembers: [],
           }
         })
         for (const myGroup in responses[1].data) {

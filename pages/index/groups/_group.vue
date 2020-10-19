@@ -478,8 +478,9 @@ export default {
           groupType: null,
           admins: [],
           members: [],
-          pendingMembers: [],
           guests: [],
+          activePendingMembers: [],
+          inactivePendingMembers: [],
         }
     },
     membersFiltered() {
