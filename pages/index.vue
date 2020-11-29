@@ -8,7 +8,7 @@
           alt="Dashboard Logo"
           src="@/static/logo.png"
           class="m-auto"
-          style="max-width: 8rem;"
+          style="max-width: 8rem"
         />
       </div>
       <ul class="flex flex-grow">
