@@ -25,6 +25,11 @@ export default {
       default: null,
     },
   },
+  head: {
+    bodyAttrs: {
+      class: '',
+    },
+  },
 }
 </script>
 

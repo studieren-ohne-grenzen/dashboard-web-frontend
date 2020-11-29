@@ -6,7 +6,7 @@
 export default {
   head: {
     bodyAttrs: {
-      class: '',
+      class: 'dark',
     },
   },
 }
@@ -14,8 +14,8 @@ export default {
 
 <style>
 html {
-  background-color: #00679e;
-  background-image: linear-gradient(20deg, #57b4dc 0%, #00679e 100%);
+  background-color: black;
+  background-image: linear-gradient(20deg, #003359 0%, black 100%);
   background-attachment: fixed;
 }
 </style>
