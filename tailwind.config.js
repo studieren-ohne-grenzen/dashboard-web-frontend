@@ -4,6 +4,8 @@
  ** Docs: https://tailwindcss.com/docs/configuration
  ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  */
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   theme: {
     extend: {
@@ -29,6 +31,7 @@ module.exports = {
           transparent: '#000000AA',
           DEFAULT: '#000000',
         },
+        pink: colors.pink,
       },
       screens: {
         xs: '420px',
@@ -39,6 +42,7 @@ module.exports = {
   variants: {
     extend: {
       opacity: ['dark'],
+      borderWidth: ['dark'],
     },
   },
   plugins: [],

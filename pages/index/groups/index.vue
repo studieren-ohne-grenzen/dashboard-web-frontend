@@ -2,13 +2,13 @@
   <div>
     <h1
       v-if="this.$store.getters['groups/requests'].length"
-      class="text-sogblue-light text-3xl"
+      class="text-sogblue-light dark:text-gray-400 text-3xl"
     >
       Anfragen an mich
     </h1>
     <div
       v-if="this.$store.getters['groups/requests'].length"
-      class="text-gray mb-4"
+      class="text-gray dark:text-gray-300 mb-4"
     >
       In den folgenden von dir koordinierten Gruppen möchten Mitglieder
       beitreten:
@@ -24,16 +24,16 @@
       >
         <nuxt-link
           :to="'/groups/' + request.id"
-          class="py-2 px-4 flex-grow border-l border-t border-b rounded-l border-gray"
+          class="py-2 px-4 flex-grow border-l border-t border-b rounded-l border-gray dark:border-0 dark:bg-gray-800 dark:text-gray-300"
         >
           {{ request.name }}
         </nuxt-link>
         <nuxt-link
           :to="'/groups/' + request.id"
-          class="flex-none bg-sogblue-light rounded-r w-10 p-2 cursor-pointer"
+          class="flex-none bg-sogblue-light dark:bg-sogblue-darker rounded-r w-10 p-2 cursor-pointer"
         >
           <svg
-            class="text-white fill-current"
+            class="text-white dark:text-gray-300 fill-current"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -43,7 +43,7 @@
           </svg>
         </nuxt-link>
         <div
-          class="bg-red-600 rounded-full w-6 h-6 text-center text-white absolute leading-6"
+          class="bg-red-600 dark:bg-red-900 rounded-full w-6 h-6 text-center text-white dark:text-gray-300 absolute leading-6"
           style="top: -6px; right: -6px"
         >
           {{ request.count }}
@@ -52,35 +52,35 @@
     </div>
     <hr
       v-if="this.$store.getters['groups/requests'].length"
-      class="border-gray-light my-4"
+      class="border-gray-light dark:border-gray-700 my-4"
     />
     <div class="w-full flex flex-wrap justify-between mb-4">
       <div
-        class="mb-4 xs:mr-4 flex-grow xs:flex-grow-0 w-auto inline-flex border border-sogblue rounded"
+        class="mb-4 xs:mr-4 flex-grow xs:flex-grow-0 w-auto inline-flex border border-sogblue dark:border-gray-800 rounded"
       >
         <button
-          class="px-1 xs:px-4 py-2 flex-grow border-r border-sogblue leading-tight text-sm xs:text-base"
+          class="px-1 xs:px-4 py-2 flex-grow border-r border-sogblue dark:border-gray-900 leading-tight text-sm xs:text-base rounded-l"
           :class="typeSelected === 'all' ? 'groupactive' : 'groupinactive'"
           @click="changeTypeSelected('all')"
         >
           Alle Gruppen
         </button>
         <button
-          class="px-1 xs:px-4 py-2 flex-grow border-r border-sogblue leading-tight text-sm xs:text-base"
+          class="px-1 xs:px-4 py-2 flex-grow border-r border-sogblue dark:border-gray-900 leading-tight text-sm xs:text-base"
           :class="typeSelected === 'personal' ? 'groupactive' : 'groupinactive'"
           @click="changeTypeSelected('personal')"
         >
           Meine Gruppen
         </button>
         <button
-          class="px-1 xs:px-4 py-2 flex-grow border-r border-sogblue leading-tight text-sm xs:text-base"
+          class="px-1 xs:px-4 py-2 flex-grow border-r border-sogblue dark:border-gray-900 leading-tight text-sm xs:text-base"
           :class="typeSelected === 'requests' ? 'groupactive' : 'groupinactive'"
           @click="changeTypeSelected('requests')"
         >
           Meine Anfragen
         </button>
         <button
-          class="px-1 xs:px-4 py-2 flex-grow text-sm xs:text-base"
+          class="px-1 xs:px-4 py-2 flex-grow text-sm xs:text-base rounded-r"
           :class="typeSelected === 'admin' ? 'groupactive' : 'groupinactive'"
           @click="changeTypeSelected('admin')"
         >
@@ -91,7 +91,7 @@
         v-model="searchQuery"
         type="text"
         placeholder="Gruppe suchen"
-        class="bg-gray-light rounded mb-4 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
+        class="bg-gray-light rounded mb-4 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:ring-2 focus:bg-white p-2 dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
         @focus="changeTypeSelected('search')"
       />
     </div>
@@ -99,7 +99,7 @@
       v-if="
         groupsSelected && !groupsSelected.length && typeSelected === 'admin'
       "
-      class="text-gray"
+      class="text-gray dark:text-gray-300"
     >
       Du hast in keiner Gruppe Koordinator:innen-Rechte.
     </div>
@@ -107,7 +107,7 @@
       v-else-if="
         groupsSelected && !groupsSelected.length && typeSelected === 'personal'
       "
-      class="text-gray"
+      class="text-gray dark:text-gray-300"
     >
       Du bist noch nicht Mitglied in einer Gruppe.
     </div>
@@ -115,7 +115,7 @@
       v-else-if="
         groupsSelected && !groupsSelected.length && typeSelected === 'requests'
       "
-      class="text-gray"
+      class="text-gray dark:text-gray-300"
     >
       Es gibt keine offenen Gruppenmitgliedschafts-Anfragen, die du gestellt
       hast.
@@ -124,17 +124,20 @@
       v-else-if="
         typeSelected === 'search' && (!groupsSelected || !groupsSelected.length)
       "
-      class="text-gray"
+      class="text-gray dark:text-gray-300"
     >
       Keine passenden Gruppen gefunden.
     </div>
     <div
       v-else-if="groupsSelected && !groupsSelected.length && loading"
-      class="text-gray"
+      class="text-gray dark:text-gray-300"
     >
       Lade Gruppen ...
     </div>
-    <div v-else-if="groupsSelected && !groupsSelected.length" class="text-gray">
+    <div
+      v-else-if="groupsSelected && !groupsSelected.length"
+      class="text-gray dark:text-gray-300"
+    >
       Keine Gruppen verfügbar.
     </div>
 
@@ -143,7 +146,7 @@
         <GroupListing :groups="category.getter" :name="category.name" />
         <hr
           v-if="index !== nonEmptyCategories.length - 1"
-          class="border-gray-light my-4"
+          class="border-gray-light dark:border-gray-700 my-4"
         />
       </div>
     </div>
@@ -212,16 +215,16 @@ export default {
 /* @apply is tailwind specific, not to be confused with the deprecated css @apply*/
 .groupactive {
   @apply text-white;
-  @apply bg-sogblue-default;
+  @apply bg-sogblue-default dark:bg-gray-700;
 }
 .groupactive:hover {
-  @apply bg-sogblue-darker;
+  @apply bg-sogblue-darker dark:bg-gray-600;
 }
 .groupinactive {
-  @apply text-sogblue-default;
+  @apply text-sogblue-default dark:text-gray-300 dark:bg-gray-800;
 }
 .groupinactive:hover {
   @apply text-white;
-  @apply bg-sogblue-light;
+  @apply bg-sogblue-light dark:bg-gray-700;
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="w-full flex flex-wrap justify-between mb-4">
-      <h1 class="text-sogblue xs:min-w-0 min-w-full text-4xl leading-tight">
+      <h1
+        class="text-sogblue dark:text-white xs:min-w-0 min-w-full text-4xl leading-tight"
+      >
         {{ thisGroup.name === '' ? 'Lade Gruppe ...' : thisGroup.name }}
       </h1>
       <input
@@ -9,34 +11,34 @@
         v-model="searchQuery"
         type="text"
         placeholder="Mitglieder suchen"
-        class="bg-gray-light rounded mb-4 mt-4 sm:mt-0 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:shadow-outline focus:bg-white p-2"
+        class="bg-gray-light rounded mb-4 mt-4 sm:mt-0 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:ring-2 focus:bg-white p-2 dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
       />
       <button
         v-if="thisGroup.membership === 'member' && thisGroup.id !== 'allgemein'"
-        class="text-white bg-gray-reddish rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0"
+        class="text-white bg-gray-reddish dark:bg-pink-900 rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0"
         @click="cancelMembership(thisGroup.id)"
       >
         Gruppe verlassen
       </button>
       <button
         v-else-if="thisGroup.membership === 'pending'"
-        class="text-white bg-gray-yellowish rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0"
+        class="text-white bg-gray-yellowish dark:bg-yellow-900 rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0"
         @click="cancelMembershipRequest(thisGroup.id)"
       >
         Mitgliedschafts-Anfrage abbrechen
       </button>
       <button
         v-else-if="thisGroup.membership === ''"
-        class="text-white bg-gray-greenish rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0"
+        class="text-white bg-gray-greenish dark:bg-green-900 rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0"
         @click="requestGroupMembership(thisGroup.id)"
       >
         Mitgliedschaft anfragen
       </button>
     </div>
     <div v-if="thisGroup.membership === 'admin'">
-      <hr class="border-gray-light my-4" />
-      <h2 class="text-sogblue-light text-3xl">Anfragen</h2>
-      <div class="text-gray mb-4">
+      <hr class="border-gray-light dark:border-gray-700 my-4" />
+      <h2 class="text-sogblue-light dark:text-white text-3xl">Anfragen</h2>
+      <div class="text-gray dark:text-gray-300 mb-4">
         Die folgenden Mitglieder möchten der Gruppe beitreten.
       </div>
       <div
@@ -45,7 +47,7 @@
           !activePendingFiltered.length &&
           !inactivePendingFiltered.length
         "
-        class="text-gray"
+        class="text-gray dark:text-gray-300"
       >
         Lade Anfragen ...
       </div>
@@ -55,7 +57,7 @@
           !inactivePendingFiltered.length &&
           searchQuery === ''
         "
-        class="text-gray"
+        class="text-gray dark:text-gray-300"
       >
         Keine ausstehenden Anfragen.
       </div>
@@ -63,7 +65,7 @@
         v-else-if="
           !activePendingFiltered.length && !inactivePendingFiltered.length
         "
-        class="text-gray"
+        class="text-gray dark:text-gray-300"
       >
         Keine Anfragen gefunden.
       </div>
@@ -74,7 +76,7 @@
           class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
         >
           <div
-            class="py-2 px-4 flex-grow border rounded-l border-r-0 border-gray"
+            class="py-2 px-4 flex-grow border rounded-l border-r-0 border-gray dark:border-0"
             :title="pendingMember.uid"
           >
             {{ pendingMember.name }}
@@ -85,7 +87,7 @@
             @click="addActivePending(pendingMember.uid)"
           >
             <svg
-              class="text-white flex-none fill-current bg-gray-greenish w-10 p-2 cursor-pointer"
+              class="text-white flex-none fill-current bg-gray-greenish dark:bg-green-900 w-10 p-2 cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -100,7 +102,7 @@
             @click="declineActivePending(pendingMember.uid)"
           >
             <svg
-              class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-2 cursor-pointer"
+              class="text-white flex-none fill-current bg-gray-reddish dark:bg-pink-900 rounded-r w-10 p-2 cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -116,7 +118,7 @@
           class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
         >
           <div
-            class="py-2 px-4 flex-grow border rounded-l border-r-0 border-gray"
+            class="py-2 px-4 flex-grow border rounded-l border-r-0 border-gray dark:border-0"
             :title="pendingMember.uid"
           >
             {{ pendingMember.name }}
@@ -127,7 +129,7 @@
             @click="addInactivePending(pendingMember.uid)"
           >
             <svg
-              class="text-white flex-none fill-current bg-gray-greenish w-10 p-2 rounded-r cursor-pointer"
+              class="text-white flex-none fill-current bg-gray-greenish dark:bg-green-900 w-10 p-2 rounded-r cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -139,36 +141,56 @@
         </div>
       </div>
     </div>
-    <hr class="border-gray-light my-4" />
-    <h2 class="text-sogblue-light text-3xl">Koordinator:innen</h2>
-    <div v-if="thisGroup.membership === 'admin'" class="text-gray mb-4">
+    <hr class="border-gray-light dark:border-gray-700 my-4" />
+    <h2 class="text-sogblue-light dark:text-white text-3xl">
+      Koordinator:innen
+    </h2>
+    <div
+      v-if="thisGroup.membership === 'admin'"
+      class="text-gray dark:text-gray-300 mb-4"
+    >
       Koordinator:innen können Mitglieder hinzufügen, entfernen und andere
       Koordinator:innen ernennen.
     </div>
-    <div v-else-if="thisGroup.membership === 'member'" class="text-gray mb-4">
+    <div
+      v-else-if="thisGroup.membership === 'member'"
+      class="text-gray dark:text-gray-300 mb-4"
+    >
       Diese Koordinator:innen verwalten {{ thisGroup.name }}. Sie können dich
       zur Koordinator:in ernennen.
     </div>
-    <div v-else-if="thisGroup.membership === 'pending'" class="text-gray mb-4">
+    <div
+      v-else-if="thisGroup.membership === 'pending'"
+      class="text-gray dark:text-gray-300 mb-4"
+    >
       Diese Koordinator:innen verwalten {{ thisGroup.name }}. Sie müssen dich
       als Mitglied freischalten, bevor du Zugriff auf den Mattermost-Kanal und
       den Nextcloud-Ordner der Gruppe hast.
     </div>
-    <div v-else-if="thisGroup.membership === ''" class="text-gray mb-4">
+    <div
+      v-else-if="thisGroup.membership === ''"
+      class="text-gray dark:text-gray-300 mb-4"
+    >
       Diese Koordinator:innen verwalten {{ thisGroup.name }}. Sie müssen dich
       als Mitglied freischalten, nachdem du eine Mitgliedschafts-Anfrage
       gestellt erhältst.
     </div>
-    <div v-if="loading && !adminsFiltered.length" class="text-gray">
+    <div
+      v-if="loading && !adminsFiltered.length"
+      class="text-gray dark:text-gray-300"
+    >
       Lade Koordinator:innen ...
     </div>
     <div
       v-else-if="!adminsFiltered.length && searchQuery === ''"
-      class="text-gray"
+      class="text-gray dark:text-gray-300"
     >
       Diese Gruppe hat keine Koordinator:innen.
     </div>
-    <div v-else-if="!adminsFiltered.length" class="text-gray">
+    <div
+      v-else-if="!adminsFiltered.length"
+      class="text-gray dark:text-gray-300"
+    >
       Keine Koordinator:innen gefunden.
     </div>
     <div v-else class="flex flex-wrap">
@@ -183,7 +205,7 @@
               ? 'border-r-0'
               : 'rounded-r'
           "
-          class="py-2 px-4 flex-grow border rounded-l border-gray"
+          class="py-2 px-4 flex-grow border rounded-l border-gray dark:border-0 dark:bg-gray-800 dark:text-gray-300"
           :title="admin.uid"
         >
           {{ admin.name }}
@@ -191,12 +213,12 @@
         <button
           v-if="admin.uid !== 'dashboardadmin'"
           title="Koordinator:innen-Rechte entziehen"
-          class="border-t border-b border-gray-reddish rounded-r"
+          class="border-t border-b border-gray-reddish rounded-r dark:border-0"
           @click="revokeAdmin(admin.uid)"
         >
           <svg
             v-if="thisGroup.membership === 'admin'"
-            class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-2 cursor-pointer"
+            class="text-white flex-none fill-current bg-gray-reddish dark:bg-pink-900 rounded-r w-10 p-2 cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -208,30 +230,38 @@
       </div>
     </div>
     <div v-if="thisGroup.membership === 'admin' && !addUsersActive">
-      <hr class="border-gray-light my-4" />
+      <hr class="border-gray-light dark:border-gray-700 my-4" />
       <div class="w-full flex flex-wrap justify-between items-center">
-        <h2 class="text-sogblue-light text-3xl mb-1">Mitglieder</h2>
+        <h2 class="text-sogblue-light dark:text-white text-3xl mb-1">
+          Mitglieder
+        </h2>
         <button
-          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker mb-1"
+          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker mb-1 dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
           @click="openAddUsers"
         >
           Mitglied hinzufügen
         </button>
       </div>
-      <div class="text-gray mb-4">
+      <div class="text-gray dark:text-gray-300 mb-4">
         Mitglieder haben Zugriff auf den Mattermost-Channel und den
         Nextcloud-Ordner und stehen auf der Mailing-Liste der Gruppe.
       </div>
-      <div v-if="loading && !membersFiltered.length" class="text-gray">
+      <div
+        v-if="loading && !membersFiltered.length"
+        class="text-gray dark:text-gray-300"
+      >
         Lade Mitglieder ...
       </div>
       <div
         v-else-if="!membersFiltered.length && searchQuery === ''"
-        class="text-gray"
+        class="text-gray dark:text-gray-300"
       >
         Diese Gruppe hat keine regulären Mitglieder.
       </div>
-      <div v-else-if="!membersFiltered.length" class="text-gray">
+      <div
+        v-else-if="!membersFiltered.length"
+        class="text-gray dark:text-gray-300"
+      >
         Keine Mitglieder gefunden.
       </div>
       <div v-else class="flex flex-wrap">
@@ -241,18 +271,18 @@
           class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
         >
           <div
-            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray dark:border-0 dark:bg-gray-800 dark:text-gray-300"
             :title="member.uid"
           >
             {{ member.name }}
           </div>
           <button
             title="Zur Koordinator:in befördern"
-            class="border-t border-b border-gray-greenish"
+            class="border-t border-b border-gray-greenish dark:border-0"
             @click="makeAdmin(member.uid)"
           >
             <svg
-              class="text-white flex-none fill-current bg-gray-greenish w-10 p-2 cursor-pointer"
+              class="text-white flex-none fill-current bg-gray-greenish dark:bg-green-900 w-10 p-2 cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -263,11 +293,11 @@
           </button>
           <button
             title="Mitglied aus Gruppe entfernen"
-            class="border-t border-b border-gray-reddish rounded-r"
+            class="border-t border-b border-gray-reddish rounded-r dark:border-0"
             @click="removeMember(member.uid)"
           >
             <svg
-              class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-2 cursor-pointer"
+              class="text-white flex-none fill-current bg-gray-reddish dark:bg-pink-900 rounded-r w-10 p-2 cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -280,17 +310,19 @@
       </div>
     </div>
     <div v-else-if="thisGroup.membership === 'admin'">
-      <hr class="border-gray-light my-4" />
+      <hr class="border-gray-light dark:border-gray-700 my-4" />
       <div class="w-full flex flex-wrap justify-between mb-4 items-center">
-        <h2 class="text-sogblue-light text-3xl mb-2">Mitglieder hinzufügen</h2>
+        <h2 class="text-sogblue-light dark:text-white text-3xl mb-2">
+          Mitglieder hinzufügen
+        </h2>
         <button
-          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
+          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
           @click="closeAddUsers"
         >
           Fertig
         </button>
       </div>
-      <div v-if="!nonMembers.length" class="text-gray">
+      <div v-if="!nonMembers.length" class="text-gray dark:text-gray-300">
         Es konnten keine weiteren Mitglieder gefunden werden.
       </div>
       <div v-else class="flex flex-wrap">
@@ -300,18 +332,18 @@
           class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
         >
           <div
-            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray dark:border-0 dark:bg-gray-800 dark:text-gray-300"
             :title="user.uid"
           >
             {{ user.name }}
           </div>
           <button
             title="Benutzer zur Gruppe hinzufügen"
-            class="border-t border-b border-gray-greenish rounded-r"
+            class="border-t border-b border-gray-greenish rounded-r dark:border-0"
             @click="addMember(user.uid)"
           >
             <svg
-              class="text-white flex-none fill-current bg-gray-greenish w-10 p-2 rounded-r cursor-pointer"
+              class="text-white flex-none fill-current bg-gray-greenish dark:bg-green-900 w-10 p-2 rounded-r cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -324,31 +356,37 @@
       </div>
     </div>
     <div v-if="thisGroup.membership === 'admin' && !addGuestsActive">
-      <hr class="border-gray-light my-4" />
+      <hr class="border-gray-light dark:border-gray-700 my-4" />
       <div class="w-full flex flex-wrap justify-between items-center">
-        <h2 class="text-sogblue-light text-3xl mb-1">Gäste</h2>
+        <h2 class="text-sogblue-light dark:text-white text-3xl mb-1">Gäste</h2>
         <button
-          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker mb-1"
+          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker mb-1 dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
           @click="openAddGuests"
         >
           Gast hinzufügen
         </button>
       </div>
-      <div class="text-gray mb-4">
+      <div class="text-gray dark:text-gray-300 mb-4">
         Gäste sind Nicht-Vereinsmitglieder und haben keinen Zugriff auf die
         SOG-Tools. Sie sind aber auf der Mailing-Liste dieser Gruppe
         eingetragen.
       </div>
-      <div v-if="loading && !guestsFiltered.length" class="text-gray">
+      <div
+        v-if="loading && !guestsFiltered.length"
+        class="text-gray dark:text-gray-300"
+      >
         Lade Gäste ...
       </div>
       <div
         v-else-if="!guestsFiltered.length && searchQuery === ''"
-        class="text-gray"
+        class="text-gray dark:text-gray-300"
       >
         Diese Gruppe hat keine Gäste.
       </div>
-      <div v-else-if="!guestsFiltered.length" class="text-gray">
+      <div
+        v-else-if="!guestsFiltered.length"
+        class="text-gray dark:text-gray-300"
+      >
         Keine Gäste gefunden.
       </div>
       <div v-else class="flex flex-wrap">
@@ -358,18 +396,18 @@
           class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
         >
           <div
-            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray"
+            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray dark:border-0"
             :title="guest.uid"
           >
             {{ guest.name }}
           </div>
           <button
             title="Gast entfernen"
-            class="border-t border-b border-gray-reddish rounded-r"
+            class="border-t border-b border-gray-reddish rounded-r dark:border-0"
             @click="removeGuest(guest.uid)"
           >
             <svg
-              class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-3 cursor-pointer"
+              class="text-white flex-none fill-current bg-gray-reddish dark:bg-pink-900 rounded-r w-10 p-3 cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -382,11 +420,13 @@
       </div>
     </div>
     <div v-else-if="thisGroup.membership === 'admin'">
-      <hr class="border-gray-light my-4" />
+      <hr class="border-gray-light dark:border-gray-700 my-4" />
       <div class="w-full flex flex-wrap justify-between mb-4 items-center">
-        <h2 class="text-sogblue-light text-3xl mb-2">Gäste hinzufügen</h2>
+        <h2 class="text-sogblue-light dark:text-white text-3xl mb-2">
+          Gäste hinzufügen
+        </h2>
         <button
-          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker"
+          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
           @click="closeAddGuests"
         >
           Fertig
@@ -395,7 +435,9 @@
       <form class="sm:flex flex-wrap w-full items-end">
         <div class="sm:flex flex-grow sm:mx-2">
           <div class="flex-grow flex-1 sm:min-w-56">
-            <label class="block text-sogblue-dark mb-1">Name</label>
+            <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
+              Name
+            </label>
             <input
               v-model="guestName"
               type="text"
@@ -403,18 +445,20 @@
               :class="
                 nameError !== '' ? 'border-red-500 border-2' : 'border-none'
               "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
             />
           </div>
           <div class="sm:ml-4 flex-grow flex-1 sm:min-w-56">
-            <label class="block text-sogblue-dark mb-1">Email-Adresse</label>
+            <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
+              Email-Adresse
+            </label>
             <input
               v-model="guestEmail"
               type="text"
               :class="
                 emailError !== '' ? 'border-red-500 border-2' : 'border-none'
               "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
             />
           </div>
         </div>
@@ -427,10 +471,10 @@
             :disabled="!addGuestSubmittable"
             :class="
               addGuestSubmittable
-                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker'
-                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
+                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light'
+                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest dark:bg-gray-800 dark:hover:bg-gray-800'
             "
-            class="rounded py-2 px-4 mb-4 text-white"
+            class="rounded py-2 px-4 mb-4 text-white dark:text-black"
             @click="addGuest"
           >
             Hinzufügen

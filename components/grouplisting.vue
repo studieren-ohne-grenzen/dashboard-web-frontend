@@ -1,6 +1,9 @@
 <template>
   <div v-if="groups.length">
-    <div v-if="name.length" class="mb-4 text-sogblue-light text-3xl">
+    <div
+      v-if="name.length"
+      class="mb-4 text-sogblue-light dark:text-white text-3xl"
+    >
       {{ name }}
     </div>
     <div class="flex flex-wrap">
@@ -11,17 +14,17 @@
       >
         <nuxt-link
           :to="'/groups/' + encodeURIComponent(group.id)"
-          class="py-2 px-4 flex-grow border-l border-t border-b rounded-l border-gray"
+          class="py-2 px-4 flex-grow border-l border-t border-b rounded-l border-gray dark:border-0 dark:bg-gray-800 dark:text-gray-300"
         >
           {{ group.name }}
         </nuxt-link>
         <nuxt-link
           v-if="group.membership == 'admin'"
           :to="'/groups/' + encodeURIComponent(group.id)"
-          class="flex-none bg-sogblue-light rounded-r w-10 p-2 cursor-pointer"
+          class="flex-none bg-sogblue-light dark:bg-sogblue-darker rounded-r w-10 p-2 cursor-pointer"
         >
           <svg
-            class="text-white fill-current"
+            class="text-white dark:text-gray-300 fill-current"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -32,7 +35,7 @@
         </nuxt-link>
         <svg
           v-else-if="group.membership == 'member' && group.id !== 'allgemein'"
-          class="text-white flex-none fill-current bg-gray-reddish rounded-r w-10 p-2 cursor-pointer"
+          class="text-white dark:text-gray-300 flex-none fill-current bg-gray-reddish dark:bg-pink-900 rounded-r w-10 p-2 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           @click="cancelMembership(group.id)"
@@ -43,7 +46,7 @@
         </svg>
         <svg
           v-else-if="group.membership == 'member' && group.id == 'allgemein'"
-          class="text-white flex-none fill-current bg-gray rounded-r w-10 p-2 cursor-pointer"
+          class="text-white dark:text-gray-300 flex-none fill-current bg-gray dark:bg-gray-700 rounded-r w-10 p-2 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           @click="infoAllgemein()"
@@ -54,7 +57,7 @@
         </svg>
         <svg
           v-else-if="group.membership == 'pending'"
-          class="text-white flex-none fill-current bg-gray-yellowish rounded-r w-10 p-3 cursor-pointer"
+          class="text-white dark:text-gray-300 flex-none fill-current bg-gray-yellowish dark:bg-yellow-900 rounded-r w-10 p-3 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           @click="cancelMembershipRequest(group.id)"
@@ -65,7 +68,7 @@
         </svg>
         <svg
           v-else-if="group.membership == ''"
-          class="text-white flex-none fill-current bg-gray-greenish rounded-r w-10 p-2 cursor-pointer"
+          class="text-white dark:text-gray-300 flex-none fill-current bg-gray-greenish dark:bg-green-900 rounded-r w-10 p-2 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           @click="requestGroupMembership(group.id)"

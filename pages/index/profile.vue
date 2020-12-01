@@ -20,18 +20,18 @@
             class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
           >
             <div
-              class="flex-grow py-2 px-4 text-sogblue-dark border border-r-0 rounded-l border-gray"
+              class="flex-grow py-2 px-4 text-sogblue-dark border border-r-0 rounded-l border-gray dark:border-0 dark:bg-gray-800 dark:text-gray-300"
               :title="admin.mail"
             >
               {{ admin.cn }}
             </div>
             <a
               :title="admin.mail"
-              class="border-t border-b border-sogblue-light rounded-r"
+              class="border-t border-b border-sogblue-light rounded-r dark:border-0 dark:bg-sogblue-darker"
               :href="'mailto:' + admin.mail"
             >
               <svg
-                class="text-white flex-none fill-current bg-sogblue-light w-10 p-2 rounded-r cursor-pointer"
+                class="text-white dark:text-gray-300 flex-none fill-current bg-sogblue-light w-10 p-2 rounded-r cursor-pointer"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
