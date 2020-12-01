@@ -68,7 +68,9 @@ export default {
   },
   options: {
     auth: 'guest',
-    layout: 'dark',
+    layout(context) {
+      return context.store.getters['user/darkMode'] ? 'dark' : 'default'
+    },
   },
   computed: {
     redirect() {
@@ -77,8 +79,38 @@ export default {
         decodeURIComponent(this.$route.query.redirect)
       )
     },
+    darkMode() {
+      return this.$store.getters['user/darkMode']
+    },
+  },
+  watch: {
+    darkMode() {
+      if (this.darkMode) this.$nuxt.setLayout('dark')
+      else this.$nuxt.setLayout('default')
+    },
+  },
+  mounted() {
+    if (this.$store.getters['user/darkMode']) this.$nuxt.setLayout('dark')
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+      this.$store.commit('user/setLocalDarkMode', { darkModeState: true })
+    else this.$store.commit('user/setLocalDarkMode', { darkModeState: false })
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', this.handleDarkMode)
+  },
+  destroyed() {
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .removeEventListener('change', this.handleDarkMode)
   },
   methods: {
+    handleDarkMode(event) {
+      if (event.matches) {
+        this.$store.commit('user/setLocalDarkMode', { darkModeState: true })
+      } else {
+        this.$store.commit('user/setLocalDarkMode', { darkModeState: false })
+      }
+    },
     async login() {
       this.error = null
       await this.$auth

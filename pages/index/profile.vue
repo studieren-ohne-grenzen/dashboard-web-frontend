@@ -275,6 +275,30 @@
         </div>
       </form>
     </div>
+    <div>
+      <hr class="border-gray-light dark:border-gray-700 my-4" />
+      <h1
+        class="text-sogblue-light dark:text-gray-400 text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
+      >
+        Darstellung
+      </h1>
+      <button
+        v-if="!forcedDarkMode"
+        type="button"
+        class="rounded py-2 px-4 sm:mt-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+        @click="forceDarkMode"
+      >
+        Dark-Mode erzwingen
+      </button>
+      <button
+        v-else
+        type="button"
+        class="rounded py-2 px-4 sm:mt-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+        @click="stopForcingDarkMode"
+      >
+        Dark-Mode nicht mehr erzwingen
+      </button>
+    </div>
   </div>
 </template>
 
@@ -325,6 +349,7 @@ export default {
       altMailConfirmed: 'user/altMailConfirmed',
       pendingGroupName: 'user/pendingGroupName',
       pendingGroupOwners: 'user/pendingGroupOwners',
+      forcedDarkMode: 'user/forcedDarkMode',
     }),
   },
   watch: {
@@ -345,6 +370,12 @@ export default {
     },
   },
   methods: {
+    forceDarkMode() {
+      this.$store.dispatch('user/alertForceDarkMode')
+    },
+    stopForcingDarkMode() {
+      this.$store.dispatch('user/alertStopForcingDarkMode')
+    },
     changeEmail() {
       this.$store.dispatch('user/alertChangeAltMail', this.newEmail1)
       this.untoggleMail()

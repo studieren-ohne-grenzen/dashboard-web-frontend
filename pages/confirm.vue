@@ -17,7 +17,32 @@
 export default {
   options: {
     auth: false,
-    layout: 'dark',
+    layout(context) {
+      return context.store.getters['user/darkMode'] ? 'dark' : 'default'
+    },
+  },
+  mounted() {
+    if (this.$store.getters['user/darkMode']) this.$nuxt.setLayout('dark')
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+      this.$store.commit('user/setLocalDarkMode', { darkModeState: true })
+    else this.$store.commit('user/setLocalDarkMode', { darkModeState: false })
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', this.handleDarkMode)
+  },
+  destroyed() {
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .removeEventListener('change', this.handleDarkMode)
+  },
+  methods: {
+    handleDarkMode(event) {
+      if (event.matches) {
+        this.$store.commit('user/setLocalDarkMode', { darkModeState: true })
+      } else {
+        this.$store.commit('user/setLocalDarkMode', { darkModeState: false })
+      }
+    },
   },
 }
 </script>
