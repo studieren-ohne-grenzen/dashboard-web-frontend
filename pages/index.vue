@@ -7,7 +7,7 @@
         <img
           alt="Dashboard Logo"
           src="@/static/logo.png"
-          class="m-auto"
+          class="m-auto dark:opacity-80"
           style="max-width: 8rem"
         />
       </div>
@@ -46,7 +46,7 @@
         </li>
         <li class="px-1 flex-grow">
           <button
-            class="inline-block float-right py-2 pr-2 sm:pr-0 sm:pl-4 text-white hover:text-white font-normal"
+            class="inline-block float-right py-2 pr-2 sm:pr-0 sm:pl-4 text-white hover:text-white dark:text-gray-300 dark:hover:text-white font-normal"
             @click="logout()"
           >
             Abmelden
@@ -55,8 +55,10 @@
       </ul>
     </div>
     <div class="sm:px-2 lg:mx-auto">
-      <div class="max-w-5xl bg-white lg:mx-auto sm:rounded p-4 sm:p-8">
-        <nuxt-child></nuxt-child>
+      <div
+        class="max-w-5xl bg-white dark:bg-gray-900 lg:mx-auto sm:rounded p-4 sm:p-8"
+      >
+        <Nuxt-child></Nuxt-child>
       </div>
     </div>
     <AlertBox />
@@ -77,6 +79,7 @@ export default {
   },
   options: {
     auth: true,
+    layout: 'dark',
   },
 }
 </script>
@@ -85,18 +88,18 @@ export default {
 .tabactive {
   @apply px-1;
   @apply h-10;
-  @apply bg-white;
+  @apply bg-white dark:bg-gray-900;
   @apply rounded-t;
-  @apply text-sogblue-darker;
+  @apply text-sogblue-darker dark:text-white;
 }
 
 .tabactive:hover {
-  @apply text-sogblue-default;
+  @apply text-sogblue-default dark:text-white;
 }
 
 .tabinactive {
   @apply px-1;
-  @apply text-white;
+  @apply text-white dark:text-gray-300;
 }
 
 .tabinactive:hover {

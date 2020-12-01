@@ -6,7 +6,7 @@
       class="mx-auto py-8 px-2 w-64"
     />
     <div class="bg-white max-w-md bg-white xs:mx-auto xs:rounded p-8">
-      <nuxt-child></nuxt-child>
+      <Nuxt-child></Nuxt-child>
     </div>
   </div>
 </template>

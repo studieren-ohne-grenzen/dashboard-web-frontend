@@ -19,7 +19,10 @@
           :class="emailError ? 'border-red-500 border-2' : 'border-none'"
           class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
         />
-        <div v-if="emailError" class="flex-grow w-full text-red-600 mb-4">
+        <div
+          v-if="emailError"
+          class="flex-grow w-full text-red-600 dark:text-red-400 mb-4"
+        >
           Keine gültige Mailadresse eingegeben.
         </div>
         <button

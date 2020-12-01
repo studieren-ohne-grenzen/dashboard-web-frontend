@@ -25,6 +25,10 @@ module.exports = {
           yellowish: '#D9D279',
           light: '#edf2f7',
         },
+        black: {
+          transparent: '#000000AA',
+          DEFAULT: '#000000',
+        },
       },
       screens: {
         xs: '420px',

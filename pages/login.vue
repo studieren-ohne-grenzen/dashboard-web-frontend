@@ -8,13 +8,13 @@
     <div class="bg-white max-w-md dark:bg-gray-900 xs:mx-auto xs:rounded p-8">
       <div
         v-if="wrongLogin"
-        class="block p-2 mb-8 rounded border border-red-600 text-red-600 dark:bg-gray-800"
+        class="block p-2 mb-8 rounded border border-red-600 text-red-600 dark:text-red-400 dark:bg-gray-800"
       >
         Falsche Logindaten
       </div>
       <div
         v-else-if="otherError"
-        class="block p-2 mb-8 rounded border border-red-600 text-red-600"
+        class="block p-2 mb-8 rounded border border-red-600 text-red-600 dark:text-red-400 dark:bg-gray-800"
       >
         Fehler bei der Kommunikation mit dem Server
       </div>
