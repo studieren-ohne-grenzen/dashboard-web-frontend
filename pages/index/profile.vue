@@ -2,11 +2,11 @@
   <div>
     <div v-if="$store.getters['user/inactive']" class="sm:flex mb-8">
       <h1
-        class="flex-none text-red-600 text-3xl mt-4 mb-2 sm:ml-2 w-40 sm:w-48 sm:mr-10"
+        class="flex-none text-red-600 dark:text-red-400 text-3xl mt-4 mb-2 sm:ml-2 w-40 sm:w-48 sm:mr-10"
       >
         Aktivierung
       </h1>
-      <div class="text-red-600 sm:mt-4">
+      <div class="text-red-600 dark:text-red-400 sm:mt-4">
         <div class="mb-4">
           Dein SOG-Benutzerkonto wurde noch nicht aktiviert. Eine:r der
           folgenden Koordinator:innen muss deine Mitgliedschaft im Verein und in
@@ -20,18 +20,18 @@
             class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
           >
             <div
-              class="flex-grow py-2 px-4 text-sogblue-dark border border-r-0 rounded-l border-gray"
+              class="flex-grow py-2 px-4 text-sogblue-dark border border-r-0 rounded-l border-gray dark:border-0 dark:bg-gray-800 dark:text-gray-300"
               :title="admin.mail"
             >
               {{ admin.cn }}
             </div>
             <a
               :title="admin.mail"
-              class="border-t border-b border-sogblue-light rounded-r"
+              class="border-t border-b border-sogblue-light rounded-r dark:border-0 dark:bg-sogblue-darker"
               :href="'mailto:' + admin.mail"
             >
               <svg
-                class="text-white flex-none fill-current bg-sogblue-light w-10 p-2 rounded-r cursor-pointer"
+                class="text-white dark:text-gray-300 flex-none fill-current bg-sogblue-light w-10 p-2 rounded-r cursor-pointer"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -47,26 +47,28 @@
     <hr
       v-if="$store.getters['user/inactive']"
       style="clear: left"
-      class="border-gray-light my-4"
+      class="border-gray-light dark:border-gray-700 my-4"
     />
     <div class="sm:flex mb-8">
       <div
         class="hidden sm:block sm:invisible flex-shrink-0 h-40 w-40 sm:h-48 sm:w-48 my-2 sm:m-2 mx-auto sm:mr-10 bg-gray rounded-full text-lightgrey text-center"
       ></div>
       <div class="self-center flex-grow">
-        <div class="block text-sogblue-dark mb-1">Name</div>
+        <div class="block text-sogblue-dark dark:text-gray-300 mb-1">Name</div>
         <div
-          class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
+          class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg dark:bg-gray-800 dark:text-white"
         >
           {{ name }}
         </div>
-        <div class="block text-sogblue-dark mb-1">Benutzername</div>
+        <div class="block text-sogblue-dark dark:text-gray-300 mb-1">
+          Benutzername
+        </div>
         <div
-          class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
+          class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg dark:bg-gray-800 dark:text-white"
         >
           {{ username }}
         </div>
-        <div class="block text-gray">
+        <div class="block text-gray dark:text-gray-400">
           Dein Name kann nur von der
           <a href="mailto:it@studieren-ohne-grenzen.org" class="underline"
             >SOG IT</a
@@ -76,16 +78,16 @@
       </div>
     </div>
     <div>
-      <hr class="border-gray-light my-4" />
+      <hr class="border-gray-light dark:border-gray-700 my-4" />
       <h1
-        class="text-sogblue-light text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
+        class="text-sogblue-light dark:text-gray-400 text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
       >
         Sicherheit
       </h1>
       <button
         v-if="!changePwd"
         type="button"
-        class="rounded py-2 px-4 sm:mt-4 bg-sogblue hover:bg-sogblue-darker text-white"
+        class="rounded py-2 px-4 sm:mt-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
         @click="togglePwd"
       >
         Passwort ändern
@@ -96,7 +98,7 @@
         @submit.prevent="changePassword"
       >
         <div class="flex-grow sm:max-w-md sm:mx-2 sm:min-w-56">
-          <label class="block text-sogblue-dark mb-1">
+          <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
             Aktuelles Passwort
           </label>
           <input
@@ -106,23 +108,25 @@
             :class="
               errorOldPassword ? 'border-red-500 border-2' : 'border-none'
             "
-            class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
+            class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
           />
         </div>
         <div class="sm:flex flex-grow">
           <div class="flex-grow sm:mx-2 sm:min-w-56">
-            <label class="block text-sogblue-dark mb-1"> Neues Passwort </label>
+            <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
+              Neues Passwort
+            </label>
             <input
               v-model="newPassword1"
               type="password"
               :class="
                 errorNewPassword ? 'border-red-500 border-2' : 'border-none'
               "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
             />
           </div>
           <div class="flex-grow sm:mx-2 sm:min-w-56">
-            <label class="block text-sogblue-dark mb-1">
+            <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
               Neues Passwort wiederholen
             </label>
             <input
@@ -131,7 +135,7 @@
               :class="
                 errorNewPassword ? 'border-red-500 border-2' : 'border-none'
               "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
             />
           </div>
         </div>
@@ -143,19 +147,19 @@
         <div class="flex-grow-0 flex-shrink-0 sm:mx-2">
           <button
             type="submit"
-            class="rounded py-2 px-4 mb-4 text-white"
+            class="rounded py-2 px-4 mb-4 text-white dark:text-black"
             :disabled="!changePwdSubmittable"
             :class="
               changePwdSubmittable
-                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker'
-                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
+                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light'
+                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest dark:bg-gray-800 dark:hover:bg-gray-800'
             "
           >
             Ändern
           </button>
           <button
             type="reset"
-            class="rounded py-2 px-4 ml-2 bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white"
+            class="rounded py-2 px-4 ml-2 bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:border-gray-900"
             @click="untogglePwd"
           >
             Abbrechen
@@ -167,21 +171,23 @@
       </form>
     </div>
     <div style="clear: left" class="mt-8">
-      <hr class="border-gray-light my-4" />
+      <hr class="border-gray-light dark:border-gray-700 my-4" />
       <h1
-        class="text-sogblue-light text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
+        class="text-sogblue-light dark:text-gray-400 text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
       >
         Email
       </h1>
       <div class="flex flex-wrap sm:mt-8">
         <div class="flex-grow">
-          <div class="text-sogblue-dark mb-1">SOG-Mailadresse</div>
+          <div class="text-sogblue-dark dark:text-gray-300 mb-1">
+            SOG-Mailadresse
+          </div>
           <div
-            class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg"
+            class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg dark:bg-gray-800 dark:text-white"
           >
             {{ sogMail }}
           </div>
-          <div class="text-gray mb-4 sm:max-w-lg">
+          <div class="text-gray dark:text-gray-400 mb-4 sm:max-w-lg">
             Deine SOG-Mailadresse kann nur von der
             <a href="mailto:it@studieren-ohne-grenzen.org" class="underline"
               >SOG IT</a
@@ -194,13 +200,16 @@
               >XWiki</a
             >.
           </div>
-          <div v-if="!changeMail" class="text-sogblue-dark mb-1">
+          <div
+            v-if="!changeMail"
+            class="text-sogblue-dark dark:text-gray-300 mb-1"
+          >
             Alternative Mailadresse
           </div>
           <div
             v-if="!changeMail"
             :class="altMailConfirmed ? 'text-sogblue-dark' : 'text-gray'"
-            class="rounded bg-gray-light p-2 mb-4 w-full sm:max-w-lg"
+            class="rounded bg-gray-light p-2 mb-4 w-full sm:max-w-lg dark:bg-gray-800 dark:text-white"
           >
             {{ altMail }}
             <span v-if="!altMailConfirmed"> (nicht bestätigt)</span>
@@ -208,7 +217,7 @@
           <button
             v-if="!changeMail"
             type="button"
-            class="rounded py-2 px-4 bg-sogblue hover:bg-sogblue-darker text-white"
+            class="rounded py-2 px-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
             @click="toggleMail"
           >
             Alternative Mail-Adresse ändern
@@ -222,7 +231,7 @@
       >
         <div class="sm:flex flex-grow sm:mx-2">
           <div class="flex-grow flex-1 sm:min-w-56">
-            <label class="block text-sogblue-dark mb-1">
+            <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
               Neue alternative Mailadresse
             </label>
             <input
@@ -233,7 +242,7 @@
               :class="
                 emailError !== '' ? 'border-red-500 border-2' : 'border-none'
               "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
+              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
             />
           </div>
         </div>
@@ -246,16 +255,16 @@
             :disabled="!changeEmailSubmittable"
             :class="
               changeEmailSubmittable
-                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker'
-                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
+                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light'
+                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest dark:bg-gray-800 dark:hover:bg-gray-800'
             "
-            class="rounded py-2 px-4 mb-4 text-white"
+            class="rounded py-2 px-4 mb-4 text-white dark:text-black"
           >
             Ändern
           </button>
           <button
             type="reset"
-            class="rounded py-2 px-4 ml-2 bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white"
+            class="rounded py-2 px-4 ml-2 bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:border-gray-900"
             @click="untoggleMail"
           >
             Abbrechen
@@ -265,6 +274,30 @@
           {{ emailError }}
         </div>
       </form>
+    </div>
+    <div>
+      <hr class="border-gray-light dark:border-gray-700 my-4" />
+      <h1
+        class="text-sogblue-light dark:text-gray-400 text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
+      >
+        Darstellung
+      </h1>
+      <button
+        v-if="!forcedDarkMode"
+        type="button"
+        class="rounded py-2 px-4 sm:mt-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+        @click="forceDarkMode"
+      >
+        Dark-Mode erzwingen
+      </button>
+      <button
+        v-else
+        type="button"
+        class="rounded py-2 px-4 sm:mt-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+        @click="stopForcingDarkMode"
+      >
+        Dark-Mode nicht mehr erzwingen
+      </button>
     </div>
   </div>
 </template>
@@ -282,10 +315,6 @@ export default {
       },
     },
   },
-  fetch() {
-    this.$store.dispatch('user/loadUserDetails')
-  },
-  fetchOnServer: false,
   data: () => {
     return {
       changePwd: false,
@@ -302,6 +331,15 @@ export default {
       emailError: '',
     }
   },
+  fetch() {
+    this.$store.dispatch('user/loadUserDetails')
+  },
+  fetchOnServer: false,
+  head: () => {
+    return {
+      title: 'Mein Profil',
+    }
+  },
   computed: {
     ...mapGetters({
       name: 'user/name',
@@ -311,6 +349,7 @@ export default {
       altMailConfirmed: 'user/altMailConfirmed',
       pendingGroupName: 'user/pendingGroupName',
       pendingGroupOwners: 'user/pendingGroupOwners',
+      forcedDarkMode: 'user/forcedDarkMode',
     }),
   },
   watch: {
@@ -331,6 +370,12 @@ export default {
     },
   },
   methods: {
+    forceDarkMode() {
+      this.$store.dispatch('user/alertForceDarkMode')
+    },
+    stopForcingDarkMode() {
+      this.$store.dispatch('user/alertStopForcingDarkMode')
+    },
     changeEmail() {
       this.$store.dispatch('user/alertChangeAltMail', this.newEmail1)
       this.untoggleMail()
@@ -410,11 +455,6 @@ export default {
         this.emailError = ''
       }
     },
-  },
-  head: () => {
-    return {
-      title: 'Mein Profil',
-    }
   },
 }
 </script>

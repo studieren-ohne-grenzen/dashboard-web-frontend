@@ -7,6 +7,8 @@ export const state = () => ({
   inactive: false,
   pendingGroupName: '',
   pendingGroupOwners: [],
+  darkMode: false,
+  localDarkMode: false,
 })
 
 export const getters = {
@@ -18,14 +20,56 @@ export const getters = {
   inactive: (state) => state.inactive,
   pendingGroupName: (state) => state.pendingGroupName,
   pendingGroupOwners: (state) => state.pendingGroupOwners,
+  forcedDarkMode: (state) => state.darkMode,
+  darkMode: (state) => state.darkMode || state.localDarkMode,
 }
 
 export const actions = {
   async signOut(_) {
     await this.$auth.logout()
   },
-
-  alertChangeAltMail({ commit, getters }, altMail) {
+  alertForceDarkMode({ commit }) {
+    const message =
+      'Ob das Vogelnest im dunklen oder im hellen Design angezeigt wird,' +
+      ' richtet sich aktuell nach deiner Betriebssystem-Einstellung.' +
+      ' Wenn du den Dark-Mode erzwingst, wird das Vogelnest dir in Zukunft' +
+      ' immer im dunklen Design angezeigt, unabhängig von deiner aktuellen' +
+      ' Betriebssystem-Einstellung.'
+    commit(
+      'alertbox/showAlert',
+      {
+        title: 'Dark-Mode erzwingen',
+        message,
+        defaultToAction: true,
+        actionName: 'Dark-Mode erzwingen',
+        action: 'user/setDarkMode',
+        params: { darkModeState: true },
+      },
+      { root: true }
+    )
+  },
+  alertStopForcingDarkMode({ commit }) {
+    const message =
+      'Ob das Vogelnest im dunklen oder im hellen Design angezeigt wird,' +
+      ' richtet sich in Zukunft wieder nach deiner aktuellen Betriebssystem-Einstellung,' +
+      ' wenn du den Dark-Mode nicht mehr erzwingst.'
+    commit(
+      'alertbox/showAlert',
+      {
+        title: 'Dark-Mode nicht mehr erzwingen',
+        message,
+        defaultToAction: true,
+        actionName: 'Nicht mehr erzwingen',
+        action: 'user/setDarkMode',
+        params: { darkModeState: false },
+      },
+      { root: true }
+    )
+  },
+  setDarkMode({ commit }, { darkModeState }) {
+    commit('setDarkMode', { darkModeState })
+  },
+  alertChangeAltMail({ commit }, altMail) {
     const message =
       'Um deine alternative Mailadresse zu ändern, öffne den Link,' +
       ' den wir dir an deine neue alternative Mailadresse (' +
@@ -281,5 +325,11 @@ export const mutations = {
     if (user.pendingGroupName) state.pendingGroupName = user.pendingGroupName
     if (user.pendingGroupOwners)
       state.pendingGroupOwners = user.pendingGroupOwners
+  },
+  setDarkMode(state, { darkModeState }) {
+    state.darkMode = darkModeState
+  },
+  setLocalDarkMode(state, { darkModeState }) {
+    state.localDarkMode = darkModeState
   },
 }

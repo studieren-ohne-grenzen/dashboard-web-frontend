@@ -1,16 +1,16 @@
 <template>
   <div
     v-if="this.$store.getters['alertbox/active']"
-    class="top-0 left-0 w-full h-full fixed flex items-center sm:px-2 bg-sogblue-transparent"
+    class="top-0 left-0 w-full h-full fixed flex items-center sm:px-2 bg-sogblue-transparent dark:bg-black-transparent"
   >
     <form
-      class="p-4 max-w-2xl mx-auto bg-white sm:rounded shadow-2xl"
+      class="p-4 max-w-2xl mx-auto bg-white dark:bg-gray-900 sm:rounded shadow-2xl"
       @submit.prevent="confirmAction"
     >
-      <h1 class="text-2xl text-sogblue mb-2">
+      <h1 class="text-2xl text-sogblue dark:text-gray-400 mb-2">
         {{ this.$store.getters['alertbox/title'] }}
       </h1>
-      <div class="mb-4">
+      <div class="mb-4 dark:text-gray-300">
         {{ this.$store.getters['alertbox/message'] }}
       </div>
       <div class="w-full flex justify-end w-full">
@@ -34,7 +34,7 @@
               ? 'buttonactive'
               : 'buttoninactive'
           "
-          class="rounded flex-grow xs:flex-grow-0 py-2 px-4 border border-sogblue"
+          class="rounded flex-grow xs:flex-grow-0 py-2 px-4 border border-sogblue dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
         >
           {{ this.$store.getters['alertbox/actionName'] }}
         </button>
@@ -66,17 +66,17 @@ export default {
 
 <style scoped>
 .buttonactive {
-  @apply text-white;
-  @apply bg-sogblue;
+  @apply text-white dark:text-black;
+  @apply bg-sogblue-default;
 }
 .buttonactive:hover {
-  @apply bg-sogblue-darker;
+  @apply bg-sogblue-darker dark:bg-sogblue-light;
 }
 .buttoninactive {
-  @apply text-sogblue;
+  @apply text-sogblue-default dark:bg-gray-800 dark:text-gray-300 dark:border-gray-900;
 }
 .buttoninactive:hover {
   @apply text-white;
-  @apply bg-sogblue-light;
+  @apply bg-sogblue-light dark:bg-gray-700;
 }
 </style>

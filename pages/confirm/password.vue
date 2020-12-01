@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 class="mb-4 text-sogblue-light text-3xl">Passwort zurücksetzen</h1>
+    <h1 class="mb-4 text-sogblue-light dark:text-white text-3xl">
+      Passwort zurücksetzen
+    </h1>
     <ResetPassword />
     <AlertBox />
   </div>

@@ -11,3 +11,17 @@
         width: calc(200% - 100vw);
     }
 }
+
+body {
+    background-attachment: fixed;
+}
+
+body.light {
+    background-color: #00679e;
+    background-image: linear-gradient(20deg, #57b4dc 0%, #00679e 100%);
+}
+
+body.dark {
+    background-color: #0F172A;
+    background-image: linear-gradient(20deg, #003359 0%, #0F172A 100%);
+}

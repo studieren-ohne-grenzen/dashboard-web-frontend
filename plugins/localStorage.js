@@ -10,6 +10,7 @@ export default ({ store }) => {
       'user.username',
       'user.sogMail',
       'user.altMail',
+      'user.darkMode',
     ],
   })(store)
 }

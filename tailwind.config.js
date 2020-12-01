@@ -4,6 +4,8 @@
  ** Docs: https://tailwindcss.com/docs/configuration
  ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  */
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   theme: {
     extend: {
@@ -12,7 +14,8 @@ module.exports = {
           lightest: '#CCF1FF',
           lighter: '#71C5EA',
           light: '#57B4DC',
-          default: '#0098CF',
+          DEFAULT: '#0098CF',
+          default: '#0098CF', // work around for @apply
           dark: '#007EBB',
           darker: '#00679E',
           transparent: '#00679EAA',
@@ -24,13 +27,24 @@ module.exports = {
           yellowish: '#D9D279',
           light: '#edf2f7',
         },
+        black: {
+          transparent: '#000000AA',
+          DEFAULT: '#000000',
+        },
+        pink: colors.pink,
       },
       screens: {
         xs: '420px',
       },
     },
   },
-  variants: {},
+  darkMode: 'class',
+  variants: {
+    extend: {
+      opacity: ['dark'],
+      borderWidth: ['dark'],
+    },
+  },
   plugins: [],
   purge: {
     // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
