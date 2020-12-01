@@ -80,7 +80,7 @@
     <div>
       <hr class="border-gray-light dark:border-gray-700 my-4" />
       <h1
-        class="text-sogblue-light dark:text-gray-400 text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
+        class="text-sogblue-light dark:text-white text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
       >
         Sicherheit
       </h1>
@@ -173,7 +173,7 @@
     <div style="clear: left" class="mt-8">
       <hr class="border-gray-light dark:border-gray-700 my-4" />
       <h1
-        class="text-sogblue-light dark:text-gray-400 text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
+        class="text-sogblue-light dark:text-white text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
       >
         Email
       </h1>
@@ -278,7 +278,7 @@
     <div>
       <hr class="border-gray-light dark:border-gray-700 my-4" />
       <h1
-        class="text-sogblue-light dark:text-gray-400 text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
+        class="text-sogblue-light dark:text-white text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
       >
         Darstellung
       </h1>
