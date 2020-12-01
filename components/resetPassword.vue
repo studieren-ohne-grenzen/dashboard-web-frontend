@@ -1,14 +1,16 @@
 <template>
   <form @submit.prevent="resetPassword">
-    <label class="block text-sogblue-dark mb-1">Neues Passwort</label>
+    <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
+      Neues Passwort
+    </label>
     <input
       v-model="newPassword1"
       type="password"
       placeholder="********"
       :class="pwdError !== '' ? 'border-red-500 border-2' : 'border-none'"
-      class="p-2 mb-8 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
+      class="p-2 mb-8 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
     />
-    <label class="block text-sogblue-dark mb-1">
+    <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
       Neues Passwort wiederholen
     </label>
     <input
@@ -16,7 +18,7 @@
       type="password"
       placeholder="********"
       :class="pwdError !== '' ? 'border-red-500 border-2' : 'border-none'"
-      class="p-2 mb-8 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:shadow-outline focus:bg-white"
+      class="p-2 mb-8 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
     />
     <div v-if="pwdError !== ''" class="w-full text-red-600 mb-8">
       {{ pwdError }}
@@ -25,10 +27,10 @@
       :disabled="!changePwdSubmittable"
       :class="
         changePwdSubmittable
-          ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker'
-          : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest'
+          ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light'
+          : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest dark:bg-gray-800 dark:hover:bg-gray-800'
       "
-      class="rounded py-2 px-4 text-white"
+      class="rounded py-2 px-4 text-white dark:text-black"
     >
       {{ confirmText }}
     </button>
