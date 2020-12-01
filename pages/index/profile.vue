@@ -282,10 +282,6 @@ export default {
       },
     },
   },
-  fetch() {
-    this.$store.dispatch('user/loadUserDetails')
-  },
-  fetchOnServer: false,
   data: () => {
     return {
       changePwd: false,
@@ -300,6 +296,15 @@ export default {
       newEmail1: '',
       changeEmailSubmittable: false,
       emailError: '',
+    }
+  },
+  fetch() {
+    this.$store.dispatch('user/loadUserDetails')
+  },
+  fetchOnServer: false,
+  head: () => {
+    return {
+      title: 'Mein Profil',
     }
   },
   computed: {
@@ -410,11 +415,6 @@ export default {
         this.emailError = ''
       }
     },
-  },
-  head: () => {
-    return {
-      title: 'Mein Profil',
-    }
   },
 }
 </script>

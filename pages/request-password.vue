@@ -69,6 +69,11 @@ export default {
       changeEmailSubmittable: false,
     }
   },
+  head() {
+    return {
+      title: 'Passwort zurücksetzen',
+    }
+  },
   options: {
     auth: 'guest',
     layout: 'dark',
@@ -93,11 +98,6 @@ export default {
     sendRequest() {
       this.$store.dispatch('user/requestPassword', this.mail)
     },
-  },
-  head() {
-    return {
-      title: 'Passwort zurücksetzen',
-    }
   },
 }
 </script>

@@ -466,6 +466,11 @@ export default {
       addGuestSubmittable: false,
     }
   },
+  head() {
+    return {
+      title: this.thisGroup.name,
+    }
+  },
   computed: {
     thisGroup() {
       if (this.$store.getters['groups/currentGroup']) {
@@ -661,11 +666,6 @@ export default {
         this.nameError = ''
       }
     },
-  },
-  head() {
-    return {
-      title: this.thisGroup.name,
-    }
   },
 }
 </script>

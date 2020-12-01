@@ -159,14 +159,19 @@ export default {
   components: {
     GroupListing,
   },
-  fetch() {
-    this.$store.dispatch('groups/loadGroups')
-  },
-  fetchOnServer: false,
   data: () => {
     return {
       typeSelected: 'all',
       searchQuery: '',
+    }
+  },
+  fetch() {
+    this.$store.dispatch('groups/loadGroups')
+  },
+  fetchOnServer: false,
+  head: () => {
+    return {
+      title: 'Gruppen',
     }
   },
   computed: {
@@ -199,11 +204,6 @@ export default {
       if (type !== 'search') this.searchQuery = ''
       this.typeSelected = type
     },
-  },
-  head: () => {
-    return {
-      title: 'Gruppen',
-    }
   },
 }
 </script>
