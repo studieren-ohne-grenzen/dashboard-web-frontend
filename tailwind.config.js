@@ -12,7 +12,8 @@ module.exports = {
           lightest: '#CCF1FF',
           lighter: '#71C5EA',
           light: '#57B4DC',
-          default: '#0098CF',
+          DEFAULT: '#0098CF',
+          default: '#0098CF', // work around for @apply
           dark: '#007EBB',
           darker: '#00679E',
           transparent: '#00679EAA',

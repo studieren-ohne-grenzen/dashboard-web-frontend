@@ -212,13 +212,13 @@ export default {
 /* @apply is tailwind specific, not to be confused with the deprecated css @apply*/
 .groupactive {
   @apply text-white;
-  @apply bg-sogblue;
+  @apply bg-sogblue-default;
 }
 .groupactive:hover {
   @apply bg-sogblue-darker;
 }
 .groupinactive {
-  @apply text-sogblue;
+  @apply text-sogblue-default;
 }
 .groupinactive:hover {
   @apply text-white;

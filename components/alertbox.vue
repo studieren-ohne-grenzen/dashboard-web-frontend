@@ -67,13 +67,13 @@ export default {
 <style scoped>
 .buttonactive {
   @apply text-white;
-  @apply bg-sogblue;
+  @apply bg-sogblue-default;
 }
 .buttonactive:hover {
   @apply bg-sogblue-darker;
 }
 .buttoninactive {
-  @apply text-sogblue;
+  @apply text-sogblue-default;
 }
 .buttoninactive:hover {
   @apply text-white;

@@ -91,7 +91,7 @@ export default {
 }
 
 .tabactive:hover {
-  @apply text-sogblue;
+  @apply text-sogblue-default;
 }
 
 .tabinactive {
