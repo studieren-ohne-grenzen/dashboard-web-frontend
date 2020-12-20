@@ -6,7 +6,7 @@
 export default {
   head: {
     bodyAttrs: {
-      class: '',
+      class: 'light',
     },
   },
 }
