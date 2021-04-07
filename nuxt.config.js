@@ -93,6 +93,13 @@ export default {
     '@nuxtjs/proxy',
   ],
   /*
+   ** TailwindCSS module configuration
+   ** See: https://tailwindcss.nuxtjs.org/
+   */
+  tailwindcss: {
+    jit: true,
+  },
+  /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
