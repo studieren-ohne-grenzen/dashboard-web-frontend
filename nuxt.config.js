@@ -3,6 +3,11 @@ export default {
    ** Headers of the page
    */
   head: {
+    script: [
+      {
+        src: 'https://studieren-ohne-grenzen.github.io/nav/index.js',
+      },
+    ],
     title: '', // process.env.npm_package_name
     titleTemplate: (title) => {
       return title ? title + ' - SOG Vogelnest' : 'SOG Vogelnest'

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full lg:width-auto lg:width-container min-h-screen h-full lg:pt-8 pb-4 lg:pb-8"
+    class="w-full lg:width-auto lg:width-container min-h-screen h-full pt-8 pb-4 lg:pb-8"
   >
     <div class="flex flex-wrap sm:pt-4 sm:px-2 max-w-5xl m-auto items-end">
       <div class="w-screen sm:w-auto py-4 pb-6 sm:py-2 lg:pl-0 sm:pr-12">
@@ -16,7 +16,7 @@
           v-if="!$store.getters['user/inactive']"
           class="ml-2 sm:ml-0"
           :class="
-            this.$router.currentRoute.path === '/groups'
+            $router.currentRoute.path === '/groups'
               ? 'tabactive'
               : 'tabinactive'
           "
@@ -32,7 +32,7 @@
           v-if="!$store.getters['user/inactive']"
           class="ml-2 sm:ml-0"
           :class="
-            this.$router.currentRoute.path === '/profile'
+            $router.currentRoute.path === '/profile'
               ? 'tabactive'
               : 'tabinactive'
           "
