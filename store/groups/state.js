@@ -3,4 +3,5 @@ export default () => ({
   currentGroupID: '',
   requests: [],
   groupsAreLoading: true,
+  adminOfManyGroups: false,
 })

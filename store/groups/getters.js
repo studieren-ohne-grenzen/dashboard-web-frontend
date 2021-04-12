@@ -72,4 +72,6 @@ export default {
   requests: (state) => state.requests,
 
   loading: (state) => state.groupsAreLoading,
+
+  adminOfManyGroups: (state) => state.adminOfManyGroups,
 }

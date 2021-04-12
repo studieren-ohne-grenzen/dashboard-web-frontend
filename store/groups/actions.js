@@ -1,5 +1,5 @@
 export default {
-  loadGroups({ commit, getters }) {
+  loadGroups({ commit, getters }, withRequests = true) {
     commit('startLoading')
     Promise.all([
       this.$axios.get('api/groups'),
@@ -29,7 +29,13 @@ export default {
         commit('stopLoading')
         const adminGroups = getters.adminGroups
         const requests = []
-        if (adminGroups.length > 0) {
+        /* don't load requests for more than 15 groups because that would take a very long time
+         * e.g. do not load requests for dashboardadmin
+         */
+        if (adminGroups.length > 15) {
+          commit('setAdminOfManyGroups', true)
+        } else if (adminGroups.length > 0 && adminGroups.length <= 15) {
+          commit('setAdminOfManyGroups', false)
           for (const i in adminGroups) {
             requests.push(
               this.$axios.get(

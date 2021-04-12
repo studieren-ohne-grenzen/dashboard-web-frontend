@@ -1,24 +1,32 @@
 <template>
   <div>
     <h1
-      v-if="this.$store.getters['groups/requests'].length"
+      v-if="
+        $store.getters['groups/requests'].length ||
+        $store.getters['groups/adminOfManyGroups']
+      "
       class="text-sogblue-light dark:text-gray-400 text-3xl"
     >
       Anfragen an mich
     </h1>
     <div
-      v-if="this.$store.getters['groups/requests'].length"
+      v-if="$store.getters['groups/adminOfManyGroups']"
+      class="text-gray dark:text-gray-300 mb-8"
+    >
+      Du koordinierst sehr viele Gruppen, weshalb Anfragen an dich nicht für
+      alle Gruppen auf einmal geladen werden können. Öffne eine spezifische
+      Gruppe, um die Anfragen an dich in dieser Gruppe zu sehen.
+    </div>
+    <div
+      v-else-if="$store.getters['groups/requests'].length"
       class="text-gray dark:text-gray-300 mb-4"
     >
       In den folgenden von dir koordinierten Gruppen möchten Mitglieder
       beitreten:
     </div>
-    <div
-      v-if="this.$store.getters['groups/requests'].length"
-      class="flex flex-wrap"
-    >
+    <div v-if="$store.getters['groups/requests'].length" class="flex flex-wrap">
       <div
-        v-for="request in this.$store.getters['groups/requests']"
+        v-for="request in $store.getters['groups/requests']"
         :key="request.id"
         class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0 relative"
       >
@@ -51,7 +59,7 @@
       </div>
     </div>
     <hr
-      v-if="this.$store.getters['groups/requests'].length"
+      v-if="$store.getters['groups/requests'].length"
       class="border-gray-light dark:border-gray-700 my-4"
     />
     <div class="w-full flex flex-wrap justify-between mb-4">

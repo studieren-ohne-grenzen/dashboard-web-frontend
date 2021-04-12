@@ -13,6 +13,9 @@ export default {
       state.groupList.push(groups[g])
     }
   },
+  setAdminOfManyGroups(state, value) {
+    state.adminOfManyGroups = value
+  },
   setCurrentGroupID(state, groupID) {
     state.currentGroupID = groupID
   },
