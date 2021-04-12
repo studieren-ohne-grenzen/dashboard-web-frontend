@@ -76,14 +76,14 @@
           class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
         >
           <div
-            class="py-2 px-4 flex-grow border rounded-l border-r-0 border-gray dark:border-0"
+            class="py-2 px-4 flex-grow border rounded-l border-r-0 border-gray dark:border-0 dark:bg-gray-800 dark:text-gray-300"
             :title="pendingMember.uid"
           >
             {{ pendingMember.name }}
           </div>
           <button
             title="Mitglied hinzufügen"
-            class="border-t border-b border-gray-greenish"
+            class="border-t border-b border-gray-greenish rounded-r dark:border-0"
             @click="addActivePending(pendingMember.uid)"
           >
             <svg
@@ -98,7 +98,7 @@
           </button>
           <button
             title="Anfrage ablehnen"
-            class="border-t border-b border-gray-reddish rounded-r"
+            class="border-t border-b border-gray-reddish rounded-r dark:border-0"
             @click="declineActivePending(pendingMember.uid)"
           >
             <svg
@@ -118,14 +118,14 @@
           class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
         >
           <div
-            class="py-2 px-4 flex-grow border rounded-l border-r-0 border-gray dark:border-0"
+            class="py-2 px-4 flex-grow border rounded-l border-r-0 border-gray dark:border-0 dark:bg-gray-800 dark:text-gray-300"
             :title="pendingMember.uid"
           >
             {{ pendingMember.name }}
           </div>
           <button
             title="Mitglied freischalten"
-            class="border-t border-b border-gray-greenish rounded-r"
+            class="border-t border-b border-gray-greenish rounded-r dark:border-0"
             @click="addInactivePending(pendingMember.uid)"
           >
             <svg
@@ -396,7 +396,7 @@
           class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
         >
           <div
-            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray dark:border-0"
+            class="py-2 px-4 flex-grow border border-r-0 rounded-l border-gray dark:border-0 dark:bg-gray-800 dark:text-gray-300"
             :title="guest.uid"
           >
             {{ guest.name }}
