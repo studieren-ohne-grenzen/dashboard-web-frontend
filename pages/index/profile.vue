@@ -47,28 +47,22 @@
     <hr
       v-if="$store.getters['user/inactive']"
       style="clear: left"
-      class="border-gray-light dark:border-gray-700 my-4"
+      class="sog_hr"
     />
     <div class="sm:flex mb-8">
       <div
         class="hidden sm:block sm:invisible flex-shrink-0 h-40 w-40 sm:h-48 sm:w-48 my-2 sm:m-2 mx-auto sm:mr-10 bg-gray rounded-full text-lightgrey text-center"
       ></div>
       <div class="self-center flex-grow">
-        <div class="block text-sogblue-dark dark:text-gray-300 mb-1">Name</div>
-        <div
-          class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg dark:bg-gray-800 dark:text-white"
-        >
+        <div class="sog_textlabel">Name</div>
+        <div class="sog_textfield w-full sm:max-w-lg">
           {{ name }}
         </div>
-        <div class="block text-sogblue-dark dark:text-gray-300 mb-1">
-          Benutzername
-        </div>
-        <div
-          class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg dark:bg-gray-800 dark:text-white"
-        >
+        <div class="sog_textlabel">Benutzername</div>
+        <div class="sog_textfield w-full sm:max-w-lg">
           {{ username }}
         </div>
-        <div class="block text-gray dark:text-gray-400">
+        <div class="block dark:text-gray-400">
           Dein Name kann nur von der
           <a href="mailto:it@studieren-ohne-grenzen.org" class="underline"
             >SOG IT</a
@@ -78,7 +72,7 @@
       </div>
     </div>
     <div>
-      <hr class="border-gray-light dark:border-gray-700 my-4" />
+      <hr class="sog_hr" />
       <h1
         class="text-sogblue-light dark:text-white text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
       >
@@ -87,7 +81,7 @@
       <button
         v-if="!changePwd"
         type="button"
-        class="rounded py-2 px-4 sm:mt-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+        class="sm:mt-4 sog_button_active"
         @click="togglePwd"
       >
         Passwort ändern
@@ -98,9 +92,7 @@
         @submit.prevent="changePassword"
       >
         <div class="flex-grow sm:max-w-md sm:mx-2 sm:min-w-56">
-          <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
-            Aktuelles Passwort
-          </label>
+          <label class="sog_textlabel">Aktuelles Passwort</label>
           <input
             v-model="oldPassword"
             v-focus
@@ -108,58 +100,50 @@
             :class="
               errorOldPassword ? 'border-red-500 border-2' : 'border-none'
             "
-            class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+            class="sog_texteditor w-full"
           />
         </div>
         <div class="sm:flex flex-grow">
           <div class="flex-grow sm:mx-2 sm:min-w-56">
-            <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
-              Neues Passwort
-            </label>
+            <label class="sog_textlabel">Neues Passwort</label>
             <input
               v-model="newPassword1"
               type="password"
               :class="
                 errorNewPassword ? 'border-red-500 border-2' : 'border-none'
               "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+              class="sog_texteditor w-full"
             />
           </div>
           <div class="flex-grow sm:mx-2 sm:min-w-56">
-            <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
-              Neues Passwort wiederholen
-            </label>
+            <label class="sog_textlabel">Neues Passwort wiederholen</label>
             <input
               v-model="newPassword2"
               type="password"
               :class="
                 errorNewPassword ? 'border-red-500 border-2' : 'border-none'
               "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+              class="sog_texteditor w-full"
             />
           </div>
         </div>
-        <div
-          class="flex-grow sm:mx-2 block lg:hidden w-full block text-red-600 mb-4"
-        >
+        <div class="flex-grow sm:mx-2 lg:hidden w-full block text-red-600 mb-4">
           {{ pwdError }}
         </div>
         <div class="flex-grow-0 flex-shrink-0 sm:mx-2">
           <button
             type="submit"
-            class="rounded py-2 px-4 mb-4 text-white dark:text-black"
+            class="mb-4"
             :disabled="!changePwdSubmittable"
             :class="
-              changePwdSubmittable
-                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light'
-                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest dark:bg-gray-800 dark:hover:bg-gray-800'
+              changePwdSubmittable ? 'sog_button_active' : 'sog_button_inactive'
             "
           >
             Ändern
           </button>
           <button
             type="reset"
-            class="rounded py-2 px-4 ml-2 bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:border-gray-900"
+            class="ml-2 sog_button_secondary"
             @click="untogglePwd"
           >
             Abbrechen
@@ -171,7 +155,7 @@
       </form>
     </div>
     <div style="clear: left" class="mt-8">
-      <hr class="border-gray-light dark:border-gray-700 my-4" />
+      <hr class="sog_hr" />
       <h1
         class="text-sogblue-light dark:text-white text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
       >
@@ -182,9 +166,7 @@
           <div class="text-sogblue-dark dark:text-gray-300 mb-1">
             SOG-Mailadresse
           </div>
-          <div
-            class="rounded bg-gray-light text-sogblue-dark p-2 mb-4 w-full sm:max-w-lg dark:bg-gray-800 dark:text-white"
-          >
+          <div class="sog_textfield w-full sm:max-w-lg">
             {{ sogMail }}
           </div>
           <div class="text-gray dark:text-gray-400 mb-4 sm:max-w-lg">
@@ -200,16 +182,13 @@
               >XWiki</a
             >.
           </div>
-          <div
-            v-if="!changeMail"
-            class="text-sogblue-dark dark:text-gray-300 mb-1"
-          >
+          <div v-if="!changeMail" class="sog_textlabel">
             Alternative Mailadresse
           </div>
           <div
             v-if="!changeMail"
-            :class="altMailConfirmed ? 'text-sogblue-dark' : 'text-gray'"
-            class="rounded bg-gray-light p-2 mb-4 w-full sm:max-w-lg dark:bg-gray-800 dark:text-white"
+            :class="altMailConfirmed ? '' : '!text-gray'"
+            class="sog_textfield w-full sm:max-w-lg"
           >
             {{ altMail }}
             <span v-if="!altMailConfirmed"> (nicht bestätigt)</span>
@@ -217,7 +196,7 @@
           <button
             v-if="!changeMail"
             type="button"
-            class="rounded py-2 px-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+            class="sog_button_active"
             @click="toggleMail"
           >
             Alternative Mail-Adresse ändern
@@ -231,9 +210,7 @@
       >
         <div class="sm:flex flex-grow sm:mx-2">
           <div class="flex-grow flex-1 sm:min-w-56">
-            <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
-              Neue alternative Mailadresse
-            </label>
+            <label class="sog_textlabel">Neue alternative Mailadresse</label>
             <input
               v-model="newEmail1"
               v-focus
@@ -242,7 +219,7 @@
               :class="
                 emailError !== '' ? 'border-red-500 border-2' : 'border-none'
               "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+              class="sog_texteditor w-full"
             />
           </div>
         </div>
@@ -255,16 +232,16 @@
             :disabled="!changeEmailSubmittable"
             :class="
               changeEmailSubmittable
-                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light'
-                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest dark:bg-gray-800 dark:hover:bg-gray-800'
+                ? 'sog_button_active'
+                : 'sog_button_inactive'
             "
-            class="rounded py-2 px-4 mb-4 text-white dark:text-black"
+            class="mb-4"
           >
             Ändern
           </button>
           <button
             type="reset"
-            class="rounded py-2 px-4 ml-2 bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:border-gray-900"
+            class="ml-2 sog_button_secondary"
             @click="untoggleMail"
           >
             Abbrechen
@@ -276,7 +253,7 @@
       </form>
     </div>
     <div>
-      <hr class="border-gray-light dark:border-gray-700 my-4" />
+      <hr class="sog_hr" />
       <h1
         class="text-sogblue-light dark:text-white text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
       >
@@ -285,7 +262,7 @@
       <button
         v-if="!forcedDarkMode"
         type="button"
-        class="rounded py-2 px-4 sm:mt-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+        class="sm:mt-4 sog_button_active"
         @click="forceDarkMode"
       >
         Dark-Mode erzwingen
@@ -293,7 +270,7 @@
       <button
         v-else
         type="button"
-        class="rounded py-2 px-4 sm:mt-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+        class="sm:mt-4 sog_button_active"
         @click="stopForcingDarkMode"
       >
         Dark-Mode nicht mehr erzwingen

@@ -37,15 +37,11 @@
           placeholder="********"
           class="p-2 mb-8 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
         />
-        <button
-          class="xs:float-left rounded py-2 px-4 bg-sogblue hover:bg-sogblue-darker text-white dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
-        >
-          Login
-        </button>
+        <button class="xs:float-left sog_button_active">Login</button>
         <div class="w-full mt-8 xs:mt-0 mb-8">
           <nuxt-link
             to="/request-password"
-            class="xs:float-right rounded py-2 px-4 bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:border-gray-900"
+            class="xs:float-right sog_button_secondary"
           >
             Passwort vergessen
           </nuxt-link>

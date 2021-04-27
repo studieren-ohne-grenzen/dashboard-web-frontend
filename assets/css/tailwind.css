@@ -2,70 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@responsive {
-  .min-w-56 {
-    min-width: 14rem;
-  }
-  .width-container {
-    margin-left: calc(100vw - 100%);
-    width: calc(200% - 100vw);
-  }
-}
-
-body:after {
-  content:"";
-  position:fixed; /* stretch a fixed position to the whole screen */
-  top:0;
-  height:100vh; /* fix for mobile browser address bar appearing disappearing */
-  left:0;
-  right:0;
-  z-index:-1; /* needed to keep in the background */
-  background-attachment: fixed;
-}
-
-body.light:after {
-  background-color: #00679e;
-  background-image: linear-gradient(20deg, #57b4dc 0%, #00679e 100%);
-}
-
-body.dark:after {
-  background-color: #0F172A;
-  background-image: linear-gradient(20deg, #003359 0%, #0F172A 100%);
-}
-
-/* Fixes for SOG Nav overwriting tailwind preflight */
-
-.SOGNav__PullHandle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  line-height: 1;
-  border-color: rgba(255, 255, 255, 0.7);
-  border-style: solid;
-  border-width: 0px 1px 1px 1px;
-}
-
-
-.SOGNav__Logo {
-  height: 30px;
-}
-
-.SOGNav__MenuItem svg {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0px;
-}
-
-.SOGNav__MenuItem {
-  line-height: 0.75;
-}
-
-@media screen and (max-width: 600px) {
-  .SOGNav__MenuItem {
-    line-height: 1;
-  }
-}
-
-.SOGNav__MenuItem__Help {
-  line-height: 1.5;
-}
+@import './sognav.css';
+@import './components.css';
+@import './tailwind_additional.css';
+@import './body.css';

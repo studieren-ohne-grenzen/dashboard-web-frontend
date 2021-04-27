@@ -11,7 +11,7 @@
         v-model="searchQuery"
         type="text"
         placeholder="Mitglieder suchen"
-        class="bg-gray-light rounded mb-4 mt-4 sm:mt-0 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:ring-2 focus:bg-white p-2 dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+        class="mt-4 sm:mt-0 flex-grow xs:flex-grow-0 sog_texteditor"
       />
       <button
         v-if="thisGroup.membership === 'member' && thisGroup.id !== 'allgemein'"
@@ -236,7 +236,7 @@
           Mitglieder
         </h2>
         <button
-          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker mb-1 dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+          class="w-full xs:w-auto sog_button_active"
           @click="openAddUsers"
         >
           Mitglied hinzufügen
@@ -316,7 +316,7 @@
           Mitglieder hinzufügen
         </h2>
         <button
-          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+          class="w-full xs:w-auto sog_button_active"
           @click="closeAddUsers"
         >
           Fertig
@@ -360,7 +360,7 @@
       <div class="w-full flex flex-wrap justify-between items-center">
         <h2 class="text-sogblue-light dark:text-white text-3xl mb-1">Gäste</h2>
         <button
-          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker mb-1 dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+          class="w-full xs:w-auto sog_button_active"
           @click="openAddGuests"
         >
           Gast hinzufügen
@@ -426,7 +426,7 @@
           Gäste hinzufügen
         </h2>
         <button
-          class="rounded w-full xs:w-auto py-2 px-4 text-white bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black"
+          class="w-full xs:w-auto sog_button_active"
           @click="closeAddGuests"
         >
           Fertig
@@ -470,11 +470,9 @@
             type="button"
             :disabled="!addGuestSubmittable"
             :class="
-              addGuestSubmittable
-                ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light'
-                : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest dark:bg-gray-800 dark:hover:bg-gray-800'
+              addGuestSubmittable ? 'sog_button_active' : 'sog_button_inactive'
             "
-            class="rounded py-2 px-4 mb-4 text-white dark:text-black"
+            class="mb-4"
             @click="addGuest"
           >
             Hinzufügen

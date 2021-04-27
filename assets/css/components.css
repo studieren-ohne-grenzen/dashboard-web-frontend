@@ -1,0 +1,49 @@
+/* custom styles for re-occuring components */
+
+@layer components {
+  .sog_button {
+    @apply rounded py-2 px-4;
+    @apply transition-colors;
+  }
+
+  .sog_button_active {
+    @apply sog_button cursor-pointer;
+    @apply bg-sogblue hover:bg-sogblue-darker text-white;
+    @apply dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black;
+  }
+
+  .sog_button_inactive {
+    @apply sog_button cursor-default;
+    @apply bg-sogblue-lightest hover:bg-sogblue-lightest text-white;
+    @apply dark:bg-gray-800 dark:hover:bg-gray-800 dark:text-black;
+  }
+
+  .sog_button_secondary {
+    @apply sog_button cursor-pointer;
+    @apply bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white;
+    @apply dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:border-gray-900;
+  }
+
+  .sog_hr {
+    @apply my-4;
+    @apply border-gray-light dark:border-gray-700;
+  }
+
+  .sog_textfield {
+    @apply rounded p-2 mb-4;
+    @apply bg-gray-light text-sogblue-dark;
+    @apply dark:bg-gray-800 dark:text-white;
+  }
+
+  .sog_texteditor {
+    @apply sog_textfield;
+    @apply appearance-none transition-colors;
+    @apply focus:ring-2 focus:bg-white;
+    @apply dark:focus:bg-gray-700 dark:focus:ring-gray-500;
+  }
+
+  .sog_textlabel {
+    @apply block mb-1;
+    @apply text-sogblue-dark dark:text-gray-300;
+  }
+}

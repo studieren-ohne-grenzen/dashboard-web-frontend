@@ -1,0 +1,23 @@
+/* tweak the layout such that it doesn't jump with (dis-)appearing scroll bars */
+body:after {
+  content:"";
+  @apply inset-0 bg-fixed;
+  @apply fixed; /* stretch a fixed position to the whole screen */
+  @apply h-screen; /* fix for mobile browser address bar appearing disappearing */
+  z-index:-1; /* needed to keep in the background */
+}
+
+/* add gradients to background */
+body:after {
+  @apply bg-gradient-to-tr;
+}
+
+body.light:after {
+  @apply bg-sogblue-darker;
+  @apply from-sogblue-light to-sogblue-darker;
+}
+
+body.dark:after {
+  @apply bg-gray-900;
+  @apply from-sogblue-darkest to-gray-900;
+}

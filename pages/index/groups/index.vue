@@ -99,7 +99,7 @@
         v-model="searchQuery"
         type="text"
         placeholder="Gruppe suchen"
-        class="bg-gray-light rounded mb-4 flex-grow xs:flex-grow-0 appearance-none text-sogblue-darker focus:ring-2 focus:bg-white p-2 dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+        class="flex-grow xs:flex-grow-0 sog_texteditor"
         @focus="changeTypeSelected('search')"
       />
     </div>
@@ -219,8 +219,7 @@ export default {
 }
 </script>
 
-<style>
-/* @apply is tailwind specific, not to be confused with the deprecated css @apply*/
+<style lang="postcss">
 .groupactive {
   @apply text-white;
   @apply bg-sogblue-default dark:bg-gray-700;

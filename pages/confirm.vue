@@ -5,9 +5,7 @@
       src="~/static/logo.png"
       class="mx-auto py-8 px-2 w-64 dark:opacity-80"
     />
-    <div
-      class="bg-white dark:bg-gray-900 max-w-md bg-white xs:mx-auto xs:rounded p-8"
-    >
+    <div class="bg-white dark:bg-gray-900 max-w-md xs:mx-auto xs:rounded p-8">
       <Nuxt-child></Nuxt-child>
     </div>
   </div>
