@@ -19,23 +19,19 @@
         Fehler bei der Kommunikation mit dem Server
       </div>
       <form @submit.prevent="login">
-        <label class="block text-sogblue-dark dark:text-gray-300 mb-1">
-          Benutzername
-        </label>
+        <label class="sog_textlabel">Benutzername</label>
         <input
           ref="username"
           v-model="username"
           placeholder="vorname.nachname"
-          class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+          class="w-full sog_texteditor"
         />
-        <label class="block text-sogblue-dark mb-1 dark:text-gray-300">
-          Passwort
-        </label>
+        <label class="sog_textlabel">Passwort</label>
         <input
           v-model="password"
           type="password"
           placeholder="********"
-          class="p-2 mb-8 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+          class="w-full sog_texteditor !mb-8"
         />
         <button class="xs:float-left sog_button_active">Login</button>
         <div class="w-full mt-8 xs:mt-0 mb-8">

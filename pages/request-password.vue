@@ -5,9 +5,7 @@
       src="logo.png"
       class="mx-auto py-8 px-2 w-64 dark:opacity-80"
     />
-    <div
-      class="bg-white max-w-md bg-white dark:bg-gray-900 xs:mx-auto xs:rounded p-8"
-    >
+    <div class="bg-white max-w-md dark:bg-gray-900 xs:mx-auto xs:rounded p-8">
       <form @submit.prevent="sendRequest">
         <label class="block text-sogblue-dark mb-1 dark:text-gray-300">
           Alternative Mail
@@ -17,7 +15,7 @@
           v-model="mail"
           v-focus
           :class="emailError ? 'border-red-500 border-2' : 'border-none'"
-          class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+          class="w-full sog_texteditor !mb-8"
         />
         <div
           v-if="emailError"
@@ -28,19 +26,14 @@
         <button
           :disabled="!changeEmailSubmittable"
           :class="
-            changeEmailSubmittable
-              ? 'cursor-pointer bg-sogblue hover:bg-sogblue-darker dark:bg-sogblue dark:hover:bg-sogblue-light'
-              : 'cursor-default bg-sogblue-lightest hover:bg-sogblue-lightest dark:bg-gray-800 dark:hover:bg-gray-800'
+            changeEmailSubmittable ? 'sog_button_active' : 'sog_button_inactive'
           "
-          class="xs:float-left rounded py-2 px-4 text-white dark:text-black"
+          class="xs:float-left"
         >
           Zurücksetzen
         </button>
         <div class="w-full mt-8 xs:mt-0 mb-12">
-          <nuxt-link
-            to="/login"
-            class="xs:float-right rounded py-2 px-4 bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:border-gray-900"
-          >
+          <nuxt-link to="/login" class="xs:float-right sog_button_secondary">
             Abbrechen
           </nuxt-link>
         </div>
