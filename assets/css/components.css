@@ -3,42 +3,42 @@
 @layer components {
   .sog_button {
     @apply rounded py-2 px-4;
-    @apply transition-colors;
+    @apply transition-colors outline-none focus:outline-none;
+    @apply bg-sogblue hover:bg-sogblue-dark text-white;
+    @apply dark:bg-sogblue-darkest dark:hover:bg-sogblue-darker dark:text-white;
   }
 
   .sog_button_active {
     @apply sog_button cursor-pointer;
-    @apply bg-sogblue hover:bg-sogblue-darker text-white;
-    @apply dark:bg-sogblue dark:hover:bg-sogblue-light dark:text-black;
   }
 
   .sog_button_inactive {
     @apply sog_button cursor-default;
-    @apply bg-sogblue-lightest hover:bg-sogblue-lightest text-white;
-    @apply dark:bg-gray-800 dark:hover:bg-gray-800 dark:text-black;
+    @apply bg-opacity-20 hover:bg-sogblue hover:bg-opacity-20;
+    @apply dark:bg-opacity-50 dark:hover:bg-opacity-50 dark:hover:bg-sogblue-darkest dark:text-black;
   }
 
   .sog_button_secondary {
     @apply sog_button cursor-pointer;
-    @apply bg-white border border-sogblue hover:bg-sogblue-light text-sogblue hover:text-white;
-    @apply dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:border-gray-900;
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-700;
+    @apply dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:border-gray-800;
   }
 
   .sog_hr {
     @apply my-4;
-    @apply border-gray-light dark:border-gray-700;
+    @apply border-gray-100 dark:border-gray-700;
   }
 
   .sog_textfield {
     @apply rounded p-2 mb-4;
-    @apply bg-gray-light text-sogblue-dark;
+    @apply bg-gray-100 text-sogblue-dark;
     @apply dark:bg-gray-800 dark:text-white;
   }
 
   .sog_texteditor {
     @apply sog_textfield;
-    @apply appearance-none transition-colors;
-    @apply focus:ring-2 focus:bg-white;
+    @apply appearance-none outline-none transition-colors;
+    @apply focus:ring-2 ring-sogblue-dark focus:bg-white;
     @apply dark:focus:bg-gray-700 dark:focus:ring-gray-500;
   }
 

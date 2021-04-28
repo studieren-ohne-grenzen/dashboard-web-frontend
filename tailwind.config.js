@@ -8,6 +8,12 @@ const colors = require('tailwindcss/colors')
 
 module.exports = {
   theme: {
+    colors: {
+      gray: colors.blueGray,
+      white: colors.white,
+      green: colors.teal,
+      red: colors.pink,
+    },
     extend: {
       colors: {
         sogblue: {
@@ -22,17 +28,14 @@ module.exports = {
           transparent: '#00679EAA',
         },
         gray: {
-          default: '#a0aec0',
           greenish: '#B7CE8D',
           reddish: '#C78086',
           yellowish: '#D9D279',
-          light: '#edf2f7',
         },
         black: {
           transparent: '#000000AA',
           DEFAULT: '#000000',
         },
-        pink: colors.pink,
       },
       screens: {
         xs: '420px',

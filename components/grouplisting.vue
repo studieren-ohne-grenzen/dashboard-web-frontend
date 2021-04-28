@@ -35,7 +35,7 @@
         </nuxt-link>
         <div
           v-else-if="group.membership == 'member' && group.id !== 'allgemein'"
-          class="text-white dark:text-gray-300 flex-none bg-gray-reddish dark:bg-pink-900 rounded-r w-10 p-2 cursor-pointer"
+          class="text-white dark:text-gray-300 flex-none bg-gray-reddish dark:bg-red-900 rounded-r w-10 p-2 cursor-pointer"
           @click="cancelMembership(group.id)"
         >
           <svg
@@ -50,7 +50,7 @@
         </div>
         <div
           v-else-if="group.membership == 'member' && group.id == 'allgemein'"
-          class="text-white dark:text-gray-300 flex-none bg-gray-default dark:bg-gray-700 rounded-r w-10 p-2 cursor-pointer"
+          class="text-white dark:text-gray-300 flex-none bg-gray-300 dark:bg-gray-700 rounded-r w-10 p-2 cursor-pointer"
           @click="infoAllgemein()"
         >
           <svg

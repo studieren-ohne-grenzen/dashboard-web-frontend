@@ -14,7 +14,7 @@
       <ul class="flex flex-grow">
         <li
           v-if="!$store.getters['user/inactive']"
-          class="ml-2 sm:ml-0"
+          class="ml-2 sm:ml-0 tab"
           :class="
             $router.currentRoute.path === '/groups'
               ? 'tabactive'
@@ -30,7 +30,7 @@
         </li>
         <li
           v-if="!$store.getters['user/inactive']"
-          class="ml-2 sm:ml-0"
+          class="ml-2 tab"
           :class="
             $router.currentRoute.path === '/profile'
               ? 'tabactive'
@@ -118,25 +118,23 @@ export default {
 }
 </script>
 
-<style>
-.tabactive {
-  @apply px-1;
-  @apply h-10;
+<style lang="postcss">
+.tab {
+  @apply px-1 rounded-t transition-colors;
   @apply bg-white dark:bg-gray-900;
-  @apply rounded-t;
+}
+
+.tabactive {
   @apply text-sogblue-darker dark:text-white;
 }
 
-.tabactive:hover {
-  @apply text-sogblue-default dark:text-white;
-}
-
 .tabinactive {
-  @apply px-1;
+  @apply bg-opacity-10 dark:bg-opacity-50;
   @apply text-white dark:text-gray-300;
 }
 
 .tabinactive:hover {
-  @apply text-white;
+  @apply bg-opacity-30 dark:bg-opacity-70;
+  @apply dark:text-white;
 }
 </style>
