@@ -10,7 +10,7 @@
       <div
         v-for="group in groups"
         :key="group.name"
-        class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0"
+        class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0 relative"
       >
         <nuxt-link
           :to="'/groups/' + encodeURIComponent(group.id)"
@@ -34,7 +34,14 @@
           </svg>
         </nuxt-link>
         <div
-          v-else-if="group.membership == 'member' && group.id !== 'allgemein'"
+          v-if="group.count"
+          class="bg-red-600 dark:bg-red-900 rounded-full w-6 h-6 text-center text-white dark:text-gray-300 absolute leading-6"
+          style="top: -8px; right: -8px"
+        >
+          {{ group.count }}
+        </div>
+        <div
+          v-if="group.membership == 'member' && group.id !== 'allgemein'"
           class="text-white dark:text-gray-300 flex-none bg-gray-reddish dark:bg-red-900 rounded-r w-10 p-2 cursor-pointer"
           @click="cancelMembership(group.id)"
         >

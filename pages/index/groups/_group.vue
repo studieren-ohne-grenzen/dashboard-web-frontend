@@ -445,7 +445,7 @@
               :class="
                 nameError !== '' ? 'border-red-500 border-2' : 'border-none'
               "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+              class="sog_texteditor w-full"
             />
           </div>
           <div class="sm:ml-4 flex-grow flex-1 sm:min-w-56">
@@ -458,7 +458,7 @@
               :class="
                 emailError !== '' ? 'border-red-500 border-2' : 'border-none'
               "
-              class="p-2 mb-4 w-full rounded appearance-none bg-gray-light text-sogblue-darker focus:ring-2 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:focus:ring-gray-500"
+              class="w-full sog_texteditor"
             />
           </div>
         </div>

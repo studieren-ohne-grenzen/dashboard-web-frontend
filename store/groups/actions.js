@@ -85,6 +85,7 @@ export default {
                   id,
                   count: membershipRequests[id],
                   name: adminGroups.find((group) => group.id === id).name,
+                  membership: 'admin',
                 })
               }
               commit('setRequests', groupsWithRequests)
