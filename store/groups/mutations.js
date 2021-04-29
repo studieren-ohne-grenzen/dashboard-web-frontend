@@ -51,7 +51,7 @@ export default {
     const guest = {
       name,
       email,
-      uid: 'guest' + name.toLowerCase().replace(/ /i, '.'),
+      uid: 'guest.' + name.toLowerCase().replace(/ /i, '.'),
     }
     state.groupList.find((group) => group.id === groupID).guests.push(guest)
   },
