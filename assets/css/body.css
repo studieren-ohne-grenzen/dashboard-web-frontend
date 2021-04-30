@@ -21,3 +21,13 @@ body.dark:after {
   @apply bg-gray-900;
   @apply from-sogblue-darkest to-gray-900;
 }
+
+/* add global page transitions */
+.page-enter-active,
+.page-leave-active {
+  @apply transition-all duration-300;
+}
+.page-enter,
+.page-leave-to {
+  @apply opacity-0 scale-99 transform-gpu;
+}
