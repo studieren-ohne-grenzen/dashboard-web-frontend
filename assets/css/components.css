@@ -38,8 +38,10 @@
   .sog_texteditor {
     @apply sog_textfield;
     @apply appearance-none outline-none transition-colors;
-    @apply focus:ring-2 ring-sogblue-dark focus:bg-white;
-    @apply dark:focus:bg-gray-700 dark:focus:ring-gray-500;
+    @apply focus:ring-2 hover:ring-2 ring-sogblue-dark focus:bg-white;
+    @apply dark:focus:bg-gray-900 dark:focus:ring-gray-500;
+    @apply hover:bg-opacity-50 hover:ring-opacity-20 hover:focus:ring-opacity-100;
+    @apply dark:hover:bg-opacity-50 dark:hover:ring-gray-700 dark:hover:focus:ring-gray-500;
   }
 
   .sog_textlabel {

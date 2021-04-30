@@ -159,7 +159,7 @@ export default {
 <style lang="postcss">
 .group_selector {
   @apply px-1 xs:px-4 py-2 flex-grow;
-  @apply border-sogblue dark:border-gray-900;
+  @apply border-sogblue dark:border-gray-800;
   @apply leading-tight text-sm xs:text-base;
   @apply transition-colors outline-none focus:outline-none;
 }
@@ -169,10 +169,10 @@ export default {
 }
 .groupinactive {
   @apply bg-sogblue-default bg-opacity-0 text-sogblue-default;
-  @apply dark:text-gray-300 dark:bg-gray-800;
+  @apply dark:text-gray-300 dark:bg-gray-900;
 }
 .groupinactive:hover {
   @apply bg-opacity-10;
-  @apply dark:bg-gray-700;
+  @apply dark:bg-gray-800 dark:text-white;
 }
 </style>
