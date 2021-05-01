@@ -60,6 +60,10 @@ export default {
    */
   loading: { color: '#fff' },
   /*
+   ** Add custom global page transition
+   */
+  pageTransition: 'fade',
+  /*
    ** Global CSS
    */
   css: [],

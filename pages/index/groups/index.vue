@@ -1,38 +1,46 @@
 <template>
   <div>
-    <h1
-      v-if="
-        $store.getters['groups/requests'].length ||
-        $store.getters['groups/adminOfManyGroups']
-      "
-      class="text-sogblue-light dark:text-gray-400 text-3xl"
-    >
-      Anfragen an mich
-    </h1>
-    <div
-      v-if="$store.getters['groups/adminOfManyGroups']"
-      class="text-gray dark:text-gray-300 mb-8"
-    >
-      Du koordinierst sehr viele Gruppen, weshalb Anfragen an dich nicht für
-      alle Gruppen auf einmal geladen werden können. Öffne eine spezifische
-      Gruppe, um die Anfragen an dich in dieser Gruppe zu sehen.
-    </div>
-    <div
-      v-else-if="$store.getters['groups/requests'].length"
-      class="text-gray dark:text-gray-300 mb-4"
-    >
-      In den folgenden von dir koordinierten Gruppen möchten Mitglieder
-      beitreten:
-      <GroupListing
-        class="mt-4"
-        :groups="$store.getters['groups/requests']"
-        name=""
+    <transition name="fade">
+      <h1
+        v-if="
+          $store.getters['groups/requests'].length ||
+          $store.getters['groups/adminOfManyGroups']
+        "
+        class="text-sogblue-light dark:text-gray-400 text-3xl"
+      >
+        Anfragen an mich
+      </h1>
+    </transition>
+    <transition name="fade">
+      <div
+        v-if="$store.getters['groups/adminOfManyGroups']"
+        class="text-gray dark:text-gray-300 mb-8"
+      >
+        Du koordinierst sehr viele Gruppen, weshalb Anfragen an dich nicht für
+        alle Gruppen auf einmal geladen werden können. Öffne eine spezifische
+        Gruppe, um die Anfragen an dich in dieser Gruppe zu sehen.
+      </div>
+    </transition>
+    <transition name="fade">
+      <div
+        v-if="$store.getters['groups/requests'].length"
+        class="text-gray dark:text-gray-300 mb-4"
+      >
+        In den folgenden von dir koordinierten Gruppen möchten Mitglieder
+        beitreten:
+        <GroupListing
+          class="mt-4"
+          :groups="$store.getters['groups/requests']"
+          name=""
+        />
+      </div>
+    </transition>
+    <transition name="fade">
+      <hr
+        v-if="$store.getters['groups/requests'].length"
+        class="border-gray-light dark:border-gray-700 my-4"
       />
-    </div>
-    <hr
-      v-if="$store.getters['groups/requests'].length"
-      class="border-gray-light dark:border-gray-700 my-4"
-    />
+    </transition>
     <div class="w-full flex flex-wrap justify-between mb-4">
       <div class="mb-4 xs:mr-4 flex-grow xs:flex-grow-0 w-auto inline-flex">
         <button
@@ -66,16 +74,27 @@
       {{ statusMessage }}
     </div>
 
-    <div v-if="typeSelected === 'all'">
-      <div v-for="(category, index) in nonEmptyCategories" :key="category.name">
-        <GroupListing :groups="category.getter" :name="category.name" />
-        <hr
-          v-if="index !== nonEmptyCategories.length - 1"
-          class="border-gray-light dark:border-gray-700 my-4"
-        />
+    <transition name="fade">
+      <div v-if="typeSelected === 'all'">
+        <div
+          v-for="(category, index) in nonEmptyCategories"
+          :key="category.name"
+        >
+          <GroupListing :groups="category.getter" :name="category.name" />
+          <hr
+            v-if="index !== nonEmptyCategories.length - 1"
+            class="border-gray-light dark:border-gray-700 my-4"
+          />
+        </div>
       </div>
-    </div>
-    <GroupListing v-else-if="groupsSelected" :groups="groupsSelected" name="" />
+    </transition>
+    <transition name="fade">
+      <GroupListing
+        v-if="typeSelected !== 'all' && groupsSelected"
+        :groups="groupsSelected"
+        name=""
+      />
+    </transition>
   </div>
 </template>
 

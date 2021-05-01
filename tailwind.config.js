@@ -41,9 +41,6 @@ module.exports = {
       screens: {
         xs: '420px',
       },
-      scale: {
-        99: '.99',
-      },
     },
   },
   darkMode: 'class',
