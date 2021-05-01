@@ -15,7 +15,7 @@
           v-model="mail"
           v-focus
           :class="emailError ? 'border-red-500 border-2' : 'border-none'"
-          class="w-full sog_texteditor !mb-8"
+          class="w-full sog_texteditor"
         />
         <div
           v-if="emailError"
@@ -23,17 +23,19 @@
         >
           Keine gültige Mailadresse eingegeben.
         </div>
-        <button
-          :disabled="!changeEmailSubmittable"
-          :class="
-            changeEmailSubmittable ? 'sog_button_active' : 'sog_button_inactive'
-          "
-          class="xs:float-left"
-        >
-          Zurücksetzen
-        </button>
-        <div class="w-full mt-8 xs:mt-0 mb-12">
-          <nuxt-link to="/login" class="xs:float-right sog_button_secondary">
+        <div class="flex mb-8 justify-between flex-wrap items-end">
+          <button
+            :disabled="!changeEmailSubmittable"
+            :class="
+              changeEmailSubmittable
+                ? 'sog_button_active'
+                : 'sog_button_inactive'
+            "
+            class="mr-2 mt-4"
+          >
+            Zurücksetzen
+          </button>
+          <nuxt-link to="/login" class="sog_button_secondary mt-4">
             Abbrechen
           </nuxt-link>
         </div>

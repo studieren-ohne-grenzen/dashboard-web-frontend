@@ -23,6 +23,7 @@
         <input
           ref="username"
           v-model="username"
+          v-focus
           placeholder="vorname.nachname"
           class="w-full sog_texteditor"
         />
@@ -31,14 +32,11 @@
           v-model="password"
           type="password"
           placeholder="********"
-          class="w-full sog_texteditor !mb-8"
+          class="w-full sog_texteditor"
         />
-        <button class="xs:float-left sog_button_active">Login</button>
-        <div class="w-full mt-8 xs:mt-0 mb-8">
-          <nuxt-link
-            to="/request-password"
-            class="xs:float-right sog_button_secondary"
-          >
+        <div class="flex mb-8 justify-between flex-wrap items-end">
+          <button class="sog_button_active mr-2 mt-4">Login</button>
+          <nuxt-link to="/request-password" class="sog_button_secondary mt-4">
             Passwort vergessen
           </nuxt-link>
         </div>
@@ -49,6 +47,13 @@
 
 <script>
 export default {
+  directives: {
+    focus: {
+      inserted: (el) => {
+        el.focus()
+      },
+    },
+  },
   data() {
     return {
       username: '',
