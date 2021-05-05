@@ -1,11 +1,11 @@
 <template>
   <div>
     <div v-if="$store.getters['user/inactive']" class="sm:flex mb-8">
-      <h1
+      <h2
         class="flex-none text-red-600 dark:text-red-400 text-3xl mt-4 mb-2 sm:ml-2 w-40 sm:w-48 sm:mr-10"
       >
         Aktivierung
-      </h1>
+      </h2>
       <div class="text-red-600 dark:text-red-400 sm:mt-4">
         <div class="mb-4">
           Dein SOG-Benutzerkonto wurde noch nicht aktiviert. Eine:r der
@@ -44,11 +44,7 @@
         </div>
       </div>
     </div>
-    <hr
-      v-if="$store.getters['user/inactive']"
-      style="clear: left"
-      class="sog_hr"
-    />
+    <hr v-if="$store.getters['user/inactive']" style="clear: left" />
     <div class="sm:flex mb-8">
       <div
         class="hidden sm:block sm:invisible flex-shrink-0 h-40 w-40 sm:h-48 sm:w-48 my-2 sm:m-2 mx-auto sm:mr-10 bg-gray rounded-full text-lightgrey text-center"
@@ -62,7 +58,7 @@
         <div class="sog_textfield w-full sm:max-w-lg">
           {{ username }}
         </div>
-        <div class="block dark:text-gray-400">
+        <div class="block sog_status">
           Dein Name kann nur von der
           <a href="mailto:it@studieren-ohne-grenzen.org" class="underline"
             >SOG IT</a
@@ -72,12 +68,10 @@
       </div>
     </div>
     <div>
-      <hr class="sog_hr" />
-      <h1
-        class="text-sogblue-light dark:text-white text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
-      >
+      <hr />
+      <h2 class="mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10">
         Sicherheit
-      </h1>
+      </h2>
       <button
         v-if="!changePwd"
         type="button"
@@ -155,12 +149,10 @@
       </form>
     </div>
     <div style="clear: left" class="mt-8">
-      <hr class="sog_hr" />
-      <h1
-        class="text-sogblue-light dark:text-white text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10"
-      >
+      <hr />
+      <h2 class="text-3xl mt-4 mb-2 sm:ml-2 sm:float-left sm:w-48 sm:mr-10">
         Email
-      </h1>
+      </h2>
       <div class="flex flex-wrap sm:mt-8">
         <div class="flex-grow">
           <div class="text-sogblue-dark dark:text-gray-300 mb-1">
@@ -169,7 +161,7 @@
           <div class="sog_textfield w-full sm:max-w-lg">
             {{ sogMail }}
           </div>
-          <div class="text-gray dark:text-gray-400 mb-4 sm:max-w-lg">
+          <div class="sog_status mb-4 sm:max-w-lg">
             Deine SOG-Mailadresse kann nur von der
             <a href="mailto:it@studieren-ohne-grenzen.org" class="underline"
               >SOG IT</a
@@ -253,12 +245,10 @@
       </form>
     </div>
     <div>
-      <hr class="sog_hr" />
-      <h1
-        class="text-sogblue-light dark:text-white text-3xl mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10"
-      >
+      <hr />
+      <h2 class="mt-4 mb-2 sm:ml-2 sm:float-left w-40 sm:w-48 sm:mr-10">
         Darstellung
-      </h1>
+      </h2>
       <button
         v-if="!forcedDarkMode"
         type="button"

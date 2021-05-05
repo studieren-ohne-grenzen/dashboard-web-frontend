@@ -1,20 +1,17 @@
 <template>
   <div v-if="groups.length">
-    <div
-      v-if="name.length"
-      class="mb-4 text-sogblue-light dark:text-white text-3xl"
-    >
+    <h2 v-if="name.length" class="mb-4">
       {{ name }}
-    </div>
+    </h2>
     <div class="flex flex-wrap">
       <div
         v-for="group in groups"
         :key="group.name"
-        class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0 relative"
+        class="mr-4 mb-4 flex flex-no-wrap min-h-10 min-w-full xs:min-w-0 relative group"
       >
         <nuxt-link
           :to="'/groups/' + encodeURIComponent(group.id)"
-          class="py-2 px-4 flex-grow border-l border-t border-b rounded-l border-gray dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors"
+          class="py-2 px-4 flex-grow border-l border-t border-b rounded-l border-gray dark:border-gray-800 group-hover:bg-gray-100 dark:group-hover:bg-gray-800 dark:text-gray-300 dark:group-hover:text-white transition-colors"
         >
           {{ group.name }}
         </nuxt-link>
@@ -27,15 +24,12 @@
         </div>
         <button
           :class="{
-            'bg-sogblue-light dark:bg-sogblue-darker p-2':
-              group.membership === 'admin',
-            'bg-gray-reddish dark:bg-red-900 p-2':
-              group.membership === 'member',
-            'bg-gray-300 dark:bg-gray-700 p-2':
+            'button_blue p-2': group.membership === 'admin',
+            'button_red p-2': group.membership === 'member',
+            'button_gray p-2':
               group.membership === 'member' && group.id === 'allgemein',
-            'bg-gray-yellowish dark:bg-yellow-800 p-3':
-              group.membership === 'pending',
-            'bg-gray-greenish dark:bg-green-900 p-2': group.membership === '',
+            'button_yellow p-3': group.membership === 'pending',
+            'button_green p-2': group.membership === '',
           }"
           class="flex-none rounded-r w-10 cursor-pointer action_button"
           @click="groupAction(group)"
@@ -112,6 +106,7 @@ export default {
 
 <style lang="postcss">
 .action_button {
+  @apply transition-colors;
   @apply outline-none focus:outline-none;
   @apply bg-opacity-80 hover:bg-opacity-100;
   @apply dark:bg-opacity-80 dark:hover:bg-opacity-100;

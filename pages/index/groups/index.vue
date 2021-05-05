@@ -1,20 +1,19 @@
 <template>
   <div>
     <transition name="fade">
-      <h1
+      <h2
         v-if="
           $store.getters['groups/requests'].length ||
           $store.getters['groups/adminOfManyGroups']
         "
-        class="text-sogblue-light dark:text-gray-400 text-3xl"
       >
         Anfragen an mich
-      </h1>
+      </h2>
     </transition>
     <transition name="fade">
       <div
         v-if="$store.getters['groups/adminOfManyGroups']"
-        class="text-gray dark:text-gray-300 mb-8"
+        class="sog_status mb-8"
       >
         Du koordinierst sehr viele Gruppen, weshalb Anfragen an dich nicht für
         alle Gruppen auf einmal geladen werden können. Öffne eine spezifische
@@ -24,7 +23,7 @@
     <transition name="fade">
       <div
         v-if="$store.getters['groups/requests'].length"
-        class="text-gray dark:text-gray-300 mb-4"
+        class="sog_status mb-4"
       >
         In den folgenden von dir koordinierten Gruppen möchten Mitglieder
         beitreten:
@@ -36,10 +35,7 @@
       </div>
     </transition>
     <transition name="fade">
-      <hr
-        v-if="$store.getters['groups/requests'].length"
-        class="border-gray-light dark:border-gray-700 my-4"
-      />
+      <hr v-if="$store.getters['groups/requests'].length" />
     </transition>
     <div class="w-full flex flex-wrap justify-between mb-4">
       <div class="mb-4 xs:mr-4 flex-grow xs:flex-grow-0 w-auto inline-flex">
@@ -67,10 +63,7 @@
         @focus="changeTypeSelected('search')"
       />
     </div>
-    <div
-      v-if="!groupsSelected || !groupsSelected.length"
-      class="text-gray dark:text-gray-300"
-    >
+    <div v-if="!groupsSelected || !groupsSelected.length" class="sog_status">
       {{ statusMessage }}
     </div>
 
@@ -81,10 +74,7 @@
           :key="category.name"
         >
           <GroupListing :groups="category.getter" :name="category.name" />
-          <hr
-            v-if="index !== nonEmptyCategories.length - 1"
-            class="border-gray-light dark:border-gray-700 my-4"
-          />
+          <hr v-if="index !== nonEmptyCategories.length - 1" />
         </div>
       </div>
     </transition>
