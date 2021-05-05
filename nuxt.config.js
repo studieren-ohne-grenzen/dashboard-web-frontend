@@ -129,7 +129,8 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { // Endpoint for retrievieng the JWT token
+          login: {
+            // Endpoint for retrievieng the JWT token
             url: 'api/login',
             method: 'post',
           },

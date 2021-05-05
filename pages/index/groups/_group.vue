@@ -13,21 +13,21 @@
       />
       <button
         v-if="thisGroup.membership === 'member' && thisGroup.id !== 'allgemein'"
-        class="button_red main_action_button"
+        class="button_red action_button main_action_button"
         @click="cancelMembership(thisGroup.id)"
       >
         Gruppe verlassen
       </button>
       <button
         v-else-if="thisGroup.membership === 'pending'"
-        class="button_yellow main_action_button"
+        class="button_yellow action_button main_action_button"
         @click="cancelMembershipRequest(thisGroup.id)"
       >
         Mitgliedschafts-Anfrage abbrechen
       </button>
       <button
         v-else-if="thisGroup.membership === ''"
-        class="button_green main_action_button"
+        class="button_green action_button main_action_button"
         @click="requestGroupMembership(thisGroup.id)"
       >
         Mitgliedschaft anfragen
@@ -439,7 +439,6 @@ export default {
 
 <style lang="postcss">
 .main_action_button {
-  @apply action_button;
   @apply text-white rounded my-4 p-2 xs:mt-0 xs:ml-2 flex-grow xs:flex-grow-0;
 }
 
