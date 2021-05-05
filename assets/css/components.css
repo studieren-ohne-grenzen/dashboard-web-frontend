@@ -24,9 +24,30 @@
     @apply dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:border-gray-800 dark:hover:text-white;
   }
 
-  .sog_hr {
-    @apply my-4;
-    @apply border-gray-100 dark:border-gray-700;
+  .action_button {
+    @apply outline-none focus:outline-none;
+    @apply bg-opacity-80 hover:bg-opacity-100;
+    @apply dark:bg-opacity-80 dark:hover:bg-opacity-100;
+  }
+  
+  .button_red {
+    @apply bg-gray-reddish dark:bg-red-900;
+  }
+  
+  .button_green {
+    @apply bg-gray-greenish dark:bg-green-900;
+  }
+  
+  .button_yellow {
+    @apply bg-gray-yellowish dark:bg-yellow-900;
+  }
+
+  .button_gray {
+    @apply bg-gray-300 dark:bg-gray-700;
+  }
+
+  .button_blue {
+    @apply bg-sogblue-light dark:bg-sogblue-darker;
   }
 
   .sog_textfield {
@@ -47,5 +68,22 @@
   .sog_textlabel {
     @apply block mb-1;
     @apply text-sogblue-dark dark:text-gray-300;
+  }
+
+  .sog_status {
+    @apply text-gray-500 dark:text-gray-300;
+  }
+
+  h2 {
+    @apply text-sogblue-light dark:text-white text-3xl;
+  }
+
+  h1 {
+    @apply text-sogblue dark:text-white text-4xl;
+  }
+
+  hr {
+    @apply my-4;
+    @apply border-gray-100 dark:border-gray-700;
   }
 }
