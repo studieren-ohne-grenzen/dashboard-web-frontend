@@ -7,6 +7,11 @@ body:after {
   z-index:-1; /* needed to keep in the background */
 }
 
+/* some fixes for displays with notches, wholes, etc. */
+body {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
 /* add gradients to background */
 body:after {
   @apply bg-gradient-to-tr;
