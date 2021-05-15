@@ -100,9 +100,7 @@ export default {
    ** TailwindCSS module configuration
    ** See: https://tailwindcss.nuxtjs.org/
    */
-  tailwindcss: {
-    jit: true,
-  },
+  tailwindcss: {},
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

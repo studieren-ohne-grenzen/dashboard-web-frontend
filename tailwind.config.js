@@ -54,9 +54,14 @@ module.exports = {
     },
   },
   plugins: [],
+  /* Disable JIT mode for now, as long as it is still quite unstable
+   * See https://tailwindcss.com/docs/just-in-time-mode
+   */
+  // mode: 'jit',
   purge: {
-    // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
-    // enabled: process.env.NODE_ENV === 'production',
+    /* Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+     * needed for JIT mode to work properly
+     */
     content: ['components/**/*.vue', 'layouts/**/*.vue', 'pages/**/*.vue'],
   },
 }

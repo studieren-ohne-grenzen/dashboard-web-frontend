@@ -9,10 +9,3 @@
     width: calc(200% - 100vw);
   }
 }
-
-/* fix a issue with the current version of Tailwind JIT
- * which produces sm\:flex twice, but no flex class.
- */
-.flex {
-  display: flex;
-}
