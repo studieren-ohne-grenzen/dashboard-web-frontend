@@ -63,12 +63,15 @@
         @focus="changeTypeSelected('search')"
       />
     </div>
-    <div v-if="!groupsSelected || !groupsSelected.length" class="sog_status">
-      {{ statusMessage }}
-    </div>
 
-    <transition name="fade">
-      <div v-if="typeSelected === 'all'">
+    <transition name="fade" mode="out-in">
+      <div v-if="typeSelected === 'all'" key="all">
+        <div
+          v-if="!groupsSelected || !groupsSelected.length"
+          class="sog_status"
+        >
+          {{ statusMessage }}
+        </div>
         <div
           v-for="(category, index) in nonEmptyCategories"
           :key="category.name"
@@ -77,13 +80,15 @@
           <hr v-if="index !== nonEmptyCategories.length - 1" />
         </div>
       </div>
-    </transition>
-    <transition name="fade">
-      <GroupListing
-        v-if="typeSelected !== 'all' && groupsSelected"
-        :groups="groupsSelected"
-        name=""
-      />
+      <div v-else-if="groupsSelected" :key="typeSelected">
+        <div
+          v-if="!groupsSelected || !groupsSelected.length"
+          class="sog_status"
+        >
+          {{ statusMessage }}
+        </div>
+        <GroupListing :groups="groupsSelected" name="" />
+      </div>
     </transition>
   </div>
 </template>
