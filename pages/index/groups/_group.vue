@@ -279,18 +279,22 @@ export default {
       ].sort(compareByName)
     },
     activePendingFiltered() {
-      return [
-        ...this.thisGroup.activePendingMembers.filter((p) =>
-          p.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        ),
-      ].sort(compareByName)
+      if (this.thisGroup.activePendingMembers) {
+        return [
+          ...this.thisGroup.activePendingMembers.filter((p) =>
+            p.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+          ),
+        ].sort(compareByName)
+      } else return []
     },
     inactivePendingFiltered() {
-      return [
-        ...this.thisGroup.inactivePendingMembers.filter((p) =>
-          p.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        ),
-      ].sort(compareByName)
+      if (this.thisGroup.inactivePendingMembers) {
+        return [
+          ...this.thisGroup.inactivePendingMembers.filter((p) =>
+            p.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+          ),
+        ].sort(compareByName)
+      } else return []
     },
     ...mapGetters({
       allUsers: 'users/all',
