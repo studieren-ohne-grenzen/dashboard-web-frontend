@@ -14,6 +14,7 @@ module.exports = {
       green: colors.teal,
       red: colors.pink,
       yellow: colors.yellow,
+      current: 'currentColor',
     },
     extend: {
       colors: {
