@@ -1,6 +1,6 @@
 /* extending the standard classes */
 
-@responsive {
+@layer utilities {
   .min-w-56 {
     min-width: 14rem;
   }

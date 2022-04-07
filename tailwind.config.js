@@ -9,7 +9,7 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   theme: {
     colors: {
-      gray: colors.blueGray,
+      gray: colors.slate,
       white: colors.white,
       green: colors.teal,
       red: colors.pink,
@@ -54,14 +54,4 @@ module.exports = {
     },
   },
   plugins: [],
-  /* Disable JIT mode for now, as long as it is still quite unstable
-   * See https://tailwindcss.com/docs/just-in-time-mode
-   */
-  // mode: 'jit',
-  purge: {
-    /* Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
-     * needed for JIT mode to work properly
-     */
-    content: ['components/**/*.vue', 'layouts/**/*.vue', 'pages/**/*.vue'],
-  },
 }
